@@ -6,16 +6,10 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { parseMatchupSlug, canonicalMatchupSlug } from "@/lib/matchup-slug";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
 
-// Public, viewer-independent page → cache and revalidate. "Your pick" is loaded
-// client-side in MatchupVote, so nothing per-user ever enters the cached HTML.
-export const revalidate = 300;
-
-// Empty list + dynamicParams (default true): pre-render nothing at build, but
-// render each slug on-demand and cache it (ISR). Without this, a dynamic segment
-// renders fully dynamic every request and ignores `revalidate`.
-export function generateStaticParams() {
-  return [];
-}
+// Rendered per-request. The page is fully public (no cookies/auth here — "your
+// pick" is resolved client-side in MatchupVote), so it's safe to cache later,
+// but ISR is deferred: supabase-js reads defeat Next's fetch cache, so forcing
+// static rendering throws DYNAMIC_SERVER_USAGE. Revisit with unstable_cache.
 
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
 
