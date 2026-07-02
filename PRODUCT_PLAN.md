@@ -21,7 +21,8 @@
 | 13 | Art vs launch | **Launch with what's ready** (~60-80 entities with art), grow toward full roster as art lands | Roster additions become content events |
 | 14 | Progression (XP/bounty/streaks) | ⚠️ **None until v1** — launch is purely vote → reveal → tier list | Supersedes MVP "minimal profile" stats framing; profile stays but no gamification |
 | 15 | Social at MVP | **Matchup of the Day + 140-char takes** (single moderated surface) | As planned |
-| 16 | Auth providers | **Google + Discord + email/password** | Email adds reset/verification flows |
+| 16 | Auth providers | ⚠️ **Username/password + Google + Discord** (no email sign-in) — *revised 2026-07-02* | See #35 |
+| 35 | Auth model | **Username is the login handle & public identity**; Supabase email-auth used underneath (real email if provided, synthetic if not). Recovery email is **optional** at signup. OAuth users pick a username via `/choose-username`. | Supabase has no native username auth |
 | 17 | Tech stack | **Next.js App Router on Vercel + Supabase (auth + Postgres)** | As planned |
 | 18 | Launch mode | ⚠️ **Public from day one** — no closed beta | Supersedes §10's closed-beta playbook |
 | 19 | Early-ranking presentation | ⚠️ **Show everything raw** — full tier list and percentages from vote #1, no placement masking | Supersedes confidence-gating/Placement-section UX (the ranking math is unchanged) |
