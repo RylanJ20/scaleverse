@@ -10,6 +10,13 @@ import { MatchupVote } from "@/components/matchup/matchup-vote";
 // client-side in MatchupVote, so nothing per-user ever enters the cached HTML.
 export const revalidate = 300;
 
+// Empty list + dynamicParams (default true): pre-render nothing at build, but
+// render each slug on-demand and cache it (ISR). Without this, a dynamic segment
+// renders fully dynamic every request and ignores `revalidate`.
+export function generateStaticParams() {
+  return [];
+}
+
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
 
 async function load(seriesSlug: string, slug: string) {
