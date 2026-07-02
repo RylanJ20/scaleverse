@@ -1,7 +1,12 @@
 import "server-only";
 import { cookies } from "next/headers";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import type { FormCard } from "@/lib/types";
+
+// Pages that render for anyone (matchup pages) pass a cookie-free public client
+// so they can be cached; per-user pages fall back to the cookie-based client.
+type DB = SupabaseClient;
 
 // The current viewer's spoiler ceiling (max arc position they've seen), or null
 // for "caught up / no gate". Works for both authed users and cookie-only guests.
@@ -68,8 +73,12 @@ export type CharacterFull = {
   }>;
 };
 
-export async function getCharacter(seriesSlug: string, charSlug: string): Promise<CharacterFull | null> {
-  const supabase = await createClient();
+export async function getCharacter(
+  seriesSlug: string,
+  charSlug: string,
+  db?: DB,
+): Promise<CharacterFull | null> {
+  const supabase = db ?? (await createClient());
   const { data } = await supabase
     .from("characters")
     .select(
@@ -130,18 +139,18 @@ export type MatchupTally = {
   a_wins: number;
   a: FormCard;
   b: FormCard;
-  your_pick: string | null;
 };
 
-// Look up the tally for a form pair (may not exist yet). Read-only — never writes.
+// Look up the public tally for a form pair (may not exist yet). Read-only.
+// Never resolves a per-user pick — that stays client-side so callers can cache.
 export async function getMatchupTally(
   formA: { id: string },
   formB: { id: string },
   cardA: FormCard,
   cardB: FormCard,
-  userId: string | null,
+  db?: DB,
 ): Promise<MatchupTally> {
-  const supabase = await createClient();
+  const supabase = db ?? (await createClient());
   const [lo, hi] = [formA.id, formB.id].sort();
   const aIsLo = cardA.form_id === lo;
 
@@ -152,17 +161,6 @@ export async function getMatchupTally(
     .eq("form_b_id", hi)
     .maybeSingle();
 
-  let yourPick: string | null = null;
-  if (m && userId) {
-    const { data: v } = await supabase
-      .from("votes")
-      .select("winner_form_id")
-      .eq("matchup_id", m.id)
-      .eq("user_id", userId)
-      .maybeSingle();
-    yourPick = v?.winner_form_id ?? null;
-  }
-
   // a_wins tracks wins for the low form; re-orient to the caller's a/b
   const aWinsForCaller = m ? (aIsLo ? m.a_wins : m.vote_count - m.a_wins) : 0;
   return {
@@ -171,7 +169,6 @@ export async function getMatchupTally(
     a_wins: aWinsForCaller,
     a: cardA,
     b: cardB,
-    your_pick: yourPick,
   };
 }
 

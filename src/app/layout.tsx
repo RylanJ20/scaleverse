@@ -64,6 +64,9 @@ export default async function RootLayout({
             <Link href="/one-piece/tier-list" className="transition hover:text-foreground">
               Tier list
             </Link>
+            <Link href="/one-piece/characters" className="hidden transition hover:text-foreground sm:block">
+              Characters
+            </Link>
             {user ? (
               <>
                 {username && (

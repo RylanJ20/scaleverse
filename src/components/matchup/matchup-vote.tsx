@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/client";
 import { voteOnMatchup } from "@/app/actions/arena";
 import type { FormCard } from "@/lib/types";
 
@@ -12,37 +13,49 @@ type Props = {
   imageBase: string;
   initialVoteCount: number;
   initialAWins: number;
-  initialPick: string | null;
-  isAuthed: boolean;
+  matchupId: string | null;
 };
 
-export function MatchupVote({
-  a,
-  b,
-  imageBase,
-  initialVoteCount,
-  initialAWins,
-  initialPick,
-  isAuthed,
-}: Props) {
+export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, matchupId }: Props) {
   const [voteCount, setVoteCount] = useState(initialVoteCount);
   const [aWins, setAWins] = useState(initialAWins);
-  const [pick, setPick] = useState<string | null>(initialPick);
+  const [pick, setPick] = useState<string | null>(null);
+  // null = still resolving auth; keeps the page cacheable (auth is client-only)
+  const [authed, setAuthed] = useState<boolean | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (cancelled) return;
+      setAuthed(!!user);
+      if (user && matchupId) {
+        const { data } = await supabase
+          .from("votes")
+          .select("winner_form_id")
+          .eq("matchup_id", matchupId)
+          .eq("user_id", user.id)
+          .maybeSingle();
+        if (!cancelled) setPick(data?.winner_form_id ?? null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [matchupId]);
 
   const aPct = voteCount > 0 ? Math.round((aWins / voteCount) * 100) : null;
 
   const vote = async (winner: FormCard) => {
-    if (busy) return;
-    if (!isAuthed) return;
-    if (pick === winner.form_id) return;
+    if (busy || authed !== true || pick === winner.form_id) return;
     setBusy(true);
     setError(null);
     try {
       const res = await voteOnMatchup(a.form_id, b.form_id, winner.form_id);
       setVoteCount(res.vote_count);
-      // res.a_wins is oriented to the matchup's stored low form; re-derive for our a
       const aIsLow = a.form_id < b.form_id;
       setAWins(aIsLow ? res.a_wins : res.vote_count - res.a_wins);
       setPick(winner.form_id);
@@ -70,11 +83,11 @@ export function MatchupVote({
       <button
         type="button"
         onClick={() => void vote(card)}
-        disabled={busy || !isAuthed}
+        disabled={busy || authed !== true}
         aria-label={`${card.character_name} wins`}
         className={`group relative flex flex-col self-start overflow-hidden rounded-lg border bg-surface text-left transition ${
-          picked ? "scale-[1.02]" : isAuthed ? "hover:scale-[1.01]" : ""
-        } ${!isAuthed ? "cursor-default" : ""}`}
+          picked ? "scale-[1.02]" : authed === true ? "hover:scale-[1.01]" : ""
+        } ${authed !== true ? "cursor-default" : ""}`}
         style={{
           borderColor: picked ? color : "rgba(255,255,255,0.08)",
           boxShadow: picked ? `0 0 32px -8px ${color}` : undefined,
@@ -113,10 +126,7 @@ export function MatchupVote({
     <div>
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
         <Card card={a} side="a" />
-        <div
-          aria-hidden
-          className="font-display -skew-x-12 text-xl uppercase text-muted sm:text-2xl"
-        >
+        <div aria-hidden className="font-display -skew-x-12 text-xl uppercase text-muted sm:text-2xl">
           vs
         </div>
         <Card card={b} side="b" />
@@ -143,14 +153,14 @@ export function MatchupVote({
       </div>
 
       <div className="mt-4 text-center">
-        {!isAuthed ? (
+        {authed === false ? (
           <Link
             href="/login"
             className="inline-block rounded-md bg-accent px-6 py-2.5 font-bold uppercase tracking-wide text-white transition hover:brightness-110"
           >
             Sign in to vote
           </Link>
-        ) : pick ? (
+        ) : authed === true && pick ? (
           <p className="text-sm text-muted">
             You picked{" "}
             <span className="font-bold text-foreground">
@@ -158,9 +168,9 @@ export function MatchupVote({
             </span>
             . Tap the other card to change (once a week).
           </p>
-        ) : (
+        ) : authed === true ? (
           <p className="text-sm text-muted">Tap a fighter to cast your vote.</p>
-        )}
+        ) : null}
         {error && <p className="mt-2 text-sm text-accent">{error}</p>}
       </div>
     </div>

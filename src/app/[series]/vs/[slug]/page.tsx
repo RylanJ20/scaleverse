@@ -2,18 +2,23 @@ import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import { getCharacter, getMatchupTally, formToCard } from "@/lib/queries";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { parseMatchupSlug, canonicalMatchupSlug } from "@/lib/matchup-slug";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
+
+// Public, viewer-independent page → cache and revalidate. "Your pick" is loaded
+// client-side in MatchupVote, so nothing per-user ever enters the cached HTML.
+export const revalidate = 300;
 
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
 
 async function load(seriesSlug: string, slug: string) {
   const parsed = parseMatchupSlug(slug);
   if (!parsed) return null;
+  const db = createPublicClient();
   const [charA, charB] = await Promise.all([
-    getCharacter(seriesSlug, parsed.a),
-    getCharacter(seriesSlug, parsed.b),
+    getCharacter(seriesSlug, parsed.a, db),
+    getCharacter(seriesSlug, parsed.b, db),
   ]);
   if (!charA || !charB || charA.id === charB.id) return null;
   const defA = charA.forms.find((f) => f.is_default) ?? charA.forms[0];
@@ -57,12 +62,9 @@ export default async function MatchupPage({
     permanentRedirect(`/${series}/vs/${canonical}`);
   }
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
   const cardA = formToCard(defA, charA);
   const cardB = formToCard(defB, charB);
-  const tally = await getMatchupTally(defA, defB, cardA, cardB, user?.id ?? null);
+  const tally = await getMatchupTally(defA, defB, cardA, cardB, createPublicClient());
 
   const imageBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/character-images`;
   const aPct = tally.vote_count > 0 ? Math.round((tally.a_wins / tally.vote_count) * 100) : null;
@@ -109,8 +111,7 @@ export default async function MatchupPage({
         imageBase={imageBase}
         initialVoteCount={tally.vote_count}
         initialAWins={tally.a_wins}
-        initialPick={tally.your_pick}
-        isAuthed={!!user}
+        matchupId={tally.matchup_id}
       />
 
       <div className="mt-8 grid grid-cols-2 gap-3 text-center text-sm">
