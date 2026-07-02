@@ -1,0 +1,35 @@
+slug: nefertari-d-lili
+name: Nefertari D. Lili
+epithet: null
+nicknames: []
+debut:
+  arc: reverie
+  chapter: 1084
+  episode: 1118
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Alabasta Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Nefertari_D._Lili
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nefertari-d-lili.jpg
+  path: characters/nefertari-d-lili.webp
+forms:
+  - slug: base
+    name: Nefertari D. Lili
+    default: true

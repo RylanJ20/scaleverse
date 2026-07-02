@@ -1,0 +1,38 @@
+slug: gol-d-roger
+name: Gol D. Roger
+epithet: Pirate King
+nicknames:
+  - Pirate King
+  - Gold Roger
+  - King of the Pirates
+debut:
+  arc: romance-dawn
+  chapter: 1
+  episode: 1
+status: Dead
+bounty: 5564800000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 53
+  height_cm: 274
+affiliation: Roger Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Gol_D._Roger
+power_level: 9740
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/gol-d-roger.jpg
+  path: characters/gol-d-roger.webp
+forms:
+  - slug: base
+    name: Gol D. Roger
+    default: true

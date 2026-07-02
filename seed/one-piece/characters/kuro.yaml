@@ -1,0 +1,36 @@
+slug: kuro
+name: Kuro
+epithet: Klahadore
+nicknames:
+  - Klahadore
+debut:
+  arc: syrup-village
+  chapter: 23
+  episode: 9
+status: Alive
+bounty: 16000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 35
+  height_cm: 207
+affiliation: Black Cat Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kuro
+power_level: 950
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kuro.jpg
+  path: characters/kuro.webp
+forms:
+  - slug: base
+    name: Kuro
+    default: true

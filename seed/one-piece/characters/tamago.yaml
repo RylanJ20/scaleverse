@@ -1,0 +1,36 @@
+slug: tamago
+name: Tamago
+epithet: Baron Tamago
+nicknames:
+  - Baron Tamago
+debut:
+  arc: fish-man-island
+  chapter: 651
+  episode: 570
+status: Alive
+bounty: 429000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Egg-Egg Fruit
+  name_ja: Tama Tama no Mi
+demographics:
+  gender: Male
+  race: Longleg
+  origin: Grand Line
+  age: 46
+  height_cm: 301
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Tamago
+power_level: 2990
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/tamago.jpg
+  path: characters/tamago.webp
+forms:
+  - slug: base
+    name: Tamago
+    default: true

@@ -1,0 +1,37 @@
+slug: baby-5
+name: Baby 5
+epithet: null
+nicknames: []
+debut:
+  arc: punk-hazard
+  chapter: 673
+  episode: 595
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Arms-Arms Fruit
+  name_ja: Buki Buki no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: North Blue
+  age: 24
+  height_cm: 181
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Donquixote Pirates
+  - Happo Navy
+wiki_url: https://onepiece.fandom.com/wiki/Baby_5
+power_level: 2510
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/baby-5.jpg
+  path: characters/baby-5.webp
+forms:
+  - slug: base
+    name: Baby 5
+    default: true

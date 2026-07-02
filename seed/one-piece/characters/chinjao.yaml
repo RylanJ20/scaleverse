@@ -1,0 +1,38 @@
+slug: chinjao
+name: Chinjao
+epithet: Don Chinjao
+nicknames:
+  - Don Chinjao
+  - Chinjao the Drill
+debut:
+  arc: dressrosa
+  chapter: 704
+  episode: 632
+status: Alive
+bounty: null
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 78
+  height_cm: 520
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Happo Navy
+wiki_url: https://onepiece.fandom.com/wiki/Chinjao
+power_level: 6920
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/chinjao.jpg
+  path: characters/chinjao.webp
+forms:
+  - slug: base
+    name: Chinjao
+    default: true

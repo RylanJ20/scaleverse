@@ -1,0 +1,36 @@
+slug: prince-grus
+name: Prince Grus
+epithet: null
+nicknames: []
+debut:
+  arc: egghead
+  chapter: 1061
+  episode: 1090
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Glorp-Glorp Fruit
+  name_ja: Gunyo Gunyo no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 29
+  height_cm: 205
+affiliation: SWORD
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Prince_Grus
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/prince-grus.jpg
+  path: characters/prince-grus.webp
+forms:
+  - slug: base
+    name: Prince Grus
+    default: true

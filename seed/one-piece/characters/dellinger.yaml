@@ -1,0 +1,35 @@
+slug: dellinger
+name: Dellinger
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: North Blue
+  age: 16
+  height_cm: 145
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Dellinger
+power_level: 2850
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/dellinger.jpg
+  path: characters/dellinger.webp
+forms:
+  - slug: base
+    name: Dellinger
+    default: true

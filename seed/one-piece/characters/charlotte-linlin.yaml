@@ -1,0 +1,38 @@
+slug: charlotte-linlin
+name: Charlotte Linlin
+epithet: Big Mom
+nicknames:
+  - Big Mom
+  - O-lin
+debut:
+  arc: whole-cake-island
+  chapter: 651
+  episode: 571
+status: Alive
+bounty: 4388000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Soul-Soul Fruit
+  name_ja: Soru Soru no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 68
+  height_cm: 880
+affiliation: Big Mom Pirates
+other_affiliations:
+  - Rocks Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Linlin
+power_level: 9000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-linlin.jpg
+  path: characters/charlotte-linlin.webp
+forms:
+  - slug: base
+    name: Charlotte Linlin
+    default: true

@@ -1,0 +1,38 @@
+slug: cavendish
+name: Cavendish
+epithet: Cavendish of the White Horse
+nicknames:
+  - Cavendish of the White Horse
+  - Hakuba
+debut:
+  arc: dressrosa
+  chapter: 703
+  episode: 632
+status: Alive
+bounty: 330000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 26
+  height_cm: 208
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Beautiful Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Cavendish
+power_level: 2770
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/cavendish.jpg
+  path: characters/cavendish.webp
+forms:
+  - slug: base
+    name: Cavendish
+    default: true

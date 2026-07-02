@@ -1,0 +1,36 @@
+slug: koala
+name: Koala
+epithet: null
+nicknames: []
+debut:
+  arc: post-war
+  chapter: 622
+  episode: 544
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: South Blue
+  age: 23
+  height_cm: 160
+affiliation: Revolutionary Army
+other_affiliations:
+  - Sun Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Koala
+power_level: 2590
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/koala.jpg
+  path: characters/koala.webp
+forms:
+  - slug: base
+    name: Koala
+    default: true

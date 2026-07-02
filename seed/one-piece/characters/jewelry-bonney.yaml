@@ -1,0 +1,36 @@
+slug: jewelry-bonney
+name: Jewelry Bonney
+epithet: Big Eater
+nicknames:
+  - Big Eater
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 320000000
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Red Line
+  age: 12
+  height_cm: 174
+affiliation: Bonney Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Jewelry_Bonney
+power_level: 2500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jewelry-bonney.jpg
+  path: characters/jewelry-bonney.webp
+forms:
+  - slug: base
+    name: Jewelry Bonney
+    default: true

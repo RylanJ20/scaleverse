@@ -1,0 +1,35 @@
+slug: charlotte-daifuku
+name: Charlotte Daifuku
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 861
+  episode: 826
+status: Alive
+bounty: 300000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Puff-Puff Fruit
+  name_ja: Hoya Hoya no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 48
+  height_cm: 489
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Daifuku
+power_level: 5690
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-daifuku.jpg
+  path: characters/charlotte-daifuku.webp
+forms:
+  - slug: base
+    name: Charlotte Daifuku
+    default: true

@@ -1,0 +1,35 @@
+slug: nezumi
+name: Nezumi
+epithet: null
+nicknames: []
+debut:
+  arc: arlong-park
+  chapter: 69
+  episode: 32
+status: Alive
+bounty: 100000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 36
+  height_cm: 182
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Nezumi
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nezumi.jpg
+  path: characters/nezumi.webp
+forms:
+  - slug: base
+    name: Nezumi
+    default: true

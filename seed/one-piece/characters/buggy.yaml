@@ -1,0 +1,38 @@
+slug: buggy
+name: Buggy
+epithet: Genius Jester
+nicknames:
+  - Genius Jester
+debut:
+  arc: orange-town
+  chapter: 9
+  episode: 4
+status: Alive
+bounty: 3189000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Chop-Chop Fruit
+  name_ja: Bara Bara no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 39
+  height_cm: 192
+affiliation: Cross Guild
+other_affiliations:
+  - Roger Pirates
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Buggy
+power_level: 250
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/buggy.jpg
+  path: characters/buggy.webp
+forms:
+  - slug: base
+    name: Buggy
+    default: true

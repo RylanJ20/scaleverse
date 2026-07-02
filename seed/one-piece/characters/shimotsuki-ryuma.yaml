@@ -1,0 +1,37 @@
+slug: shimotsuki-ryuma
+name: Shimotsuki Ryuma
+epithet: Sword God
+nicknames:
+  - Sword God
+  - Legendary Samurai
+debut:
+  arc: thriller-bark
+  chapter: 450
+  episode: 343
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 47
+  height_cm: 179
+affiliation: Shimotsuki Family
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shimotsuki_Ryuma
+power_level: 8920
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shimotsuki-ryuma.jpg
+  path: characters/shimotsuki-ryuma.webp
+forms:
+  - slug: base
+    name: Shimotsuki Ryuma
+    default: true

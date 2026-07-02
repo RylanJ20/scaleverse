@@ -1,0 +1,35 @@
+slug: amazon
+name: Amazon
+epithet: null
+nicknames: []
+debut:
+  arc: skypiea
+  chapter: 237
+  episode: 153
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Skypiean
+  origin: Sky Islands
+  age: 79
+  height_cm: 120
+affiliation: Skypiea
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Amazon
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/amazon.jpg
+  path: characters/amazon.webp
+forms:
+  - slug: base
+    name: Amazon
+    default: true

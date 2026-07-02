@@ -1,0 +1,36 @@
+slug: tamanegi
+name: Tamanegi
+epithet: Onion
+nicknames:
+  - Onion
+debut:
+  arc: syrup-village
+  chapter: 23
+  episode: 9
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 11
+  height_cm: 124
+affiliation: Usopp Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Tamanegi
+power_level: 80
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/tamanegi.jpg
+  path: characters/tamanegi.webp
+forms:
+  - slug: base
+    name: Tamanegi
+    default: true

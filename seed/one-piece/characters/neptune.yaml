@@ -1,0 +1,36 @@
+slug: neptune
+name: Neptune
+epithet: King Neptune
+nicknames:
+  - King Neptune
+debut:
+  arc: fish-man-island
+  chapter: 612
+  episode: 531
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Merfolk
+  origin: Grand Line
+  age: 70
+  height_cm: 1220
+affiliation: Ryugu Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Neptune
+power_level: 5160
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/neptune.jpg
+  path: characters/neptune.webp
+forms:
+  - slug: base
+    name: Neptune
+    default: true

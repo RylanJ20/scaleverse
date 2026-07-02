@@ -1,0 +1,36 @@
+slug: kyo
+name: Kyo
+epithet: Silver Axe
+nicknames:
+  - Silver Axe
+debut:
+  arc: elbaph
+  chapter: 1156
+  episode: null
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Rocks Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kyo
+power_level: 5600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kyo.jpg
+  path: characters/kyo.webp
+forms:
+  - slug: base
+    name: Kyo
+    default: true

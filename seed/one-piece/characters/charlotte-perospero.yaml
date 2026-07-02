@@ -1,0 +1,36 @@
+slug: charlotte-perospero
+name: Charlotte Perospero
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 834
+  episode: 795
+status: Alive
+bounty: 700000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Lick-Lick Fruit
+  name_ja: Pero Pero no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 50
+  height_cm: 333
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Perospero
+power_level: 4110
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-perospero.jpg
+  path: characters/charlotte-perospero.webp
+forms:
+  - slug: base
+    name: Charlotte Perospero
+    default: true

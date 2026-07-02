@@ -1,0 +1,36 @@
+slug: kujaku
+name: Kujaku
+epithet: null
+nicknames: []
+debut:
+  arc: egghead
+  chapter: 1074
+  episode: 1090
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Whip Whip Fruit
+  name_ja: Muchi Muchi no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: North Blue
+  age: 26
+  height_cm: 180
+affiliation: SWORD
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Kujaku
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kujaku.jpg
+  path: characters/kujaku.webp
+forms:
+  - slug: base
+    name: Kujaku
+    default: true

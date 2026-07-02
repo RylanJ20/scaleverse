@@ -1,0 +1,35 @@
+slug: kuina
+name: Kuina
+epithet: null
+nicknames: []
+debut:
+  arc: romance-dawn
+  chapter: 5
+  episode: 2
+status: Dead
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 11
+  height_cm: null
+affiliation: None
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kuina
+power_level: 1700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kuina.jpg
+  path: characters/kuina.webp
+forms:
+  - slug: base
+    name: Kuina
+    default: true

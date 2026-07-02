@@ -1,0 +1,36 @@
+slug: caribou
+name: Caribou
+epithet: Wet-Haired
+nicknames:
+  - Wet-Haired
+debut:
+  arc: return-to-sabaody
+  chapter: 598
+  episode: 517
+status: Alive
+bounty: 210000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Logia
+  name_en: Swamp-Swamp Fruit
+  name_ja: Numa Numa no Mi
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: South Blue
+  age: 32
+  height_cm: 228
+affiliation: Caribou Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Caribou
+power_level: 2210
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/caribou.jpg
+  path: characters/caribou.webp
+forms:
+  - slug: base
+    name: Caribou
+    default: true

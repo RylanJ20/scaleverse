@@ -1,0 +1,36 @@
+slug: pedro
+name: Pedro
+epithet: null
+nicknames: []
+debut:
+  arc: zou
+  chapter: 804
+  episode: 751
+status: Dead
+bounty: 382000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Mink
+  origin: Zou
+  age: 32
+  height_cm: 233
+affiliation: Mokomo Dukedom
+other_affiliations:
+  - Nox Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Pedro
+power_level: 4900
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/pedro.jpg
+  path: characters/pedro.webp
+forms:
+  - slug: base
+    name: Pedro
+    default: true

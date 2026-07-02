@@ -1,0 +1,35 @@
+slug: kokoro
+name: Kokoro
+epithet: null
+nicknames: []
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Merfolk
+  origin: Grand Line
+  age: 72
+  height_cm: 168
+affiliation: Water 7
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kokoro
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kokoro.jpg
+  path: characters/kokoro.webp
+forms:
+  - slug: base
+    name: Kokoro
+    default: true

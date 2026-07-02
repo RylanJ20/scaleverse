@@ -1,0 +1,41 @@
+slug: vinsmoke-sanji
+name: Vinsmoke Sanji
+epithet: Black Leg
+nicknames:
+  - Black Leg
+  - Mr. Prince
+  - Sangoro
+  - Soba Mask
+debut:
+  arc: baratie
+  chapter: 43
+  episode: 20
+status: Alive
+bounty: 1032000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 21
+  height_cm: 180
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Germa 66
+  - Baratie
+wiki_url: https://onepiece.fandom.com/wiki/Vinsmoke_Sanji
+power_level: 6940
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vinsmoke-sanji.jpg
+  path: characters/vinsmoke-sanji.webp
+forms:
+  - slug: base
+    name: Vinsmoke Sanji
+    default: true

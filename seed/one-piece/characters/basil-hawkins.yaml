@@ -1,0 +1,37 @@
+slug: basil-hawkins
+name: Basil Hawkins
+epithet: Magician
+nicknames:
+  - Magician
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Unknown
+bounty: 320000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Straw-Straw Fruit
+  name_ja: Wara Wara no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 31
+  height_cm: 210
+affiliation: Beast Pirates
+other_affiliations:
+  - Hawkins Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Basil_Hawkins
+power_level: 2910
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/basil-hawkins.jpg
+  path: characters/basil-hawkins.webp
+forms:
+  - slug: base
+    name: Basil Hawkins
+    default: true

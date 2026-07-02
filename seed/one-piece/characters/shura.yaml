@@ -1,0 +1,36 @@
+slug: shura
+name: Shura
+epithet: Sky Rider
+nicknames:
+  - Sky Rider
+debut:
+  arc: skypiea
+  chapter: 241
+  episode: 155
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Birkan
+  origin: Sky Islands
+  age: 33
+  height_cm: 191
+affiliation: God's Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shura
+power_level: 1560
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shura.jpg
+  path: characters/shura.webp
+forms:
+  - slug: base
+    name: Shura
+    default: true

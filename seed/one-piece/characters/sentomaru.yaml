@@ -1,0 +1,36 @@
+slug: sentomaru
+name: Sentomaru
+epithet: null
+nicknames: []
+debut:
+  arc: sabaody-archipelago
+  chapter: 497
+  episode: 392
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 34
+  height_cm: 279
+affiliation: Marines
+other_affiliations:
+  - Vegapunk
+wiki_url: https://onepiece.fandom.com/wiki/Sentomaru
+power_level: 3610
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sentomaru.jpg
+  path: characters/sentomaru.webp
+forms:
+  - slug: base
+    name: Sentomaru
+    default: true

@@ -1,0 +1,37 @@
+slug: monkey-d-dragon
+name: Monkey D. Dragon
+epithet: The Most Wanted Man in the World
+nicknames:
+  - The Most Wanted Man in the World
+debut:
+  arc: loguetown
+  chapter: 100
+  episode: 53
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 55
+  height_cm: 256
+affiliation: Revolutionary Army
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Monkey_D._Dragon
+power_level: 8690
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/monkey-d-dragon.jpg
+  path: characters/monkey-d-dragon.webp
+forms:
+  - slug: base
+    name: Monkey D. Dragon
+    default: true

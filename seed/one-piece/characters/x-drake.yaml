@@ -1,0 +1,39 @@
+slug: x-drake
+name: X. Drake
+epithet: Red Flag
+nicknames:
+  - Red Flag
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 222000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Dragon-Dragon Fruit, Allosaurus Model
+  name_ja: 'Ryu Ryu no Mi, Model: Allosaurus'
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 33
+  height_cm: 233
+affiliation: SWORD
+other_affiliations:
+  - Marines
+  - Drake Pirates
+  - Beast Pirates
+wiki_url: https://onepiece.fandom.com/wiki/X._Drake
+power_level: 6300
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/x-drake.jpg
+  path: characters/x-drake.webp
+forms:
+  - slug: base
+    name: X. Drake
+    default: true

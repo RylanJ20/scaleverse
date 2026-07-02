@@ -1,0 +1,36 @@
+slug: issho
+name: Issho
+epithet: Fujitora
+nicknames:
+  - Fujitora
+debut:
+  arc: dressrosa
+  chapter: 701
+  episode: 630
+status: Alive
+bounty: 3000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Press-Press Fruit
+  name_ja: Zushi Zushi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 54
+  height_cm: 270
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Issho
+power_level: 8170
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/issho.jpg
+  path: characters/issho.webp
+forms:
+  - slug: base
+    name: Issho
+    default: true

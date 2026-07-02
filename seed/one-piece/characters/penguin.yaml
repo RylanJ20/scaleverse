@@ -1,0 +1,35 @@
+slug: penguin
+name: Penguin
+epithet: null
+nicknames: []
+debut:
+  arc: sabaody-archipelago
+  chapter: 500
+  episode: 392
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 28
+  height_cm: null
+affiliation: Heart Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Penguin
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/penguin.jpg
+  path: characters/penguin.webp
+forms:
+  - slug: base
+    name: Penguin
+    default: true

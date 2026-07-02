@@ -1,0 +1,35 @@
+slug: buffalo
+name: Buffalo
+epithet: null
+nicknames: []
+debut:
+  arc: punk-hazard
+  chapter: 692
+  episode: 618
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Spin-Spin Fruit
+  name_ja: Guru Guru no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 30
+  height_cm: 696
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Buffalo
+power_level: 1500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/buffalo.jpg
+  path: characters/buffalo.webp
+forms:
+  - slug: base
+    name: Buffalo
+    default: true

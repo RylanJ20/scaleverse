@@ -1,0 +1,37 @@
+slug: catarina-devon
+name: Catarina Devon
+epithet: The Crescent Moon Hunter
+nicknames:
+  - The Crescent Moon Hunter
+debut:
+  arc: post-war
+  chapter: 576
+  episode: 485
+status: Alive
+bounty: 429000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: 'Dog-Dog Fruit, Model: Nine-Tailed Fox'
+  name_ja: 'Inu Inu no Mi, Model: Kyubi no Kitsune'
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Blackbeard Pirates
+other_affiliations:
+  - Impel Down
+wiki_url: https://onepiece.fandom.com/wiki/Catarina_Devon
+power_level: 3870
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/catarina-devon.jpg
+  path: characters/catarina-devon.webp
+forms:
+  - slug: base
+    name: Catarina Devon
+    default: true

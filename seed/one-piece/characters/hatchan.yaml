@@ -1,0 +1,38 @@
+slug: hatchan
+name: Hatchan
+epithet: Hachi
+nicknames:
+  - Hachi
+debut:
+  arc: arlong-park
+  chapter: 69
+  episode: 31
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 38
+  height_cm: 220
+affiliation: Ryugu Kingdom
+other_affiliations:
+  - Sun Pirates
+  - Arlong Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Hatchan
+power_level: 1520
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/hatchan.jpg
+  path: characters/hatchan.webp
+forms:
+  - slug: base
+    name: Hatchan
+    default: true

@@ -1,0 +1,36 @@
+slug: urouge
+name: Urouge
+epithet: Mad Monk
+nicknames:
+  - Mad Monk
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 108000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Sky Person
+  origin: Sky Islands
+  age: 47
+  height_cm: 388
+affiliation: Fallen Monk Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Urouge
+power_level: 6960
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/urouge.jpg
+  path: characters/urouge.webp
+forms:
+  - slug: base
+    name: Urouge
+    default: true

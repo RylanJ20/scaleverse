@@ -1,0 +1,36 @@
+slug: borsalino
+name: Borsalino
+epithet: Kizaru
+nicknames:
+  - Kizaru
+debut:
+  arc: sabaody-archipelago
+  chapter: 504
+  episode: 398
+status: Alive
+bounty: 3000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Glint-Glint Fruit
+  name_ja: Pika Pika no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 58
+  height_cm: 302
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Borsalino
+power_level: 8230
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/borsalino.jpg
+  path: characters/borsalino.webp
+forms:
+  - slug: base
+    name: Borsalino
+    default: true

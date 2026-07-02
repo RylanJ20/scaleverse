@@ -1,0 +1,36 @@
+slug: chadros-higelyges
+name: Chadros Higelyges
+epithet: Brownbeard
+nicknames:
+  - Brownbeard
+debut:
+  arc: marineford
+  chapter: 556
+  episode: 463
+status: Alive
+bounty: 80060000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 45
+  height_cm: 691
+affiliation: None
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Chadros_Higelyges
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/chadros-higelyges.jpg
+  path: characters/chadros-higelyges.webp
+forms:
+  - slug: base
+    name: Chadros Higelyges
+    default: true

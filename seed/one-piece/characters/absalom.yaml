@@ -1,0 +1,36 @@
+slug: absalom
+name: Absalom
+epithet: Absalom of the Graveyard
+nicknames:
+  - Absalom of the Graveyard
+debut:
+  arc: thriller-bark
+  chapter: 443
+  episode: 337
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Clear-Clear Fruit
+  name_ja: Suke Suke no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 36
+  height_cm: 195
+affiliation: Thriller Bark Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Absalom
+power_level: 1700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/absalom.jpg
+  path: characters/absalom.webp
+forms:
+  - slug: base
+    name: Absalom
+    default: true

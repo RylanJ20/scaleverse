@@ -1,0 +1,36 @@
+slug: wyper
+name: Wyper
+epithet: Berserker
+nicknames:
+  - Berserker
+debut:
+  arc: skypiea
+  chapter: 237
+  episode: 153
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Shandian
+  origin: Sky Islands
+  age: 24
+  height_cm: 183
+affiliation: Shandia
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Wyper
+power_level: 910
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/wyper.jpg
+  path: characters/wyper.webp
+forms:
+  - slug: base
+    name: Wyper
+    default: true

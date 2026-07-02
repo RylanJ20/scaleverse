@@ -1,0 +1,36 @@
+slug: duval
+name: Duval
+epithet: Handsome
+nicknames:
+  - Handsome
+debut:
+  arc: sabaody-archipelago
+  chapter: 490
+  episode: 385
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: null
+  height_cm: null
+affiliation: Rosy Life Riders
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Duval
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/duval.jpg
+  path: characters/duval.webp
+forms:
+  - slug: base
+    name: Duval
+    default: true

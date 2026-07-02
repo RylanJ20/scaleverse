@@ -1,0 +1,36 @@
+slug: charlotte-praline
+name: Charlotte Praline
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 830
+  episode: 790
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Merfolk
+  origin: Grand Line
+  age: 29
+  height_cm: 800
+affiliation: Sun Pirates
+other_affiliations:
+  - Big Mom Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Praline
+power_level: 1500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-praline.jpg
+  path: characters/charlotte-praline.webp
+forms:
+  - slug: base
+    name: Charlotte Praline
+    default: true

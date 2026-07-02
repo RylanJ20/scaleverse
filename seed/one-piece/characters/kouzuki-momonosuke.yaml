@@ -1,0 +1,36 @@
+slug: kouzuki-momonosuke
+name: Kouzuki Momonosuke
+epithet: Momo
+nicknames:
+  - Momo
+debut:
+  arc: punk-hazard
+  chapter: 656
+  episode: 582
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: Fish-Fish Fruit, Azure Dragon Model
+  name_ja: 'Uo Uo no Mi, Model: Seiryu'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 8
+  height_cm: 322
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kouzuki_Momonosuke
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kouzuki-momonosuke.jpg
+  path: characters/kouzuki-momonosuke.webp
+forms:
+  - slug: base
+    name: Kouzuki Momonosuke
+    default: true

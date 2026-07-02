@@ -1,0 +1,36 @@
+slug: charlotte-mont-d-or
+name: Charlotte Mont-d'Or
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 829
+  episode: 789
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Book-Book Fruit
+  name_ja: Buku Buku no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 38
+  height_cm: 260
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Mont-d'Or
+power_level: 2000
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-mont-d-or.jpg
+  path: characters/charlotte-mont-d-or.webp
+forms:
+  - slug: base
+    name: Charlotte Mont-d'Or
+    default: true

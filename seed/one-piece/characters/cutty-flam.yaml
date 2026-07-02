@@ -1,0 +1,40 @@
+slug: cutty-flam
+name: Cutty Flam
+epithet: Franky
+nicknames:
+  - Franky
+  - Cyborg Franky
+  - Frankosuke
+debut:
+  arc: water-7
+  chapter: 329
+  episode: 233
+status: Alive
+bounty: 94400000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Cyborg
+  origin: South Blue
+  age: 36
+  height_cm: 240
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Water 7
+  - Tom's Workers
+wiki_url: https://onepiece.fandom.com/wiki/Cutty_Flam
+power_level: 4600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/cutty-flam.jpg
+  path: characters/cutty-flam.webp
+forms:
+  - slug: base
+    name: Cutty Flam
+    default: true

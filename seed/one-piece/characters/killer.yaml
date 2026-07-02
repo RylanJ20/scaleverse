@@ -1,0 +1,37 @@
+slug: killer
+name: Killer
+epithet: Massacre Soldier
+nicknames:
+  - Massacre Soldier
+  - Hitokiri Kamazo
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 200000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: SMILE
+  name_ja: SMILE
+demographics:
+  gender: Male
+  race: Human
+  origin: South Blue
+  age: 27
+  height_cm: 195
+affiliation: Kid Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Killer
+power_level: 4650
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/killer.jpg
+  path: characters/killer.webp
+forms:
+  - slug: base
+    name: Killer
+    default: true

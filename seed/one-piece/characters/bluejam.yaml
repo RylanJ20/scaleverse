@@ -1,0 +1,35 @@
+slug: bluejam
+name: Bluejam
+epithet: null
+nicknames: []
+debut:
+  arc: post-war
+  chapter: 584
+  episode: 494
+status: Unknown
+bounty: 14300000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 42
+  height_cm: 261
+affiliation: Bluejam Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Bluejam
+power_level: 1300
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/bluejam.jpg
+  path: characters/bluejam.webp
+forms:
+  - slug: base
+    name: Bluejam
+    default: true

@@ -1,0 +1,38 @@
+slug: bartholomew-kuma
+name: Bartholomew Kuma
+epithet: The Tyrant
+nicknames:
+  - The Tyrant
+debut:
+  arc: jaya
+  chapter: 233
+  episode: 151
+status: Alive
+bounty: 296000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Paw-Paw Fruit
+  name_ja: Nikyu Nikyu no Mi
+demographics:
+  gender: Male
+  race: Buccaneer
+  origin: South Blue
+  age: 47
+  height_cm: 689
+affiliation: Revolutionary Army
+other_affiliations:
+  - Warlords
+  - Sorbet Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Bartholomew_Kuma
+power_level: 5930
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/bartholomew-kuma.jpg
+  path: characters/bartholomew-kuma.webp
+forms:
+  - slug: base
+    name: Bartholomew Kuma
+    default: true

@@ -1,0 +1,36 @@
+slug: abdullah
+name: Abdullah
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 704
+  episode: 633
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Ideo Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Abdullah
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/abdullah.jpg
+  path: characters/abdullah.webp
+forms:
+  - slug: base
+    name: Abdullah
+    default: true

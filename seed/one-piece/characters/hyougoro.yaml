@@ -1,0 +1,36 @@
+slug: hyougoro
+name: Hyougoro
+epithet: Hyougoro the Flower
+nicknames:
+  - Hyougoro the Flower
+debut:
+  arc: wano-country
+  chapter: 926
+  episode: 919
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 70
+  height_cm: 100
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Hyougoro
+power_level: 5360
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/hyougoro.jpg
+  path: characters/hyougoro.webp
+forms:
+  - slug: base
+    name: Hyougoro
+    default: true

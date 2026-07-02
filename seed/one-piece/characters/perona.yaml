@@ -1,0 +1,36 @@
+slug: perona
+name: Perona
+epithet: Ghost Princess
+nicknames:
+  - Ghost Princess
+debut:
+  arc: thriller-bark
+  chapter: 443
+  episode: 337
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Hollow-Hollow Fruit
+  name_ja: Horo Horo no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: West Blue
+  age: 25
+  height_cm: 160
+affiliation: Thriller Bark Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Perona
+power_level: 1400
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/perona.jpg
+  path: characters/perona.webp
+forms:
+  - slug: base
+    name: Perona
+    default: true

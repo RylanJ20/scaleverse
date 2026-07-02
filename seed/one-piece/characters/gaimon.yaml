@@ -1,0 +1,36 @@
+slug: gaimon
+name: Gaimon
+epithet: Treasure Hunter
+nicknames:
+  - Treasure Hunter
+debut:
+  arc: romance-dawn
+  chapter: 22
+  episode: 18
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 45
+  height_cm: 130
+affiliation: None
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Gaimon
+power_level: 150
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/gaimon.jpg
+  path: characters/gaimon.webp
+forms:
+  - slug: base
+    name: Gaimon
+    default: true

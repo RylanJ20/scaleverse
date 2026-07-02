@@ -1,0 +1,36 @@
+slug: chaka
+name: Chaka
+epithet: The Jackal
+nicknames:
+  - The Jackal
+debut:
+  arc: alabasta
+  chapter: 155
+  episode: 92
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: 'Dog-Dog Fruit, Model: Jackal'
+  name_ja: 'Inu Inu no Mi, Model: Jackal'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 36
+  height_cm: 191
+affiliation: Alabasta Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Chaka
+power_level: 2000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/chaka.jpg
+  path: characters/chaka.webp
+forms:
+  - slug: base
+    name: Chaka
+    default: true

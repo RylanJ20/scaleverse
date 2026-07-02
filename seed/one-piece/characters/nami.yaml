@@ -1,0 +1,38 @@
+slug: nami
+name: Nami
+epithet: Cat Burglar
+nicknames:
+  - Cat Burglar
+  - Onami
+debut:
+  arc: romance-dawn
+  chapter: 8
+  episode: 1
+status: Alive
+bounty: 66000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 20
+  height_cm: 170
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Arlong Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Nami
+power_level: 3500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nami.jpg
+  path: characters/nami.webp
+forms:
+  - slug: base
+    name: Nami
+    default: true

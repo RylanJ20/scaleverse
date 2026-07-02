@@ -1,0 +1,36 @@
+slug: sadi
+name: Sadi
+epithet: Sadi-chan
+nicknames:
+  - Sadi-chan
+debut:
+  arc: impel-down
+  chapter: 527
+  episode: 424
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: 188
+affiliation: Impel Down
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Sadi
+power_level: 1300
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sadi.jpg
+  path: characters/sadi.webp
+forms:
+  - slug: base
+    name: Sadi
+    default: true

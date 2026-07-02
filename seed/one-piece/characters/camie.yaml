@@ -1,0 +1,36 @@
+slug: camie
+name: Camie
+epithet: Camie the Mermaid
+nicknames:
+  - Camie the Mermaid
+debut:
+  arc: sabaody-archipelago
+  chapter: 494
+  episode: 385
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Merfolk
+  origin: Grand Line
+  age: 18
+  height_cm: 197
+affiliation: Ryugu Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Camie
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/camie.jpg
+  path: characters/camie.webp
+forms:
+  - slug: base
+    name: Camie
+    default: true

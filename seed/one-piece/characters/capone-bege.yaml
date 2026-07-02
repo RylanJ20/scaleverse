@@ -1,0 +1,37 @@
+slug: capone-bege
+name: Capone Bege
+epithet: Gang
+nicknames:
+  - Gang
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 350000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Castle-Castle Fruit
+  name_ja: Shiro Shiro no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 42
+  height_cm: 166
+affiliation: Fire Tank Pirates
+other_affiliations:
+  - Big Mom Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Capone_Bege
+power_level: 2630
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/capone-bege.jpg
+  path: characters/capone-bege.webp
+forms:
+  - slug: base
+    name: Capone Bege
+    default: true

@@ -1,0 +1,35 @@
+slug: buckingham-stussy
+name: Buckingham Stussy
+epithet: null
+nicknames: []
+debut:
+  arc: zou
+  chapter: 802
+  episode: 752
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 76
+  height_cm: 68
+affiliation: Rocks Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Buckingham_Stussy
+power_level: 6200
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/buckingham-stussy.jpg
+  path: characters/buckingham-stussy.webp
+forms:
+  - slug: base
+    name: Buckingham Stussy
+    default: true

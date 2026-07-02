@@ -1,0 +1,35 @@
+slug: mocha
+name: Mocha
+epithet: null
+nicknames: []
+debut:
+  arc: punk-hazard
+  chapter: 659
+  episode: 583
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 9
+  height_cm: null
+affiliation: None
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Mocha
+power_level: 100
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/mocha.jpg
+  path: characters/mocha.webp
+forms:
+  - slug: base
+    name: Mocha
+    default: true

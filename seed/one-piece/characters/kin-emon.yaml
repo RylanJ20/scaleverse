@@ -1,0 +1,36 @@
+slug: kin-emon
+name: Kin'emon
+epithet: Foxfire Kin'emon
+nicknames:
+  - Foxfire Kin'emon
+debut:
+  arc: punk-hazard
+  chapter: 656
+  episode: 580
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Garb-Garb Fruit
+  name_ja: Fuku Fuku no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 36
+  height_cm: 295
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kin'emon
+power_level: 5650
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kin-emon.jpg
+  path: characters/kin-emon.webp
+forms:
+  - slug: base
+    name: Kin'emon
+    default: true

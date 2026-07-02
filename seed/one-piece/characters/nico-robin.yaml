@@ -1,0 +1,40 @@
+slug: nico-robin
+name: Nico Robin
+epithet: Devil Child
+nicknames:
+  - Devil Child
+  - Miss All Sunday
+  - Orobi
+debut:
+  arc: alabasta
+  chapter: 114
+  episode: 67
+status: Alive
+bounty: 930000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Flower-Flower Fruit
+  name_ja: Hana Hana no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: West Blue
+  age: 30
+  height_cm: 188
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Baroque Works
+  - Ohara Scholars
+wiki_url: https://onepiece.fandom.com/wiki/Nico_Robin
+power_level: 5200
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nico-robin.jpg
+  path: characters/nico-robin.webp
+forms:
+  - slug: base
+    name: Nico Robin
+    default: true

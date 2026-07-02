@@ -1,0 +1,39 @@
+slug: figarland-shanks
+name: Figarland Shanks
+epithet: Red-Haired Shanks
+nicknames:
+  - Red-Haired Shanks
+debut:
+  arc: romance-dawn
+  chapter: 1
+  episode: 4
+status: Alive
+bounty: 4048900000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 39
+  height_cm: 199
+affiliation: Red-Haired Pirates
+other_affiliations:
+  - Roger Pirates
+  - Holy Knights
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Shanks
+power_level: 9220
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shanks.jpg
+  path: characters/figarland-shanks.webp
+forms:
+  - slug: base
+    name: Figarland Shanks
+    default: true

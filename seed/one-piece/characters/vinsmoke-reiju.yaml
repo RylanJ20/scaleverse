@@ -1,0 +1,36 @@
+slug: vinsmoke-reiju
+name: Vinsmoke Reiju
+epithet: Poison Pink
+nicknames:
+  - Poison Pink
+debut:
+  arc: whole-cake-island
+  chapter: 826
+  episode: 783
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: North Blue
+  age: 24
+  height_cm: 173
+affiliation: Germa 66
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Vinsmoke_Reiju
+power_level: 5120
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vinsmoke-reiju.jpg
+  path: characters/vinsmoke-reiju.webp
+forms:
+  - slug: base
+    name: Vinsmoke Reiju
+    default: true

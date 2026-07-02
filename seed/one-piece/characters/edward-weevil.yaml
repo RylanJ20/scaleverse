@@ -1,0 +1,36 @@
+slug: edward-weevil
+name: Edward Weevil
+epithet: null
+nicknames: []
+debut:
+  arc: zou
+  chapter: 802
+  episode: 751
+status: Alive
+bounty: 480000000
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Buccaneer
+  origin: Grand Line
+  age: 35
+  height_cm: 680
+affiliation: None
+other_affiliations:
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Edward_Weevil
+power_level: 6400
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/edward-weevil.jpg
+  path: characters/edward-weevil.webp
+forms:
+  - slug: base
+    name: Edward Weevil
+    default: true

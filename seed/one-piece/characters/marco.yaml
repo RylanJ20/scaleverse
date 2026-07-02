@@ -1,0 +1,36 @@
+slug: marco
+name: Marco
+epithet: Marco the Phoenix
+nicknames:
+  - Marco the Phoenix
+debut:
+  arc: jaya
+  chapter: 234
+  episode: 151
+status: Alive
+bounty: 1374000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Bird-Bird Fruit, Phoenix Model
+  name_ja: 'Tori Tori no Mi, Model: Phoenix'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 45
+  height_cm: 203
+affiliation: Whitebeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Marco
+power_level: 7340
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/marco.jpg
+  path: characters/marco.webp
+forms:
+  - slug: base
+    name: Marco
+    default: true

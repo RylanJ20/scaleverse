@@ -1,0 +1,37 @@
+slug: road
+name: Road
+epithet: Sun God
+nicknames:
+  - Sun God
+debut:
+  arc: whole-cake-island
+  chapter: 898
+  episode: null
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Giant
+  origin: Grand Line
+  age: 63
+  height_cm: 2600
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - New Giant Warrior Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Road
+power_level: 4100
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/road.jpg
+  path: characters/road.webp
+forms:
+  - slug: base
+    name: Road
+    default: true

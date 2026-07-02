@@ -1,0 +1,36 @@
+slug: saint-jaygarcia-saturn
+name: Saint Jaygarcia Saturn
+epithet: Godhead of Science & Defense
+nicknames:
+  - Godhead of Science & Defense
+debut:
+  arc: jaya
+  chapter: 233
+  episode: 151
+status: Alive
+bounty: 0
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Ox-Ogre Fruit
+  name_ja: Ushi Oni no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Jaygarcia_Saturn
+power_level: 8050
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jaygarcia-saturn.jpg
+  path: characters/saint-jaygarcia-saturn.webp
+forms:
+  - slug: base
+    name: Saint Jaygarcia Saturn
+    default: true

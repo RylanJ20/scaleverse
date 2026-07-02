@@ -1,0 +1,35 @@
+slug: doll
+name: Doll
+epithet: null
+nicknames: []
+debut:
+  arc: egghead
+  chapter: 1061
+  episode: 1090
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Doll
+power_level: 4800
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/doll.jpg
+  path: characters/doll.webp
+forms:
+  - slug: base
+    name: Doll
+    default: true

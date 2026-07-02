@@ -1,0 +1,36 @@
+slug: saint-nerona-imu
+name: Saint Nerona Imu
+epithet: Mu
+nicknames:
+  - Mu
+debut:
+  arc: reverie
+  chapter: 1085
+  episode: 1119
+status: Alive
+bounty: 0
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: The Devil's Fruit
+  name_ja: Akuma no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations: []
+wiki_url: null
+power_level: 10000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nerona-imu.jpg
+  path: characters/saint-nerona-imu.webp
+forms:
+  - slug: base
+    name: Saint Nerona Imu
+    default: true

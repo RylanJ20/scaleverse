@@ -1,0 +1,35 @@
+slug: trebol
+name: Trebol
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Stick-Stick Fruit
+  name_ja: Beta Beta no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 49
+  height_cm: 349
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Trebol
+power_level: 3700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/trebol.jpg
+  path: characters/trebol.webp
+forms:
+  - slug: base
+    name: Trebol
+    default: true

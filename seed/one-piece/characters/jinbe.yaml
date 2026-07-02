@@ -1,0 +1,39 @@
+slug: jinbe
+name: Jinbe
+epithet: First Son of the Sea
+nicknames:
+  - First Son of the Sea
+  - Boss Jinbe
+debut:
+  arc: arlong-park
+  chapter: 69
+  episode: 440
+status: Alive
+bounty: 1100000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 46
+  height_cm: 301
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Sun Pirates
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Jinbe
+power_level: 6840
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jinbe.jpg
+  path: characters/jinbe.webp
+forms:
+  - slug: base
+    name: Jinbe
+    default: true

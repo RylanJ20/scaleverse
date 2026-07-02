@@ -1,0 +1,37 @@
+slug: kurozumi-orochi
+name: Kurozumi Orochi
+epithet: Shogun Orochi
+nicknames:
+  - Shogun Orochi
+debut:
+  arc: wano-country
+  chapter: 927
+  episode: 921
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: Snake-Snake Fruit, Yamata no Orochi Model
+  name_ja: 'Hebi Hebi no Mi, Model: Yamata no Orochi'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 54
+  height_cm: 350
+affiliation: Kurozumi Family
+other_affiliations:
+  - Orochi's Army
+wiki_url: https://onepiece.fandom.com/wiki/Kurozumi_Orochi
+power_level: 2380
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kurozumi-orochi.jpg
+  path: characters/kurozumi-orochi.webp
+forms:
+  - slug: base
+    name: Kurozumi Orochi
+    default: true

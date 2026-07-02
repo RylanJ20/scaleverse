@@ -1,0 +1,35 @@
+slug: momonga
+name: Momonga
+epithet: null
+nicknames: []
+debut:
+  arc: amazon-lily
+  chapter: 514
+  episode: 408
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Momonga
+power_level: 3480
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/momonga.jpg
+  path: characters/momonga.webp
+forms:
+  - slug: base
+    name: Momonga
+    default: true

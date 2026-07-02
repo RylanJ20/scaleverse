@@ -1,0 +1,36 @@
+slug: jaguar-d-saul
+name: Jaguar D. Saul
+epithet: null
+nicknames: []
+debut:
+  arc: enies-lobby
+  chapter: 392
+  episode: 276
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Giant
+  origin: South Blue
+  age: 127
+  height_cm: 1950
+affiliation: Elbaph
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Jaguar_D._Saul
+power_level: 5600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jaguar-d-saul.jpg
+  path: characters/jaguar-d-saul.webp
+forms:
+  - slug: base
+    name: Jaguar D. Saul
+    default: true

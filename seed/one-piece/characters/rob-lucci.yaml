@@ -1,0 +1,38 @@
+slug: rob-lucci
+name: Rob Lucci
+epithet: Massacre Weapon
+nicknames:
+  - Massacre Weapon
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Cat-Cat Fruit, Leopard Model
+  name_ja: 'Neko Neko no Mi, Model: Leopard'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 30
+  height_cm: 212
+affiliation: Cipher Pol
+other_affiliations:
+  - World Government
+  - Galley-La Company
+wiki_url: https://onepiece.fandom.com/wiki/Rob_Lucci
+power_level: 7300
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/rob-lucci.jpg
+  path: characters/rob-lucci.webp
+forms:
+  - slug: base
+    name: Rob Lucci
+    default: true

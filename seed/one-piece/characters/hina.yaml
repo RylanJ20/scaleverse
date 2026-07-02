@@ -1,0 +1,36 @@
+slug: hina
+name: Hina
+epithet: Black Cage Hina
+nicknames:
+  - Black Cage Hina
+debut:
+  arc: alabasta
+  chapter: 218
+  episode: 127
+status: Alive
+bounty: 200000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Bind-Bind Fruit
+  name_ja: Ori Ori no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 34
+  height_cm: 181
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Hina
+power_level: 1090
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/hina.jpg
+  path: characters/hina.webp
+forms:
+  - slug: base
+    name: Hina
+    default: true

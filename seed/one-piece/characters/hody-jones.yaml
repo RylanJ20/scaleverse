@@ -1,0 +1,35 @@
+slug: hody-jones
+name: Hody Jones
+epithet: null
+nicknames: []
+debut:
+  arc: fish-man-island
+  chapter: 608
+  episode: 529
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 30
+  height_cm: 331
+affiliation: New Fish-Man Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Hody_Jones
+power_level: 2840
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/hody-jones.jpg
+  path: characters/hody-jones.webp
+forms:
+  - slug: base
+    name: Hody Jones
+    default: true

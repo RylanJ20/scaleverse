@@ -1,0 +1,36 @@
+slug: vista
+name: Vista
+epithet: Flower Sword Vista
+nicknames:
+  - Flower Sword Vista
+debut:
+  arc: marineford
+  chapter: 551
+  episode: 460
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Whitebeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Vista
+power_level: 5800
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vista.jpg
+  path: characters/vista.webp
+forms:
+  - slug: base
+    name: Vista
+    default: true

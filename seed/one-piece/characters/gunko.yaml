@@ -1,0 +1,36 @@
+slug: gunko
+name: Gunko
+epithet: null
+nicknames: []
+debut:
+  arc: elbaph
+  chapter: 1134
+  episode: null
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Arrow-Arrow Fruit
+  name_ja: Aro Aro no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: West Blue
+  age: null
+  height_cm: null
+affiliation: Holy Knights
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Manmayer_Gunko
+power_level: 5390
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/gunko.jpg
+  path: characters/gunko.webp
+forms:
+  - slug: base
+    name: Gunko
+    default: true

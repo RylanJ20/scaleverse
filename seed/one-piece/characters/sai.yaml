@@ -1,0 +1,37 @@
+slug: sai
+name: Sai
+epithet: Don Sai
+nicknames:
+  - Don Sai
+debut:
+  arc: dressrosa
+  chapter: 704
+  episode: 632
+status: Alive
+bounty: 210000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 28
+  height_cm: 242
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Happo Navy
+wiki_url: https://onepiece.fandom.com/wiki/Sai
+power_level: 5180
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sai.jpg
+  path: characters/sai.webp
+forms:
+  - slug: base
+    name: Sai
+    default: true

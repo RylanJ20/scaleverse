@@ -1,0 +1,36 @@
+slug: saint-figarland-shamrock
+name: Saint Figarland Shamrock
+epithet: null
+nicknames: []
+debut:
+  arc: reverie
+  chapter: 907
+  episode: 887
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: 39
+  height_cm: null
+affiliation: Holy Knights
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Saint_Figarland_Shamrock
+power_level: 8410
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/figarland-shamrock.jpg
+  path: characters/saint-figarland-shamrock.webp
+forms:
+  - slug: base
+    name: Saint Figarland Shamrock
+    default: true

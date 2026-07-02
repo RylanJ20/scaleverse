@@ -1,0 +1,36 @@
+slug: emet
+name: Emet
+epithet: Iron Giant
+nicknames:
+  - Iron Giant
+debut:
+  arc: egghead
+  chapter: 1065
+  episode: 1095
+status: Unknown
+bounty: null
+haki:
+  conqueror: true
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Unknown
+  race: Robot
+  origin: Unknown
+  age: null
+  height_cm: null
+affiliation: Ancient Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Emet
+power_level: 6500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/emet.jpg
+  path: characters/emet.webp
+forms:
+  - slug: base
+    name: Emet
+    default: true

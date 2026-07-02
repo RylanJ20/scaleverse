@@ -1,0 +1,37 @@
+slug: aramaki
+name: Aramaki
+epithet: Ryokugyu
+nicknames:
+  - Ryokugyu
+  - Green Bull
+debut:
+  arc: wano-country
+  chapter: 905
+  episode: 882
+status: Alive
+bounty: 3000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Forest-Forest Fruit
+  name_ja: Mori Mori no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 41
+  height_cm: 308
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Aramaki
+power_level: 8170
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/aramaki.jpg
+  path: characters/aramaki.webp
+forms:
+  - slug: base
+    name: Aramaki
+    default: true

@@ -1,0 +1,35 @@
+slug: boa-marigold
+name: Boa Marigold
+epithet: null
+nicknames: []
+debut:
+  arc: amazon-lily
+  chapter: 516
+  episode: 409
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Snake-Snake Fruit, King Cobra Model
+  name_ja: 'Hebi Hebi no Mi, Model: King Cobra'
+demographics:
+  gender: Female
+  race: Human
+  origin: Calm Belt
+  age: 28
+  height_cm: 432
+affiliation: Kuja Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Boa_Marigold
+power_level: 4850
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/boa-marigold.jpg
+  path: characters/boa-marigold.webp
+forms:
+  - slug: base
+    name: Boa Marigold
+    default: true

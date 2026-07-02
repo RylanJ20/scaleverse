@@ -1,0 +1,37 @@
+slug: who-s-who
+name: Who's-Who
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 977
+  episode: 982
+status: Alive
+bounty: 546000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Cat-Cat Fruit, Ancient Model: Saber-Toothed Tiger'
+  name_ja: 'Neko Neko no Mi, Model: Saber-Toothed Tiger'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 38
+  height_cm: 336
+affiliation: Beast Pirates
+other_affiliations:
+  - Cipher Pol
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Who's-Who
+power_level: 6360
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/who-s-who.jpg
+  path: characters/who-s-who.webp
+forms:
+  - slug: base
+    name: Who's-Who
+    default: true

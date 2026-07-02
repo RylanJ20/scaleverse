@@ -1,0 +1,37 @@
+slug: shirahoshi
+name: Shirahoshi
+epithet: Mermaid Princess
+nicknames:
+  - Mermaid Princess
+  - Poseidon
+debut:
+  arc: fish-man-island
+  chapter: 612
+  episode: 531
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Merfolk
+  origin: Grand Line
+  age: 16
+  height_cm: 1187
+affiliation: Ryugu Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shirahoshi
+power_level: 2500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shirahoshi.jpg
+  path: characters/shirahoshi.webp
+forms:
+  - slug: base
+    name: Shirahoshi
+    default: true

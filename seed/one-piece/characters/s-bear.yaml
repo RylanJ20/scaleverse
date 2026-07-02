@@ -1,0 +1,35 @@
+slug: s-bear
+name: S-Bear
+epithet: null
+nicknames: []
+debut:
+  arc: egghead
+  chapter: 1061
+  episode: 1072
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Paw-Paw Fruit
+  name_ja: Nikyu Nikyu no Mi
+demographics:
+  gender: Male
+  race: Seraphim
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/S-Bear
+power_level: 7400
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/s-bear.jpg
+  path: characters/s-bear.webp
+forms:
+  - slug: base
+    name: S-Bear
+    default: true

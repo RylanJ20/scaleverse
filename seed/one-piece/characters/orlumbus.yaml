@@ -1,0 +1,37 @@
+slug: orlumbus
+name: Orlumbus
+epithet: Massacre Ruler
+nicknames:
+  - Massacre Ruler
+debut:
+  arc: dressrosa
+  chapter: 704
+  episode: 632
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 42
+  height_cm: 480
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Yonta Maria Grand Fleet
+wiki_url: https://onepiece.fandom.com/wiki/Orlumbus
+power_level: 2280
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/orlumbus.jpg
+  path: characters/orlumbus.webp
+forms:
+  - slug: base
+    name: Orlumbus
+    default: true

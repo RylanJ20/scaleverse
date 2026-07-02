@@ -1,0 +1,35 @@
+slug: pica
+name: Pica
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Stone-Stone Fruit
+  name_ja: Ishi Ishi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 40
+  height_cm: 470
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Pica
+power_level: 3740
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/pica.jpg
+  path: characters/pica.webp
+forms:
+  - slug: base
+    name: Pica
+    default: true

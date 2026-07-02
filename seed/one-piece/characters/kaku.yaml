@@ -1,0 +1,38 @@
+slug: kaku
+name: Kaku
+epithet: Kaku the Giraffe
+nicknames:
+  - Kaku the Giraffe
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Ox-Ox Fruit, Giraffe Model
+  name_ja: 'Ushi Ushi no Mi, Model: Giraffe'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 25
+  height_cm: 293
+affiliation: Cipher Pol
+other_affiliations:
+  - World Government
+  - Galley-La Company
+wiki_url: https://onepiece.fandom.com/wiki/Kaku
+power_level: 4700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kaku.jpg
+  path: characters/kaku.webp
+forms:
+  - slug: base
+    name: Kaku
+    default: true

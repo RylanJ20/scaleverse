@@ -1,0 +1,39 @@
+slug: crocodile
+name: Crocodile
+epithet: Mr. 0
+nicknames:
+  - Mr. 0
+  - Sir Crocodile
+debut:
+  arc: alabasta
+  chapter: 126
+  episode: 76
+status: Alive
+bounty: 1965000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Sand-Sand Fruit
+  name_ja: Suna Suna no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 46
+  height_cm: 253
+affiliation: Cross Guild
+other_affiliations:
+  - Baroque Works
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Crocodile
+power_level: 6780
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/crocodile.jpg
+  path: characters/crocodile.webp
+forms:
+  - slug: base
+    name: Crocodile
+    default: true

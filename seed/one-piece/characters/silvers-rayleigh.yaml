@@ -1,0 +1,36 @@
+slug: silvers-rayleigh
+name: Silvers Rayleigh
+epithet: Dark King
+nicknames:
+  - Dark King
+debut:
+  arc: sabaody-archipelago
+  chapter: 19
+  episode: 8
+status: Alive
+bounty: null
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 78
+  height_cm: 188
+affiliation: Roger Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Silvers_Rayleigh
+power_level: 8710
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/silvers-rayleigh.jpg
+  path: characters/silvers-rayleigh.webp
+forms:
+  - slug: base
+    name: Silvers Rayleigh
+    default: true

@@ -1,0 +1,37 @@
+slug: jabra
+name: Jabra
+epithet: Jabra the Wolf
+nicknames:
+  - Jabra the Wolf
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Dog-Dog Fruit, Wolf Model
+  name_ja: 'Inu Inu no Mi, Model: Wolf'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 37
+  height_cm: 212
+affiliation: Cipher Pol
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Jabra
+power_level: 2350
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jabra.jpg
+  path: characters/jabra.webp
+forms:
+  - slug: base
+    name: Jabra
+    default: true

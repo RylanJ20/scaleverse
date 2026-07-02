@@ -1,0 +1,37 @@
+slug: arlong
+name: Arlong
+epithet: Saw-Tooth
+nicknames:
+  - Saw-Tooth
+debut:
+  arc: arlong-park
+  chapter: 69
+  episode: 31
+status: Alive
+bounty: 20000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 41
+  height_cm: 263
+affiliation: Arlong Pirates
+other_affiliations:
+  - Sun Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Arlong
+power_level: 1450
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/arlong.jpg
+  path: characters/arlong.webp
+forms:
+  - slug: base
+    name: Arlong
+    default: true

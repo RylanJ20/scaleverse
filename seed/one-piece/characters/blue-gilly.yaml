@@ -1,0 +1,36 @@
+slug: blue-gilly
+name: Blue Gilly
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 706
+  episode: 636
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Longleg
+  origin: Grand Line
+  age: 24
+  height_cm: 314
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Ideo Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Blue_Gilly
+power_level: 2360
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/blue-gilly.jpg
+  path: characters/blue-gilly.webp
+forms:
+  - slug: base
+    name: Blue Gilly
+    default: true

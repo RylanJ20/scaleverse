@@ -1,0 +1,37 @@
+slug: kalifa
+name: Kalifa
+epithet: null
+nicknames: []
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Bubble-Bubble Fruit
+  name_ja: Awa Awa no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 27
+  height_cm: 185
+affiliation: Cipher Pol
+other_affiliations:
+  - World Government
+  - Galley-La Company
+wiki_url: https://onepiece.fandom.com/wiki/Kalifa
+power_level: 2250
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kalifa.jpg
+  path: characters/kalifa.webp
+forms:
+  - slug: base
+    name: Kalifa
+    default: true

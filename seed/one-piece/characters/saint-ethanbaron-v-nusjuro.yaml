@@ -1,0 +1,38 @@
+slug: saint-ethanbaron-v-nusjuro
+name: Saint Ethanbaron V. Nusjuro
+epithet: Godhead of Finance
+nicknames:
+  - Godhead of Finance
+  - Nusjuro the Warlord
+debut:
+  arc: jaya
+  chapter: 233
+  episode: 151
+status: Alive
+bounty: 0
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Horse Bones Fruit
+  name_ja: Bakotsu no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Ethanbaron_V._Nusjuro
+power_level: 8050
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/ethanbaron-v-nusjuro.jpg
+  path: characters/saint-ethanbaron-v-nusjuro.webp
+forms:
+  - slug: base
+    name: Saint Ethanbaron V. Nusjuro
+    default: true

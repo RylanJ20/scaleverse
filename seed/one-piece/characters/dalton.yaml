@@ -1,0 +1,37 @@
+slug: dalton
+name: Dalton
+epithet: Dalton of the Bison
+nicknames:
+  - Dalton of the Bison
+debut:
+  arc: drum-island
+  chapter: 134
+  episode: 80
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: Ox-Ox Fruit, Bison Model
+  name_ja: 'Ushi Ushi no Mi, Model: Bison'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 35
+  height_cm: 218
+affiliation: Sakura Kingdom
+other_affiliations:
+  - Drum Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Dalton
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/dalton.jpg
+  path: characters/dalton.webp
+forms:
+  - slug: base
+    name: Dalton
+    default: true

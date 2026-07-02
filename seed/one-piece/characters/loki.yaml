@@ -1,0 +1,36 @@
+slug: loki
+name: Loki
+epithet: Accursed Prince
+nicknames:
+  - Accursed Prince
+debut:
+  arc: elbaph
+  chapter: 1130
+  episode: null
+status: Alive
+bounty: 2600000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Unknown
+  name_ja: Unknown
+demographics:
+  gender: Male
+  race: Giant
+  origin: Grand Line
+  age: 63
+  height_cm: null
+affiliation: Elbaph
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Loki
+power_level: 8650
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/loki.jpg
+  path: characters/loki.webp
+forms:
+  - slug: base
+    name: Loki
+    default: true

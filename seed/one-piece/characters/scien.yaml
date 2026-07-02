@@ -1,0 +1,37 @@
+slug: scien
+name: Scien
+epithet: The Plague
+nicknames:
+  - The Plague
+debut:
+  arc: wano-country
+  chapter: 925
+  episode: 918
+status: Alive
+bounty: 1320000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Dragon-Dragon Fruit, Model: Brachiosaurus'
+  name_ja: 'Ryu Ryu no Mi, Model: Brachiosaurus'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 56
+  height_cm: 612
+affiliation: Beast Pirates
+other_affiliations:
+  - MADS
+wiki_url: https://onepiece.fandom.com/wiki/Scien
+power_level: 6700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/scien.jpg
+  path: characters/scien.webp
+forms:
+  - slug: base
+    name: Scien
+    default: true

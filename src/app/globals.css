@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
+/* Dark arcade baseline (ratified decision #21). Always dark — no light mode.
+   These are placeholder tokens; the real design pass happens with the
+   frontend-design / ui-ux-pro-max skills and founder sign-off. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a12;
+  --surface: #12121e;
+  --foreground: #f2f2f7;
+  --muted: #8b8b9e;
+  --accent: #e11d48; /* versus-screen red */
+  --accent-2: #22d3ee; /* electric cyan */
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-tier-s: #facc15;
+  --color-tier-a: #fb7185;
+  --color-tier-b: #38bdf8;
+  --color-tier-c: #4ade80;
+  --color-tier-d: #a78bfa;
+  --color-tier-f: #71717a;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-anton);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }

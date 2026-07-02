@@ -1,0 +1,37 @@
+slug: vinsmoke-judge
+name: Vinsmoke Judge
+epithet: Garuda
+nicknames:
+  - Garuda
+debut:
+  arc: whole-cake-island
+  chapter: 827
+  episode: 784
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 56
+  height_cm: 272
+affiliation: Germa 66
+other_affiliations:
+  - MADS
+wiki_url: https://onepiece.fandom.com/wiki/Vinsmoke_Judge
+power_level: 5000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vinsmoke-judge.jpg
+  path: characters/vinsmoke-judge.webp
+forms:
+  - slug: base
+    name: Vinsmoke Judge
+    default: true

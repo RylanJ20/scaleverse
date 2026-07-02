@@ -1,0 +1,37 @@
+slug: saint-figarland-garling
+name: Saint Figarland Garling
+epithet: Godhead of Science & Defense
+nicknames:
+  - Godhead of Science & Defense
+debut:
+  arc: egghead
+  chapter: 1086
+  episode: 1120
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations:
+  - Holy Knights
+wiki_url: https://onepiece.fandom.com/wiki/Figarland_Garling
+power_level: 8470
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/figarland-garling.jpg
+  path: characters/saint-figarland-garling.webp
+forms:
+  - slug: base
+    name: Saint Figarland Garling
+    default: true

@@ -1,0 +1,36 @@
+slug: van-augur
+name: Van Augur
+epithet: The Supersonic
+nicknames:
+  - The Supersonic
+debut:
+  arc: jaya
+  chapter: 223
+  episode: 146
+status: Alive
+bounty: 64000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Warp-Warp Fruit
+  name_ja: Wapu Wapu no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 27
+  height_cm: 340
+affiliation: Blackbeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Van_Augur
+power_level: 3190
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/van-augur.jpg
+  path: characters/van-augur.webp
+forms:
+  - slug: base
+    name: Van Augur
+    default: true

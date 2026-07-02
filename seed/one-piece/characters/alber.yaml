@@ -1,0 +1,37 @@
+slug: alber
+name: Alber
+epithet: King
+nicknames:
+  - King
+  - The Wildfire
+debut:
+  arc: wano-country
+  chapter: 925
+  episode: 918
+status: Alive
+bounty: 1390000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Dragon-Dragon Fruit, Model: Pteranodon'
+  name_ja: 'Ryu Ryu no Mi, Model: Pteranodon'
+demographics:
+  gender: Male
+  race: Lunarian
+  origin: Grand Line
+  age: 47
+  height_cm: 613
+affiliation: Beast Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Alber
+power_level: 7510
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/alber.jpg
+  path: characters/alber.webp
+forms:
+  - slug: base
+    name: Alber
+    default: true

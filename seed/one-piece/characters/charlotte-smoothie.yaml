@@ -1,0 +1,35 @@
+slug: charlotte-smoothie
+name: Charlotte Smoothie
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 846
+  episode: 812
+status: Alive
+bounty: 932000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Wring-Wring Fruit
+  name_ja: Shibo Shibo no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 35
+  height_cm: 464
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Smoothie
+power_level: 6540
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-smoothie.jpg
+  path: characters/charlotte-smoothie.webp
+forms:
+  - slug: base
+    name: Charlotte Smoothie
+    default: true

@@ -1,0 +1,36 @@
+slug: elizabello-ii
+name: Elizabello II
+epithet: The Fighting King
+nicknames:
+  - The Fighting King
+debut:
+  arc: dressrosa
+  chapter: 704
+  episode: 632
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 57
+  height_cm: 436
+affiliation: Prodence Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Elizabello_II
+power_level: 2150
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/elizabello-ii.jpg
+  path: characters/elizabello-ii.webp
+forms:
+  - slug: base
+    name: Elizabello II
+    default: true

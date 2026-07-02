@@ -1,0 +1,36 @@
+slug: inazuma
+name: Inazuma
+epithet: null
+nicknames: []
+debut:
+  arc: impel-down
+  chapter: 538
+  episode: 438
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Snip-Snip Fruit
+  name_ja: Choki Choki no Mi
+demographics:
+  gender: Other
+  race: Human
+  origin: South Blue
+  age: 29
+  height_cm: 228
+affiliation: Revolutionary Army
+other_affiliations:
+  - Kamabakka Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Inazuma
+power_level: 2680
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/inazuma.jpg
+  path: characters/inazuma.webp
+forms:
+  - slug: base
+    name: Inazuma
+    default: true

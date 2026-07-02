@@ -1,0 +1,35 @@
+slug: belo-betty
+name: Belo Betty
+epithet: null
+nicknames: []
+debut:
+  arc: reverie
+  chapter: 904
+  episode: 880
+status: Alive
+bounty: 457000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Pump-Pump Fruit
+  name_ja: Kobu Kobu no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 34
+  height_cm: 196
+affiliation: Revolutionary Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Belo_Betty
+power_level: 4490
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/belo-betty.jpg
+  path: characters/belo-betty.webp
+forms:
+  - slug: base
+    name: Belo Betty
+    default: true

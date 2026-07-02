@@ -1,0 +1,39 @@
+slug: donquixote-doflamingo
+name: Donquixote Doflamingo
+epithet: Heavenly Demon
+nicknames:
+  - Heavenly Demon
+  - Joker
+debut:
+  arc: jaya
+  chapter: 233
+  episode: 151
+status: Alive
+bounty: 340000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: String-String Fruit
+  name_ja: Ito Ito no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: 41
+  height_cm: 305
+affiliation: Donquixote Pirates
+other_affiliations:
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Donquixote_Doflamingo
+power_level: 7440
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/donquixote-doflamingo.jpg
+  path: characters/donquixote-doflamingo.webp
+forms:
+  - slug: base
+    name: Donquixote Doflamingo
+    default: true

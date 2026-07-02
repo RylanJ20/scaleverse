@@ -1,0 +1,37 @@
+slug: koby
+name: Koby
+epithet: Koby the Hero
+nicknames:
+  - Koby the Hero
+debut:
+  arc: romance-dawn
+  chapter: 2
+  episode: 1
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 18
+  height_cm: 167
+affiliation: SWORD
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Koby
+power_level: 4500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/koby.jpg
+  path: characters/koby.webp
+forms:
+  - slug: base
+    name: Koby
+    default: true

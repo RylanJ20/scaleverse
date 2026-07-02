@@ -1,0 +1,35 @@
+slug: charlotte-flampe
+name: Charlotte Flampe
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 891
+  episode: 865
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 15
+  height_cm: 170
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Flampe
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-flampe.jpg
+  path: characters/charlotte-flampe.webp
+forms:
+  - slug: base
+    name: Charlotte Flampe
+    default: true

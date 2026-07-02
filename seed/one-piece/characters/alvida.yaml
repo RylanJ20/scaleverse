@@ -1,0 +1,37 @@
+slug: alvida
+name: Alvida
+epithet: Iron Mace
+nicknames:
+  - Iron Mace
+debut:
+  arc: romance-dawn
+  chapter: 2
+  episode: 1
+status: Alive
+bounty: 5000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Slip-Slip Fruit
+  name_ja: Sube Sube no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 27
+  height_cm: 198
+affiliation: Cross Guild
+other_affiliations:
+  - Buggy Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Alvida
+power_level: 1000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/alvida.jpg
+  path: characters/alvida.webp
+forms:
+  - slug: base
+    name: Alvida
+    default: true

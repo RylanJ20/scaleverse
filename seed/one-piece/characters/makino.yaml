@@ -1,0 +1,35 @@
+slug: makino
+name: Makino
+epithet: null
+nicknames: []
+debut:
+  arc: romance-dawn
+  chapter: 1
+  episode: 4
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 31
+  height_cm: 166
+affiliation: Partys Bar
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Makino
+power_level: 120
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/makino.jpg
+  path: characters/makino.webp
+forms:
+  - slug: base
+    name: Makino
+    default: true

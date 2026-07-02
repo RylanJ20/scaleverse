@@ -1,0 +1,36 @@
+slug: tsuru
+name: Tsuru
+epithet: Great Advisor Tsuru
+nicknames:
+  - Great Advisor Tsuru
+debut:
+  arc: jaya
+  chapter: 234
+  episode: 151
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Wash-Wash Fruit
+  name_ja: Woshu Woshu no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 76
+  height_cm: 204
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Tsuru
+power_level: 6900
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/tsuru.jpg
+  path: characters/tsuru.webp
+forms:
+  - slug: base
+    name: Tsuru
+    default: true

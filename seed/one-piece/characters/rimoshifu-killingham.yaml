@@ -1,0 +1,38 @@
+slug: rimoshifu-killingham
+name: Rimoshifu Killingham
+epithet: St. Killingham
+nicknames:
+  - St. Killingham
+debut:
+  arc: elbaph
+  chapter: 1140
+  episode: null
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Dragon-Dragon Fruit, Model: Kirin'
+  name_ja: 'Ryu Ryu no Mi, Model: Kirin'
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: Holy Knights
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Saint_Rimoshifu_Killingham
+power_level: 5450
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/rimoshifu-killingham.jpg
+  path: characters/rimoshifu-killingham.webp
+forms:
+  - slug: base
+    name: Rimoshifu Killingham
+    default: true

@@ -1,0 +1,37 @@
+slug: enel
+name: Enel
+epithet: God Enel
+nicknames:
+  - God Enel
+debut:
+  arc: skypiea
+  chapter: 254
+  episode: 167
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Rumble-Rumble Fruit
+  name_ja: Goro Goro no Mi
+demographics:
+  gender: Male
+  race: Birkan
+  origin: Sky Islands
+  age: 39
+  height_cm: 266
+affiliation: Automata
+other_affiliations:
+  - God's Army
+wiki_url: https://onepiece.fandom.com/wiki/Enel
+power_level: 3470
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/enel.jpg
+  path: characters/enel.webp
+forms:
+  - slug: base
+    name: Enel
+    default: true

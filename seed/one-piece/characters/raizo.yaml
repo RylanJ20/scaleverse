@@ -1,0 +1,36 @@
+slug: raizo
+name: Raizo
+epithet: Raizo of the Mist
+nicknames:
+  - Raizo of the Mist
+debut:
+  arc: zou
+  chapter: 817
+  episode: 770
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 35
+  height_cm: 311
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Raizo
+power_level: 5330
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/raizo.jpg
+  path: characters/raizo.webp
+forms:
+  - slug: base
+    name: Raizo
+    default: true

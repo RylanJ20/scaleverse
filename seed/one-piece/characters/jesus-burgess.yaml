@@ -1,0 +1,36 @@
+slug: jesus-burgess
+name: Jesus Burgess
+epithet: Champion
+nicknames:
+  - Champion
+debut:
+  arc: jaya
+  chapter: 222
+  episode: 146
+status: Alive
+bounty: 20000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Strong-Strong Fruit
+  name_ja: Riki Riki no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 29
+  height_cm: 355
+affiliation: Blackbeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Jesus_Burgess
+power_level: 4170
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jesus-burgess.jpg
+  path: characters/jesus-burgess.webp
+forms:
+  - slug: base
+    name: Jesus Burgess
+    default: true

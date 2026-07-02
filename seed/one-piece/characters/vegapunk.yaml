@@ -1,0 +1,38 @@
+slug: vegapunk
+name: Vegapunk
+epithet: Stella
+nicknames:
+  - Stella
+debut:
+  arc: egghead
+  chapter: 1066
+  episode: 1096
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Brain-Brain Fruit
+  name_ja: Nomi Nomi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 65
+  height_cm: 314
+affiliation: Vegapunk
+other_affiliations:
+  - World Government
+  - MADS
+wiki_url: https://onepiece.fandom.com/wiki/Vegapunk
+power_level: 100
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vegapunk.jpg
+  path: characters/vegapunk.webp
+forms:
+  - slug: base
+    name: Vegapunk
+    default: true

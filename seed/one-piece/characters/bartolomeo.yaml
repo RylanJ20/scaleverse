@@ -1,0 +1,37 @@
+slug: bartolomeo
+name: Bartolomeo
+epithet: Bartolomeo the Cannibal
+nicknames:
+  - Bartolomeo the Cannibal
+debut:
+  arc: dressrosa
+  chapter: 703
+  episode: 631
+status: Unknown
+bounty: 200000000
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Barrier-Barrier Fruit
+  name_ja: Bari Bari no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 24
+  height_cm: 220
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Barto Club
+wiki_url: https://onepiece.fandom.com/wiki/Bartolomeo
+power_level: 2420
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/bartolomeo.jpg
+  path: characters/bartolomeo.webp
+forms:
+  - slug: base
+    name: Bartolomeo
+    default: true

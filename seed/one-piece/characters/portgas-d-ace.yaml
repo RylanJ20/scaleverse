@@ -1,0 +1,37 @@
+slug: portgas-d-ace
+name: Portgas D. Ace
+epithet: Fire Fist Ace
+nicknames:
+  - Fire Fist Ace
+debut:
+  arc: alabasta
+  chapter: 154
+  episode: 91
+status: Dead
+bounty: 550000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Flame-Flame Fruit
+  name_ja: Mera Mera no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: South Blue
+  age: 20
+  height_cm: 185
+affiliation: Whitebeard Pirates
+other_affiliations:
+  - Spade Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Portgas_D._Ace
+power_level: 6780
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/portgas-d-ace.jpg
+  path: characters/portgas-d-ace.webp
+forms:
+  - slug: base
+    name: Portgas D. Ace
+    default: true

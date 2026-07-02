@@ -1,0 +1,36 @@
+slug: satori
+name: Satori
+epithet: Satori of the Forest
+nicknames:
+  - Satori of the Forest
+debut:
+  arc: skypiea
+  chapter: 241
+  episode: 155
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Birkan
+  origin: Sky Islands
+  age: 27
+  height_cm: 179
+affiliation: God's Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Satori
+power_level: 1620
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/satori.jpg
+  path: characters/satori.webp
+forms:
+  - slug: base
+    name: Satori
+    default: true

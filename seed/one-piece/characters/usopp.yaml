@@ -1,0 +1,41 @@
+slug: usopp
+name: Usopp
+epithet: God Usopp
+nicknames:
+  - God Usopp
+  - King of Snipers
+  - Sniper King
+  - Sogeking
+  - Usoland
+debut:
+  arc: syrup-village
+  chapter: 23
+  episode: 9
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 19
+  height_cm: 176
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Usopp Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Usopp
+power_level: 3000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/usopp.jpg
+  path: characters/usopp.webp
+forms:
+  - slug: base
+    name: Usopp
+    default: true

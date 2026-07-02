@@ -1,0 +1,38 @@
+slug: donquixote-rosinante
+name: Donquixote Rosinante
+epithet: Corazon
+nicknames:
+  - Corazon
+debut:
+  arc: dressrosa
+  chapter: 761
+  episode: 703
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Calm-Calm Fruit
+  name_ja: Nagi Nagi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 26
+  height_cm: 293
+affiliation: Marines
+other_affiliations:
+  - Donquixote Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Donquixote_Rosinante
+power_level: 3300
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/donquixote-rosinante.jpg
+  path: characters/donquixote-rosinante.webp
+forms:
+  - slug: base
+    name: Donquixote Rosinante
+    default: true

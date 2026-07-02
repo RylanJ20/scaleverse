@@ -1,0 +1,35 @@
+slug: shinobu
+name: Shinobu
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 921
+  episode: 911
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Ripe-Ripe Fruit
+  name_ja: Juku Juku no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 49
+  height_cm: 180
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shinobu
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shinobu.jpg
+  path: characters/shinobu.webp
+forms:
+  - slug: base
+    name: Shinobu
+    default: true

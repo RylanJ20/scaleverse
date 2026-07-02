@@ -1,0 +1,36 @@
+slug: kouzuki-sukiyaki
+name: Kouzuki Sukiyaki
+epithet: Tenguyama Hitetsu
+nicknames:
+  - Tenguyama Hitetsu
+debut:
+  arc: wano-country
+  chapter: 961
+  episode: 893
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 81
+  height_cm: 214
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kouzuki_Sukiyaki
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kouzuki-sukiyaki.jpg
+  path: characters/kouzuki-sukiyaki.webp
+forms:
+  - slug: base
+    name: Kouzuki Sukiyaki
+    default: true

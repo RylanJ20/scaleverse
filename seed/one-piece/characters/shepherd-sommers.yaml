@@ -1,0 +1,37 @@
+slug: shepherd-sommers
+name: Shepherd Sommers
+epithet: St. Sommers
+nicknames:
+  - St. Sommers
+debut:
+  arc: elbaph
+  chapter: 1140
+  episode: null
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Thorn-Thorn Fruit
+  name_ja: Iba Iba no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: Holy Knights
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Shepherd_Sommers
+power_level: 5300
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shepherd-sommers.jpg
+  path: characters/shepherd-sommers.webp
+forms:
+  - slug: base
+    name: Shepherd Sommers
+    default: true

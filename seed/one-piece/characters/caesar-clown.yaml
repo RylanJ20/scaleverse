@@ -1,0 +1,37 @@
+slug: caesar-clown
+name: Caesar Clown
+epithet: Master
+nicknames:
+  - Master
+debut:
+  arc: punk-hazard
+  chapter: 654
+  episode: 581
+status: Alive
+bounty: 300000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Logia
+  name_en: Gas-Gas Fruit
+  name_ja: Gasu Gasu no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 55
+  height_cm: 309
+affiliation: Germa 66
+other_affiliations:
+  - MADS
+wiki_url: https://onepiece.fandom.com/wiki/Caesar_Clown
+power_level: 1900
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/caesar-clown.jpg
+  path: characters/caesar-clown.webp
+forms:
+  - slug: base
+    name: Caesar Clown
+    default: true

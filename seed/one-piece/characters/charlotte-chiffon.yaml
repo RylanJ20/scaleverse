@@ -1,0 +1,36 @@
+slug: charlotte-chiffon
+name: Charlotte Chiffon
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 825
+  episode: 783
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 26
+  height_cm: 215
+affiliation: Fire Tank Pirates
+other_affiliations:
+  - Big Mom Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Chiffon
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-chiffon.jpg
+  path: characters/charlotte-chiffon.webp
+forms:
+  - slug: base
+    name: Charlotte Chiffon
+    default: true

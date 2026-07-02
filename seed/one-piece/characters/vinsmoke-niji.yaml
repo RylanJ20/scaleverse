@@ -1,0 +1,36 @@
+slug: vinsmoke-niji
+name: Vinsmoke Niji
+epithet: Electric Blue
+nicknames:
+  - Electric Blue
+debut:
+  arc: whole-cake-island
+  chapter: 826
+  episode: 783
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 21
+  height_cm: 185
+affiliation: Germa 66
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Vinsmoke_Niji
+power_level: 6220
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vinsmoke-niji.jpg
+  path: characters/vinsmoke-niji.webp
+forms:
+  - slug: base
+    name: Vinsmoke Niji
+    default: true

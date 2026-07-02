@@ -1,0 +1,35 @@
+slug: prometheus
+name: Prometheus
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 835
+  episode: 796
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Homie
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Prometheus
+power_level: 3350
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/prometheus.jpg
+  path: characters/prometheus.webp
+forms:
+  - slug: base
+    name: Prometheus
+    default: true

@@ -1,0 +1,36 @@
+slug: shiki
+name: Shiki
+epithet: Golden Lion
+nicknames:
+  - Golden Lion
+debut:
+  arc: impel-down
+  chapter: 530
+  episode: 425
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Unknown
+  name_ja: Unknown
+demographics:
+  gender: Male
+  race: Human
+  origin: Unknown
+  age: null
+  height_cm: null
+affiliation: Rocks Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shiki
+power_level: 7950
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shiki.jpg
+  path: characters/shiki.webp
+forms:
+  - slug: base
+    name: Shiki
+    default: true

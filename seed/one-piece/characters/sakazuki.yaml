@@ -1,0 +1,36 @@
+slug: sakazuki
+name: Sakazuki
+epithet: Akainu
+nicknames:
+  - Akainu
+debut:
+  arc: enies-lobby
+  chapter: 397
+  episode: 278
+status: Alive
+bounty: 5000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Magma-Magma Fruit
+  name_ja: Magu Magu no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 55
+  height_cm: 206
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Sakazuki
+power_level: 8830
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sakazuki.jpg
+  path: characters/sakazuki.webp
+forms:
+  - slug: base
+    name: Sakazuki
+    default: true

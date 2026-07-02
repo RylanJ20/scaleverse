@@ -1,0 +1,37 @@
+slug: daz-bonez
+name: Daz Bonez
+epithet: Mr. 1
+nicknames:
+  - Mr. 1
+debut:
+  arc: alabasta
+  chapter: 160
+  episode: 103
+status: Alive
+bounty: 75000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Dice-Dice Fruit
+  name_ja: Supa Supa no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 31
+  height_cm: 212
+affiliation: Cross Guild
+other_affiliations:
+  - Baroque Works
+wiki_url: https://onepiece.fandom.com/wiki/Daz_Bonez
+power_level: 1710
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/daz-bonez.jpg
+  path: characters/daz-bonez.webp
+forms:
+  - slug: base
+    name: Daz Bonez
+    default: true

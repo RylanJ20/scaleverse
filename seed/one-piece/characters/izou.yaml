@@ -1,0 +1,37 @@
+slug: izou
+name: Izou
+epithet: Commander of the 16th Division
+nicknames:
+  - Commander of the 16th Division
+debut:
+  arc: marineford
+  chapter: 554
+  episode: 461
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 45
+  height_cm: 192
+affiliation: Whitebeard Pirates
+other_affiliations:
+  - Wano
+wiki_url: https://onepiece.fandom.com/wiki/Izou
+power_level: 5050
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/izou.jpg
+  path: characters/izou.webp
+forms:
+  - slug: base
+    name: Izou
+    default: true

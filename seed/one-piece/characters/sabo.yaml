@@ -1,0 +1,36 @@
+slug: sabo
+name: Sabo
+epithet: Flame Emperor
+nicknames:
+  - Flame Emperor
+debut:
+  arc: post-war
+  chapter: 583
+  episode: 494
+status: Alive
+bounty: 602000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Flame-Flame Fruit
+  name_ja: Mera Mera no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 22
+  height_cm: 187
+affiliation: Revolutionary Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Sabo
+power_level: 7160
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sabo.jpg
+  path: characters/sabo.webp
+forms:
+  - slug: base
+    name: Sabo
+    default: true

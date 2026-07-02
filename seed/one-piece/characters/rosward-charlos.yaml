@@ -1,0 +1,35 @@
+slug: rosward-charlos
+name: Saint Rosward Charlos
+epithet: null
+nicknames: []
+debut:
+  arc: sabaody-archipelago
+  chapter: 497
+  episode: 391
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Red Line
+  age: null
+  height_cm: null
+affiliation: World Government
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Saint_Charlos
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/rosward-charlos.jpg
+  path: characters/rosward-charlos.webp
+forms:
+  - slug: base
+    name: Saint Rosward Charlos
+    default: true

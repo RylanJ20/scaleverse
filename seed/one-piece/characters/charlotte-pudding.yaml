@@ -1,0 +1,35 @@
+slug: charlotte-pudding
+name: Charlotte Pudding
+epithet: null
+nicknames: []
+debut:
+  arc: fish-man-island
+  chapter: 651
+  episode: 571
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Memory-Memory Fruit
+  name_ja: Memo Memo no Mi
+demographics:
+  gender: Female
+  race: Three-Eyed
+  origin: Grand Line
+  age: 16
+  height_cm: 166
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Pudding
+power_level: 1750
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-pudding.jpg
+  path: characters/charlotte-pudding.webp
+forms:
+  - slug: base
+    name: Charlotte Pudding
+    default: true

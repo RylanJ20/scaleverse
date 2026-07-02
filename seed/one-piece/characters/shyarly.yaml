@@ -1,0 +1,35 @@
+slug: shyarly
+name: Shyarly
+epithet: null
+nicknames: []
+debut:
+  arc: fish-man-island
+  chapter: 607
+  episode: 526
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Merfolk
+  origin: Grand Line
+  age: 29
+  height_cm: null
+affiliation: Ryugu Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shyarly
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shyarly.jpg
+  path: characters/shyarly.webp
+forms:
+  - slug: base
+    name: Shyarly
+    default: true

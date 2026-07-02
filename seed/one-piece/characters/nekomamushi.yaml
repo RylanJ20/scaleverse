@@ -1,0 +1,37 @@
+slug: nekomamushi
+name: Nekomamushi
+epithet: Master Cat Viper
+nicknames:
+  - Master Cat Viper
+debut:
+  arc: zou
+  chapter: 804
+  episode: 751
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Mink
+  origin: Zou
+  age: 40
+  height_cm: 522
+affiliation: Wano
+other_affiliations:
+  - Mokomo Dukedom
+wiki_url: https://onepiece.fandom.com/wiki/Nekomamushi
+power_level: 6110
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nekomamushi.jpg
+  path: characters/nekomamushi.webp
+forms:
+  - slug: base
+    name: Nekomamushi
+    default: true

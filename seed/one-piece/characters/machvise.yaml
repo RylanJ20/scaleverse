@@ -1,0 +1,35 @@
+slug: machvise
+name: Machvise
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 682
+  episode: 608
+status: Alive
+bounty: 11000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Ton-Ton Fruit
+  name_ja: Ton Ton no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 52
+  height_cm: 440
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Machvise
+power_level: 2690
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/machvise.jpg
+  path: characters/machvise.webp
+forms:
+  - slug: base
+    name: Machvise
+    default: true

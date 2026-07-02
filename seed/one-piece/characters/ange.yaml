@@ -1,0 +1,35 @@
+slug: ange
+name: Ange
+epithet: null
+nicknames: []
+debut:
+  arc: elbaph
+  chapter: 1131
+  episode: null
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Giant
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Elbaph
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Ange
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/ange.jpg
+  path: characters/ange.webp
+forms:
+  - slug: base
+    name: Ange
+    default: true

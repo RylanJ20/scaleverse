@@ -1,0 +1,36 @@
+slug: jack
+name: Jack
+epithet: The Drought
+nicknames:
+  - The Drought
+debut:
+  arc: zou
+  chapter: 801
+  episode: 751
+status: Alive
+bounty: 1000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Elephant-Elephant Fruit, Mammoth Model
+  name_ja: 'Zou Zou no Mi, Model: Mammoth'
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 28
+  height_cm: 830
+affiliation: Beast Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Jack
+power_level: 6500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jack.jpg
+  path: characters/jack.webp
+forms:
+  - slug: base
+    name: Jack
+    default: true

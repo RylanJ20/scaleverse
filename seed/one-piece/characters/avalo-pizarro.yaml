@@ -1,0 +1,37 @@
+slug: avalo-pizarro
+name: Avalo Pizarro
+epithet: Corrupt King
+nicknames:
+  - Corrupt King
+debut:
+  arc: impel-down
+  chapter: 575
+  episode: 484
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Isle-Isle Fruit
+  name_ja: Shima Shima no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 42
+  height_cm: 505
+affiliation: Blackbeard Pirates
+other_affiliations:
+  - Impel Down
+wiki_url: https://onepiece.fandom.com/wiki/Avalo_Pizarro
+power_level: 3120
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/avalo-pizarro.jpg
+  path: characters/avalo-pizarro.webp
+forms:
+  - slug: base
+    name: Avalo Pizarro
+    default: true

@@ -1,0 +1,39 @@
+slug: trafalgar-d-water-law
+name: Trafalgar D. Water Law
+epithet: Surgeon of Death
+nicknames:
+  - Surgeon of Death
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 3000000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Op-Op Fruit
+  name_ja: Ope Ope no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 26
+  height_cm: 191
+affiliation: Heart Pirates
+other_affiliations:
+  - Donquixote Pirates
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Trafalgar_D._Water_Law
+power_level: 7370
+image:
+  source_url: >-
+    https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/trafalgar-d-water-law.jpg
+  path: characters/trafalgar-d-water-law.webp
+forms:
+  - slug: base
+    name: Trafalgar D. Water Law
+    default: true

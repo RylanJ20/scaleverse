@@ -1,0 +1,35 @@
+slug: page-one
+name: Page One
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 929
+  episode: 923
+status: Alive
+bounty: 290000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Dragon-Dragon Fruit, Model: Spinosaurus'
+  name_ja: 'Ryu Ryu no Mi, Model: Spinosaurus'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 20
+  height_cm: 171
+affiliation: Beast Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Page_One
+power_level: 6280
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/page-one.jpg
+  path: characters/page-one.webp
+forms:
+  - slug: base
+    name: Page One
+    default: true

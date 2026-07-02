@@ -1,0 +1,35 @@
+slug: fukurokuju
+name: Fukurokuju
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 931
+  episode: 925
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 61
+  height_cm: 221
+affiliation: Orochi's Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Fukurokuju
+power_level: 2710
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/fukurokuju.jpg
+  path: characters/fukurokuju.webp
+forms:
+  - slug: base
+    name: Fukurokuju
+    default: true

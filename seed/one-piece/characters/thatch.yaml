@@ -1,0 +1,35 @@
+slug: thatch
+name: Thatch
+epithet: null
+nicknames: []
+debut:
+  arc: marineford
+  chapter: 434
+  episode: 314
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Whitebeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Thatch
+power_level: 5540
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/thatch.jpg
+  path: characters/thatch.webp
+forms:
+  - slug: base
+    name: Thatch
+    default: true

@@ -1,0 +1,37 @@
+slug: emporio-ivankov
+name: Emporio Ivankov
+epithet: Miracle Person
+nicknames:
+  - Miracle Person
+debut:
+  arc: impel-down
+  chapter: 537
+  episode: 438
+status: Alive
+bounty: 100000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Horm-Horm Fruit
+  name_ja: Horu Horu no Mi
+demographics:
+  gender: Other
+  race: Human
+  origin: Grand Line
+  age: 53
+  height_cm: 449
+affiliation: Revolutionary Army
+other_affiliations:
+  - Kamabakka Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Emporio_Ivankov
+power_level: 4290
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/emporio-ivankov.jpg
+  path: characters/emporio-ivankov.webp
+forms:
+  - slug: base
+    name: Emporio Ivankov
+    default: true

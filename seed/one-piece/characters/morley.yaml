@@ -1,0 +1,35 @@
+slug: morley
+name: Morley
+epithet: null
+nicknames: []
+debut:
+  arc: reverie
+  chapter: 904
+  episode: 880
+status: Alive
+bounty: 293000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Push-Push Fruit
+  name_ja: Oshi Oshi no Mi
+demographics:
+  gender: Other
+  race: Giant
+  origin: West Blue
+  age: 160
+  height_cm: 1253
+affiliation: Revolutionary Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Morley
+power_level: 6250
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/morley.jpg
+  path: characters/morley.webp
+forms:
+  - slug: base
+    name: Morley
+    default: true

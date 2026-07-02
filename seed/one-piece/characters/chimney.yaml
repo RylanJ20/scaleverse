@@ -1,0 +1,35 @@
+slug: chimney
+name: Chimney
+epithet: null
+nicknames: []
+debut:
+  arc: water-7
+  chapter: 322
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 10
+  height_cm: 115
+affiliation: Water 7
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Chimney
+power_level: 90
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/chimney.jpg
+  path: characters/chimney.webp
+forms:
+  - slug: base
+    name: Chimney
+    default: true

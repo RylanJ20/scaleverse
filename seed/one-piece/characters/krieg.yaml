@@ -1,0 +1,36 @@
+slug: krieg
+name: Krieg
+epithet: Don Krieg
+nicknames:
+  - Don Krieg
+debut:
+  arc: baratie
+  chapter: 43
+  episode: 21
+status: Alive
+bounty: 17000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 44
+  height_cm: 243
+affiliation: Krieg Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Krieg
+power_level: 640
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/krieg.jpg
+  path: characters/krieg.webp
+forms:
+  - slug: base
+    name: Krieg
+    default: true

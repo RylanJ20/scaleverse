@@ -1,0 +1,36 @@
+slug: gecko-moria
+name: Gecko Moria
+epithet: null
+nicknames: []
+debut:
+  arc: thriller-bark
+  chapter: 444
+  episode: 338
+status: Alive
+bounty: 320000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Shadow-Shadow Fruit
+  name_ja: Kage Kage no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 50
+  height_cm: 692
+affiliation: Thriller Bark Pirates
+other_affiliations:
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Gecko_Moria
+power_level: 4150
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/gecko-moria.jpg
+  path: characters/gecko-moria.webp
+forms:
+  - slug: base
+    name: Gecko Moria
+    default: true

@@ -1,0 +1,37 @@
+slug: shimotsuki-yasuie
+name: Shimotsuki Yasuie
+epithet: Yasu the Hedgehog
+nicknames:
+  - Yasu the Hedgehog
+  - Tonoyasu
+debut:
+  arc: wano-country
+  chapter: 929
+  episode: 916
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: SMILE
+  name_ja: SMILE
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 71
+  height_cm: 155
+affiliation: Shimotsuki Family
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Shimotsuki_Yasuie
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/shimotsuki-yasuie.jpg
+  path: characters/shimotsuki-yasuie.webp
+forms:
+  - slug: base
+    name: Shimotsuki Yasuie
+    default: true

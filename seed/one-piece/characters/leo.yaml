@@ -1,0 +1,36 @@
+slug: leo
+name: Leo
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 705
+  episode: 634
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Dwarf
+  origin: Grand Line
+  age: 25
+  height_cm: 23
+affiliation: Straw Hat Grand Fleet
+other_affiliations:
+  - Tontatta Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Leo
+power_level: 1850
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/leo.jpg
+  path: characters/leo.webp
+forms:
+  - slug: base
+    name: Leo
+    default: true

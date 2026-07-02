@@ -1,0 +1,35 @@
+slug: black-maria
+name: Black Maria
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 977
+  episode: 982
+status: Alive
+bounty: 480000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Spider-Spider Fruit, Ancient Model: Rosamygale Grauvogeli'
+  name_ja: 'Kumo Kumo no Mi, Model: Rosamygale Grauvogeli'
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 29
+  height_cm: 820
+affiliation: Beast Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Black_Maria
+power_level: 6310
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/black-maria.jpg
+  path: characters/black-maria.webp
+forms:
+  - slug: base
+    name: Black Maria
+    default: true

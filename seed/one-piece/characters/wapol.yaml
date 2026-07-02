@@ -1,0 +1,37 @@
+slug: wapol
+name: Wapol
+epithet: Tin-Plate Wapol
+nicknames:
+  - Tin-Plate Wapol
+debut:
+  arc: drum-island
+  chapter: 130
+  episode: 78
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Munch-Munch Fruit
+  name_ja: Baku Baku no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 29
+  height_cm: 207
+affiliation: Evil Black Drum Kingdom
+other_affiliations:
+  - Drum Kingdom
+wiki_url: https://onepiece.fandom.com/wiki/Wapol
+power_level: 450
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/wapol.jpg
+  path: characters/wapol.webp
+forms:
+  - slug: base
+    name: Wapol
+    default: true

@@ -1,0 +1,38 @@
+slug: marshall-d-teach
+name: Marshall D. Teach
+epithet: Blackbeard
+nicknames:
+  - Blackbeard
+debut:
+  arc: jaya
+  chapter: 223
+  episode: 146
+status: Alive
+bounty: 3996000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Dark-Dark Fruit
+  name_ja: Yami Yami no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 40
+  height_cm: 344
+affiliation: Blackbeard Pirates
+other_affiliations:
+  - Whitebeard Pirates
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Marshall_D._Teach
+power_level: 8620
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/marshall-d-teach.jpg
+  path: characters/marshall-d-teach.webp
+forms:
+  - slug: base
+    name: Marshall D. Teach
+    default: true

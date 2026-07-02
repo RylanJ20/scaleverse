@@ -1,0 +1,35 @@
+slug: tashigi
+name: Tashigi
+epithet: null
+nicknames: []
+debut:
+  arc: loguetown
+  chapter: 98
+  episode: 60
+status: Alive
+bounty: 100000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 23
+  height_cm: 170
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Tashigi
+power_level: 3220
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/tashigi.jpg
+  path: characters/tashigi.webp
+forms:
+  - slug: base
+    name: Tashigi
+    default: true

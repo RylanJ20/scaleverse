@@ -1,0 +1,36 @@
+slug: ohm
+name: Ohm
+epithet: Skybreeder
+nicknames:
+  - Skybreeder
+debut:
+  arc: skypiea
+  chapter: 241
+  episode: 155
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Birkan
+  origin: Sky Islands
+  age: 29
+  height_cm: 189
+affiliation: God's Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Ohm
+power_level: 1690
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/ohm.jpg
+  path: characters/ohm.webp
+forms:
+  - slug: base
+    name: Ohm
+    default: true

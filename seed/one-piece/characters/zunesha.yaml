@@ -1,0 +1,35 @@
+slug: zunesha
+name: Zunesha
+epithet: null
+nicknames: []
+debut:
+  arc: zou
+  chapter: 802
+  episode: 751
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Unknown
+  race: Animal
+  origin: Unknown
+  age: null
+  height_cm: 498897
+affiliation: Ancient Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Zunesha
+power_level: 8000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/zunesha.jpg
+  path: characters/zunesha.webp
+forms:
+  - slug: base
+    name: Zunesha
+    default: true

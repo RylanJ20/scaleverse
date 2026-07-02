@@ -1,0 +1,36 @@
+slug: charlotte-cracker
+name: Charlotte Cracker
+epithet: Thousand Arms
+nicknames:
+  - Thousand Arms
+debut:
+  arc: whole-cake-island
+  chapter: 835
+  episode: 796
+status: Alive
+bounty: 860000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Biscuit-Biscuit Fruit
+  name_ja: Bisu Bisu no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 45
+  height_cm: 307
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Cracker
+power_level: 6590
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-cracker.jpg
+  path: characters/charlotte-cracker.webp
+forms:
+  - slug: base
+    name: Charlotte Cracker
+    default: true

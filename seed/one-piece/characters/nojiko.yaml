@@ -1,0 +1,35 @@
+slug: nojiko
+name: Nojiko
+epithet: null
+nicknames: []
+debut:
+  arc: arlong-park
+  chapter: 70
+  episode: 32
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: East Blue
+  age: 22
+  height_cm: 170
+affiliation: None
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Nojiko
+power_level: 350
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/nojiko.jpg
+  path: characters/nojiko.webp
+forms:
+  - slug: base
+    name: Nojiko
+    default: true

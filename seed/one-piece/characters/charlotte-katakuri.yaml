@@ -1,0 +1,35 @@
+slug: charlotte-katakuri
+name: Charlotte Katakuri
+epithet: null
+nicknames: []
+debut:
+  arc: whole-cake-island
+  chapter: 860
+  episode: 825
+status: Alive
+bounty: 1057000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Mochi-Mochi Fruit
+  name_ja: Mochi Mochi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 48
+  height_cm: 509
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Charlotte_Katakuri
+power_level: 7650
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/charlotte-katakuri.jpg
+  path: characters/charlotte-katakuri.webp
+forms:
+  - slug: base
+    name: Charlotte Katakuri
+    default: true

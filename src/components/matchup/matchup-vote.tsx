@@ -1,0 +1,168 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { voteOnMatchup } from "@/app/actions/arena";
+import type { FormCard } from "@/lib/types";
+
+type Props = {
+  a: FormCard;
+  b: FormCard;
+  imageBase: string;
+  initialVoteCount: number;
+  initialAWins: number;
+  initialPick: string | null;
+  isAuthed: boolean;
+};
+
+export function MatchupVote({
+  a,
+  b,
+  imageBase,
+  initialVoteCount,
+  initialAWins,
+  initialPick,
+  isAuthed,
+}: Props) {
+  const [voteCount, setVoteCount] = useState(initialVoteCount);
+  const [aWins, setAWins] = useState(initialAWins);
+  const [pick, setPick] = useState<string | null>(initialPick);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const aPct = voteCount > 0 ? Math.round((aWins / voteCount) * 100) : null;
+
+  const vote = async (winner: FormCard) => {
+    if (busy) return;
+    if (!isAuthed) return;
+    if (pick === winner.form_id) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await voteOnMatchup(a.form_id, b.form_id, winner.form_id);
+      setVoteCount(res.vote_count);
+      // res.a_wins is oriented to the matchup's stored low form; re-derive for our a
+      const aIsLow = a.form_id < b.form_id;
+      setAWins(aIsLow ? res.a_wins : res.vote_count - res.a_wins);
+      setPick(winner.form_id);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "vote failed";
+      setError(
+        msg.includes("too fast")
+          ? "Slow down a moment."
+          : msg.includes("revote limit")
+            ? "You can only change this pick once a week."
+            : msg.includes("rate limit")
+              ? "You've hit the vote limit for now."
+              : "That vote didn't land. Try again.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const Card = ({ card, side }: { card: FormCard; side: "a" | "b" }) => {
+    const color = side === "a" ? "var(--accent)" : "var(--accent-2)";
+    const picked = pick === card.form_id;
+    const url = card.image_path ? `${imageBase}/${card.image_path}` : null;
+    return (
+      <button
+        type="button"
+        onClick={() => void vote(card)}
+        disabled={busy || !isAuthed}
+        aria-label={`${card.character_name} wins`}
+        className={`group relative flex flex-col self-start overflow-hidden rounded-lg border bg-surface text-left transition ${
+          picked ? "scale-[1.02]" : isAuthed ? "hover:scale-[1.01]" : ""
+        } ${!isAuthed ? "cursor-default" : ""}`}
+        style={{
+          borderColor: picked ? color : "rgba(255,255,255,0.08)",
+          boxShadow: picked ? `0 0 32px -8px ${color}` : undefined,
+        }}
+      >
+        <div className="relative aspect-[3/4] w-full bg-black/40">
+          {url && (
+            <Image
+              src={url}
+              alt={card.character_name}
+              fill
+              sizes="(max-width: 640px) 40vw, 300px"
+              className="object-cover object-top"
+            />
+          )}
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+            style={{ background: "linear-gradient(to top, rgba(10,10,18,0.95), transparent)" }}
+          />
+        </div>
+        <div className="p-3">
+          {card.epithet && (
+            <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+              {card.epithet}
+            </p>
+          )}
+          <p className="font-display -skew-x-6 truncate text-lg uppercase leading-tight">
+            {card.character_name}
+          </p>
+        </div>
+      </button>
+    );
+  };
+
+  return (
+    <div>
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
+        <Card card={a} side="a" />
+        <div
+          aria-hidden
+          className="font-display -skew-x-12 text-xl uppercase text-muted sm:text-2xl"
+        >
+          vs
+        </div>
+        <Card card={b} side="b" />
+      </div>
+
+      <div className="mt-4">
+        {aPct != null ? (
+          <>
+            <div className="flex h-4 w-full overflow-hidden rounded-full bg-white/5">
+              <div className="h-full bg-accent transition-all duration-500" style={{ width: `${aPct}%` }} />
+              <div className="h-full bg-accent-2 transition-all duration-500" style={{ width: `${100 - aPct}%` }} />
+            </div>
+            <div className="mt-1.5 flex items-center justify-between font-mono text-xs">
+              <span className="text-accent">{aPct}%</span>
+              <span className="text-muted">
+                {voteCount.toLocaleString()} vote{voteCount === 1 ? "" : "s"}
+              </span>
+              <span className="text-accent-2">{100 - aPct}%</span>
+            </div>
+          </>
+        ) : (
+          <p className="text-center text-sm text-muted">No votes yet — settle it.</p>
+        )}
+      </div>
+
+      <div className="mt-4 text-center">
+        {!isAuthed ? (
+          <Link
+            href="/login"
+            className="inline-block rounded-md bg-accent px-6 py-2.5 font-bold uppercase tracking-wide text-white transition hover:brightness-110"
+          >
+            Sign in to vote
+          </Link>
+        ) : pick ? (
+          <p className="text-sm text-muted">
+            You picked{" "}
+            <span className="font-bold text-foreground">
+              {pick === a.form_id ? a.character_name : b.character_name}
+            </span>
+            . Tap the other card to change (once a week).
+          </p>
+        ) : (
+          <p className="text-sm text-muted">Tap a fighter to cast your vote.</p>
+        )}
+        {error && <p className="mt-2 text-sm text-accent">{error}</p>}
+      </div>
+    </div>
+  );
+}

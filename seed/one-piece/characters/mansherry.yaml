@@ -1,0 +1,36 @@
+slug: mansherry
+name: Mansherry
+epithet: Princess Mansherry
+nicknames:
+  - Princess Mansherry
+debut:
+  arc: dressrosa
+  chapter: 717
+  episode: 647
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Heal-Heal Fruit
+  name_ja: Chiyu Chiyu no Mi
+demographics:
+  gender: Female
+  race: Dwarf
+  origin: Grand Line
+  age: 25
+  height_cm: 20
+affiliation: Tontatta Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Mansherry
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/mansherry.jpg
+  path: characters/mansherry.webp
+forms:
+  - slug: base
+    name: Mansherry
+    default: true

@@ -1,0 +1,35 @@
+slug: ulti
+name: Ulti
+epithet: null
+nicknames: []
+debut:
+  arc: wano-country
+  chapter: 977
+  episode: 982
+status: Alive
+bounty: 400000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Dragon-Dragon Fruit, Pachycephalosaurus Model
+  name_ja: 'Ryu Ryu no Mi, Model: Pachycephalosaurus'
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 22
+  height_cm: 173
+affiliation: Beast Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Ulti
+power_level: 6290
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/ulti.jpg
+  path: characters/ulti.webp
+forms:
+  - slug: base
+    name: Ulti
+    default: true

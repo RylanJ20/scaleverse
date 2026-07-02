@@ -1,0 +1,36 @@
+slug: oars
+name: Oars
+epithet: The Continent-Puller
+nicknames:
+  - The Continent-Puller
+debut:
+  arc: thriller-bark
+  chapter: 456
+  episode: 350
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Giant
+  origin: Grand Line
+  age: 159
+  height_cm: 6700
+affiliation: Thriller Bark Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Oars
+power_level: 5760
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/oars.jpg
+  path: characters/oars.webp
+forms:
+  - slug: base
+    name: Oars
+    default: true

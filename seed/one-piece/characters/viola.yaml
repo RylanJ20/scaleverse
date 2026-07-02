@@ -1,0 +1,37 @@
+slug: viola
+name: Viola
+epithet: Violet
+nicknames:
+  - Violet
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Glare-Glare Fruit
+  name_ja: Giro Giro no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 29
+  height_cm: 178
+affiliation: Riku Royal Army
+other_affiliations:
+  - Donquixote Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Viola
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/viola.jpg
+  path: characters/viola.webp
+forms:
+  - slug: base
+    name: Viola
+    default: true

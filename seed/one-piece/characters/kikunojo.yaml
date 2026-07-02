@@ -1,0 +1,36 @@
+slug: kikunojo
+name: Kikunojo
+epithet: O-Kiku
+nicknames:
+  - O-Kiku
+debut:
+  arc: wano-country
+  chapter: 913
+  episode: 899
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 22
+  height_cm: 287
+affiliation: Wano
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Kikunojo
+power_level: 4590
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kikunojo.jpg
+  path: characters/kikunojo.webp
+forms:
+  - slug: base
+    name: Kikunojo
+    default: true

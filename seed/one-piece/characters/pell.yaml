@@ -1,0 +1,36 @@
+slug: pell
+name: Pell
+epithet: Pell the Falcon
+nicknames:
+  - Pell the Falcon
+debut:
+  arc: alabasta
+  chapter: 161
+  episode: 103
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: Bird-Bird Fruit, Falcon Model
+  name_ja: 'Tori Tori no Mi, Model: Falcon'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 35
+  height_cm: 189
+affiliation: Alabasta Kingdom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Pell
+power_level: 2000
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/pell.jpg
+  path: characters/pell.webp
+forms:
+  - slug: base
+    name: Pell
+    default: true

@@ -1,0 +1,36 @@
+slug: sengoku
+name: Sengoku
+epithet: Sengoku the Buddha
+nicknames:
+  - Sengoku the Buddha
+debut:
+  arc: jaya
+  chapter: 234
+  episode: 151
+status: Alive
+bounty: 5000000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: 'Human-Human Fruit, Model: Buddha'
+  name_ja: 'Hito Hito no Mi, Model: Daibutsu'
+demographics:
+  gender: Male
+  race: Human
+  origin: South Blue
+  age: 79
+  height_cm: 278
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Sengoku
+power_level: 8890
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/sengoku.jpg
+  path: characters/sengoku.webp
+forms:
+  - slug: base
+    name: Sengoku
+    default: true

@@ -1,0 +1,36 @@
+slug: kurozumi-kanjuro
+name: Kurozumi Kanjuro
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Brush-Brush Fruit
+  name_ja: Fude Fude no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 34
+  height_cm: 347
+affiliation: Kurozumi Family
+other_affiliations:
+  - Wano
+wiki_url: https://onepiece.fandom.com/wiki/Kurozumi_Kanjuro
+power_level: 4330
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kurozumi-kanjuro.jpg
+  path: characters/kurozumi-kanjuro.webp
+forms:
+  - slug: base
+    name: Kurozumi Kanjuro
+    default: true

@@ -1,0 +1,37 @@
+slug: stussy
+name: Stussy
+epithet: Queen of the Pleasure District
+nicknames:
+  - Queen of the Pleasure District
+debut:
+  arc: whole-cake-island
+  chapter: 860
+  episode: 831
+status: Unknown
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Clone
+  origin: Grand Line
+  age: 36
+  height_cm: 179
+affiliation: CP0
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Stussy
+power_level: 6170
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/stussy.jpg
+  path: characters/stussy.webp
+forms:
+  - slug: base
+    name: Stussy
+    default: true

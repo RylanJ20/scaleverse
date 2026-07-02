@@ -1,0 +1,38 @@
+slug: scopper-gaban
+name: Scopper Gaban
+epithet: Mountain Eater
+nicknames:
+  - Mountain Eater
+  - Left Hand of the Pirate King
+  - Mr. Ya
+debut:
+  arc: orange-town
+  chapter: 19
+  episode: 969
+status: Alive
+bounty: null
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 78
+  height_cm: null
+affiliation: Roger Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Scopper_Gaban
+power_level: 8590
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/scopper-gaban.jpg
+  path: characters/scopper-gaban.webp
+forms:
+  - slug: base
+    name: Scopper Gaban
+    default: true

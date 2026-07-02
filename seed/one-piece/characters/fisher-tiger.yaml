@@ -1,0 +1,36 @@
+slug: fisher-tiger
+name: Fisher Tiger
+epithet: The Adventurer
+nicknames:
+  - The Adventurer
+debut:
+  arc: fish-man-island
+  chapter: 521
+  episode: 415
+status: Dead
+bounty: 230000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Fish-Man
+  origin: Fish-Man Island
+  age: null
+  height_cm: 480
+affiliation: Sun Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Fisher_Tiger
+power_level: 4050
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/fisher-tiger.jpg
+  path: characters/fisher-tiger.webp
+forms:
+  - slug: base
+    name: Fisher Tiger
+    default: true

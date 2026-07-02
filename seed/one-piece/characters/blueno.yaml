@@ -1,0 +1,36 @@
+slug: blueno
+name: Blueno
+epithet: null
+nicknames: []
+debut:
+  arc: water-7
+  chapter: 323
+  episode: 230
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Door-Door Fruit
+  name_ja: Doa Doa no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 32
+  height_cm: 258
+affiliation: Cipher Pol
+other_affiliations:
+  - World Government
+wiki_url: https://onepiece.fandom.com/wiki/Blueno
+power_level: 2330
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/blueno.jpg
+  path: characters/blueno.webp
+forms:
+  - slug: base
+    name: Blueno
+    default: true

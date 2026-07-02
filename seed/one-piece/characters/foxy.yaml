@@ -1,0 +1,36 @@
+slug: foxy
+name: Foxy
+epithet: Silver Fox
+nicknames:
+  - Silver Fox
+debut:
+  arc: long-ring-long-land
+  chapter: 304
+  episode: 213
+status: Alive
+bounty: 24000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Slow-Slow Fruit
+  name_ja: Noro Noro no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 38
+  height_cm: 180
+affiliation: Foxy Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Foxy
+power_level: 820
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/foxy.jpg
+  path: characters/foxy.webp
+forms:
+  - slug: base
+    name: Foxy
+    default: true

@@ -1,0 +1,36 @@
+slug: yasopp
+name: Yasopp
+epithet: Chaser
+nicknames:
+  - Chaser
+debut:
+  arc: romance-dawn
+  chapter: 1
+  episode: 4
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 47
+  height_cm: 183
+affiliation: Red-Haired Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Yasopp
+power_level: 5960
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/yasopp.jpg
+  path: characters/yasopp.webp
+forms:
+  - slug: base
+    name: Yasopp
+    default: true

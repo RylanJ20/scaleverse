@@ -1,0 +1,38 @@
+slug: bentham
+name: Bentham
+epithet: Mr. 2
+nicknames:
+  - Mr. 2
+  - Bon Clay
+debut:
+  arc: little-garden
+  chapter: 155
+  episode: 78
+status: Alive
+bounty: 32000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Clone-Clone Fruit
+  name_ja: Mane Mane no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 32
+  height_cm: 238
+affiliation: Impel Down
+other_affiliations:
+  - Baroque Works
+wiki_url: https://onepiece.fandom.com/wiki/Bentham
+power_level: 1180
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/bentham.jpg
+  path: characters/bentham.webp
+forms:
+  - slug: base
+    name: Bentham
+    default: true

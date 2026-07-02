@@ -1,0 +1,36 @@
+slug: pekoms
+name: Pekoms
+epithet: null
+nicknames: []
+debut:
+  arc: fish-man-island
+  chapter: 651
+  episode: 570
+status: Unknown
+bounty: 330000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Turtle-Turtle Fruit
+  name_ja: Kame Kame no Mi
+demographics:
+  gender: Male
+  race: Mink
+  origin: Grand Line
+  age: 27
+  height_cm: 232
+affiliation: Big Mom Pirates
+other_affiliations:
+  - Mokomo Dukedom
+wiki_url: https://onepiece.fandom.com/wiki/Pekoms
+power_level: 5750
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/pekoms.jpg
+  path: characters/pekoms.webp
+forms:
+  - slug: base
+    name: Pekoms
+    default: true

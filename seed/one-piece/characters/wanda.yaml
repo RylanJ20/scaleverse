@@ -1,0 +1,35 @@
+slug: wanda
+name: Wanda
+epithet: null
+nicknames: []
+debut:
+  arc: zou
+  chapter: 804
+  episode: 751
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Mink
+  origin: Zou
+  age: 28
+  height_cm: 181
+affiliation: Mokomo Dukedom
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Wanda
+power_level: 3080
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/wanda.jpg
+  path: characters/wanda.webp
+forms:
+  - slug: base
+    name: Wanda
+    default: true

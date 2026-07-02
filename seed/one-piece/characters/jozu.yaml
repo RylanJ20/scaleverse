@@ -1,0 +1,36 @@
+slug: jozu
+name: Jozu
+epithet: Diamond Jozu
+nicknames:
+  - Diamond Jozu
+debut:
+  arc: marineford
+  chapter: 551
+  episode: 460
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Glint-Glint Fruit
+  name_ja: Kira Kira no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Whitebeard Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Jozu
+power_level: 5820
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jozu.jpg
+  path: characters/jozu.webp
+forms:
+  - slug: base
+    name: Jozu
+    default: true

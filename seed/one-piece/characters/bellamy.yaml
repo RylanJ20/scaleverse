@@ -1,0 +1,37 @@
+slug: bellamy
+name: Bellamy
+epithet: The Hyena
+nicknames:
+  - The Hyena
+debut:
+  arc: jaya
+  chapter: 222
+  episode: 146
+status: Alive
+bounty: 195000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Spring-Spring Fruit
+  name_ja: Bane Bane no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 27
+  height_cm: 240
+affiliation: Donquixote Pirates
+other_affiliations:
+  - Bellamy Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Bellamy
+power_level: 4620
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/bellamy.jpg
+  path: characters/bellamy.webp
+forms:
+  - slug: base
+    name: Bellamy
+    default: true

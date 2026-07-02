@@ -1,0 +1,35 @@
+slug: lindbergh
+name: Lindbergh
+epithet: null
+nicknames: []
+debut:
+  arc: reverie
+  chapter: 904
+  episode: 880
+status: Alive
+bounty: 316000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Mink
+  origin: South Blue
+  age: 37
+  height_cm: 149
+affiliation: Revolutionary Army
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Lindbergh
+power_level: 6180
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/lindbergh.jpg
+  path: characters/lindbergh.webp
+forms:
+  - slug: base
+    name: Lindbergh
+    default: true

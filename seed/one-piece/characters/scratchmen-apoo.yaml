@@ -1,0 +1,37 @@
+slug: scratchmen-apoo
+name: Scratchmen Apoo
+epithet: Roar of the Sea
+nicknames:
+  - Roar of the Sea
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 350000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Tone-Tone Fruit
+  name_ja: Oto Oto no Mi
+demographics:
+  gender: Male
+  race: Longarm
+  origin: Grand Line
+  age: 31
+  height_cm: 256
+affiliation: Beast Pirates
+other_affiliations:
+  - On Air Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Scratchmen_Apoo
+power_level: 2700
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/scratchmen-apoo.jpg
+  path: characters/scratchmen-apoo.webp
+forms:
+  - slug: base
+    name: Scratchmen Apoo
+    default: true

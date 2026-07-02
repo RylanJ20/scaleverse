@@ -1,0 +1,37 @@
+slug: edward-newgate
+name: Edward Newgate
+epithet: Whitebeard
+nicknames:
+  - Whitebeard
+debut:
+  arc: marineford
+  chapter: 159
+  episode: 95
+status: Dead
+bounty: 5046000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Tremor-Tremor Fruit
+  name_ja: Gura Gura no Mi
+demographics:
+  gender: Male
+  race: Buccaneer
+  origin: Grand Line
+  age: 72
+  height_cm: 666
+affiliation: Whitebeard Pirates
+other_affiliations:
+  - Rocks Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Edward_Newgate
+power_level: 9680
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/edward-newgate.jpg
+  path: characters/edward-newgate.webp
+forms:
+  - slug: base
+    name: Edward Newgate
+    default: true

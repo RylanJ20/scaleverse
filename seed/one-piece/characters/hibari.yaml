@@ -1,0 +1,36 @@
+slug: hibari
+name: Hibari
+epithet: null
+nicknames: []
+debut:
+  arc: egghead
+  chapter: 1061
+  episode: 1090
+status: Alive
+bounty: 200000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 17
+  height_cm: 165
+affiliation: SWORD
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Hibari
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/hibari.jpg
+  path: characters/hibari.webp
+forms:
+  - slug: base
+    name: Hibari
+    default: true

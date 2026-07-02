@@ -1,0 +1,36 @@
+slug: streusen
+name: Streusen
+epithet: Gourmet Knight
+nicknames:
+  - Gourmet Knight
+debut:
+  arc: whole-cake-island
+  chapter: 858
+  episode: 827
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Cook-Cook Fruit
+  name_ja: Kuku Kuku no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 92
+  height_cm: 140
+affiliation: Big Mom Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Streusen
+power_level: 4950
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/streusen.jpg
+  path: characters/streusen.webp
+forms:
+  - slug: base
+    name: Streusen
+    default: true

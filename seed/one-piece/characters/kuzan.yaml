@@ -1,0 +1,37 @@
+slug: kuzan
+name: Kuzan
+epithet: Aokiji
+nicknames:
+  - Aokiji
+debut:
+  arc: long-ring-long-land
+  chapter: 303
+  episode: 227
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Ice-Ice Fruit
+  name_ja: Hie Hie no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: South Blue
+  age: 49
+  height_cm: 298
+affiliation: Blackbeard Pirates
+other_affiliations:
+  - Marines
+wiki_url: https://onepiece.fandom.com/wiki/Kuzan
+power_level: 8290
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kuzan.jpg
+  path: characters/kuzan.webp
+forms:
+  - slug: base
+    name: Kuzan
+    default: true

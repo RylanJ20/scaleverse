@@ -1,0 +1,35 @@
+slug: tritoma
+name: Tritoma
+epithet: null
+nicknames: []
+debut:
+  arc: elbaph
+  chapter: 1156
+  episode: null
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Human
+  origin: Calm Belt
+  age: null
+  height_cm: null
+affiliation: Kuja Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Tritoma
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/tritoma.jpg
+  path: characters/tritoma.webp
+forms:
+  - slug: base
+    name: Tritoma
+    default: true

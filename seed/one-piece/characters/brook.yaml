@@ -1,0 +1,38 @@
+slug: brook
+name: Brook
+epithet: Soul King
+nicknames:
+  - Soul King
+debut:
+  arc: thriller-bark
+  chapter: 442
+  episode: 337
+status: Dead
+bounty: 83000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Revive-Revive Fruit
+  name_ja: Yomi Yomi no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: West Blue
+  age: 90
+  height_cm: 277
+affiliation: Straw Hat Pirates
+other_affiliations:
+  - Esperia Kingdom
+  - Rumbar Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Brook
+power_level: 4500
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/brook.jpg
+  path: characters/brook.webp
+forms:
+  - slug: base
+    name: Brook
+    default: true

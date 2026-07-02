@@ -1,0 +1,37 @@
+# One Piece unified arc timeline (ratified #24: one ordered list, chapter + episode ranges).
+# position = spoiler-gating index. Ranges are community-correctable via PR — this file
+# is the public audit trail (ratified #25). episode/chapter nulls = ongoing.
+series: one-piece
+arcs:
+  - { slug: romance-dawn, name: Romance Dawn, chapters: [1, 7], episodes: [1, 3] }
+  - { slug: orange-town, name: Orange Town, chapters: [8, 21], episodes: [4, 8] }
+  - { slug: syrup-village, name: Syrup Village, chapters: [22, 41], episodes: [9, 18] }
+  - { slug: baratie, name: Baratie, chapters: [42, 68], episodes: [19, 30] }
+  - { slug: arlong-park, name: Arlong Park, chapters: [69, 95], episodes: [31, 45] }
+  - { slug: loguetown, name: Loguetown, chapters: [96, 100], episodes: [48, 53] }
+  - { slug: reverse-mountain, name: Reverse Mountain, chapters: [101, 105], episodes: [62, 63] }
+  - { slug: whisky-peak, name: Whisky Peak, chapters: [106, 114], episodes: [64, 67] }
+  - { slug: little-garden, name: Little Garden, chapters: [115, 129], episodes: [70, 77] }
+  - { slug: drum-island, name: Drum Island, chapters: [130, 154], episodes: [78, 91] }
+  - { slug: alabasta, name: Alabasta, chapters: [155, 217], episodes: [92, 130] }
+  - { slug: jaya, name: Jaya, chapters: [218, 236], episodes: [144, 152] }
+  - { slug: skypiea, name: Skypiea, chapters: [237, 302], episodes: [153, 195] }
+  - { slug: long-ring-long-land, name: Long Ring Long Land, chapters: [303, 321], episodes: [207, 219] }
+  - { slug: water-7, name: Water 7, chapters: [322, 374], episodes: [229, 263] }
+  - { slug: enies-lobby, name: Enies Lobby, chapters: [375, 441], episodes: [264, 325] }
+  - { slug: thriller-bark, name: Thriller Bark, chapters: [442, 489], episodes: [337, 381] }
+  - { slug: sabaody-archipelago, name: Sabaody Archipelago, chapters: [490, 513], episodes: [382, 407] }
+  - { slug: amazon-lily, name: Amazon Lily, chapters: [514, 524], episodes: [408, 421] }
+  - { slug: impel-down, name: Impel Down, chapters: [525, 549], episodes: [422, 456] }
+  - { slug: marineford, name: Marineford, chapters: [550, 580], episodes: [457, 489] }
+  - { slug: post-war, name: Post-War, chapters: [581, 597], episodes: [490, 516] }
+  - { slug: return-to-sabaody, name: Return to Sabaody, chapters: [598, 602], episodes: [517, 522] }
+  - { slug: fish-man-island, name: Fish-Man Island, chapters: [603, 653], episodes: [523, 574] }
+  - { slug: punk-hazard, name: Punk Hazard, chapters: [654, 699], episodes: [575, 628] }
+  - { slug: dressrosa, name: Dressrosa, chapters: [700, 801], episodes: [629, 746] }
+  - { slug: zou, name: Zou, chapters: [802, 824], episodes: [751, 779] }
+  - { slug: whole-cake-island, name: Whole Cake Island, chapters: [825, 902], episodes: [783, 877] }
+  - { slug: reverie, name: Reverie, chapters: [903, 908], episodes: [878, 889] }
+  - { slug: wano-country, name: Wano Country, chapters: [909, 1057], episodes: [890, 1085] }
+  - { slug: egghead, name: Egghead, chapters: [1058, 1125], episodes: [1086, null] }
+  - { slug: elbaph, name: Elbaph, chapters: [1126, null], episodes: [null, null] }

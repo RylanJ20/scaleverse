@@ -1,0 +1,36 @@
+slug: smoker
+name: Smoker
+epithet: White Hunter
+nicknames:
+  - White Hunter
+debut:
+  arc: loguetown
+  chapter: 98
+  episode: 48
+status: Alive
+bounty: 500000000
+haki:
+  conqueror: false
+  armament: true
+  observation: true
+devil_fruit:
+  type: Logia
+  name_en: Smoke-Smoke Fruit
+  name_ja: Moku Moku no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 36
+  height_cm: 209
+affiliation: Marines
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Smoker
+power_level: 3540
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/smoker.jpg
+  path: characters/smoker.webp
+forms:
+  - slug: base
+    name: Smoker
+    default: true

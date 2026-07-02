@@ -1,0 +1,37 @@
+slug: zala
+name: Zala
+epithet: Miss Doublefinger
+nicknames:
+  - Miss Doublefinger
+  - Poison Spider
+debut:
+  arc: alabasta
+  chapter: 170
+  episode: 107
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Spike-Spike Fruit
+  name_ja: Toge Toge no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: null
+  height_cm: null
+affiliation: Baroque Works
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Miss_Doublefinger
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/zala.jpg
+  path: characters/zala.webp
+forms:
+  - slug: base
+    name: Zala
+    default: true

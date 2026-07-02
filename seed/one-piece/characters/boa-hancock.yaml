@@ -1,0 +1,38 @@
+slug: boa-hancock
+name: Boa Hancock
+epithet: Pirate Empress
+nicknames:
+  - Pirate Empress
+  - Snake Princess
+debut:
+  arc: amazon-lily
+  chapter: 516
+  episode: 409
+status: Alive
+bounty: 1660000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Love-Love Fruit
+  name_ja: Mero Mero no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Calm Belt
+  age: 31
+  height_cm: 191
+affiliation: Kuja Pirates
+other_affiliations:
+  - Warlords
+wiki_url: https://onepiece.fandom.com/wiki/Boa_Hancock
+power_level: 7090
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/boa-hancock.jpg
+  path: characters/boa-hancock.webp
+forms:
+  - slug: base
+    name: Boa Hancock
+    default: true

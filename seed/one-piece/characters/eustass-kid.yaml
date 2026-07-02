@@ -1,0 +1,36 @@
+slug: eustass-kid
+name: Eustass Kid
+epithet: Captain
+nicknames:
+  - Captain
+debut:
+  arc: sabaody-archipelago
+  chapter: 498
+  episode: 392
+status: Alive
+bounty: 3000000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Paramecia
+  name_en: Magnet-Magnet Fruit
+  name_ja: Jiki Jiki no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: South Blue
+  age: 23
+  height_cm: 205
+affiliation: Kid Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Eustass_Kid
+power_level: 7580
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/eustass-kid.jpg
+  path: characters/eustass-kid.webp
+forms:
+  - slug: base
+    name: Eustass Kid
+    default: true

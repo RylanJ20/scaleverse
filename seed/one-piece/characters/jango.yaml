@@ -1,0 +1,37 @@
+slug: jango
+name: Jango
+epithet: Hypnotist
+nicknames:
+  - Hypnotist
+debut:
+  arc: syrup-village
+  chapter: 24
+  episode: 9
+status: Alive
+bounty: 100000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Male
+  race: Human
+  origin: East Blue
+  age: 29
+  height_cm: 207
+affiliation: Marines
+other_affiliations:
+  - Black Cat Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Jango
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/jango.jpg
+  path: characters/jango.webp
+forms:
+  - slug: base
+    name: Jango
+    default: true

@@ -1,0 +1,37 @@
+slug: galdino
+name: Galdino
+epithet: Mr. 3
+nicknames:
+  - Mr. 3
+debut:
+  arc: little-garden
+  chapter: 120
+  episode: 78
+status: Alive
+bounty: 24000000
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Wax-Wax Fruit
+  name_ja: Doru Doru no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 37
+  height_cm: 179
+affiliation: Cross Guild
+other_affiliations:
+  - Baroque Works
+wiki_url: https://onepiece.fandom.com/wiki/Galdino
+power_level: 1720
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/galdino.jpg
+  path: characters/galdino.webp
+forms:
+  - slug: base
+    name: Galdino
+    default: true

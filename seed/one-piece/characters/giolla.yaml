@@ -1,0 +1,35 @@
+slug: giolla
+name: Giolla
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 682
+  episode: 608
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Art-Art Fruit
+  name_ja: Ato Ato no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: North Blue
+  age: 61
+  height_cm: 221
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Giolla
+power_level: 1900
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/giolla.jpg
+  path: characters/giolla.webp
+forms:
+  - slug: base
+    name: Giolla
+    default: true

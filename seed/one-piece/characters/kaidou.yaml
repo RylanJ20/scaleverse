@@ -1,0 +1,37 @@
+slug: kaidou
+name: Kaidou
+epithet: King of the Beasts
+nicknames:
+  - King of the Beasts
+debut:
+  arc: wano-country
+  chapter: 795
+  episode: 736
+status: Alive
+bounty: 4611000000
+haki:
+  conqueror: true
+  armament: true
+  observation: true
+devil_fruit:
+  type: Zoan
+  name_en: Fish-Fish Fruit, Azure Dragon Model
+  name_ja: 'Uo Uo no Mi, Model: Seiryu'
+demographics:
+  gender: Male
+  race: Human
+  origin: Grand Line
+  age: 59
+  height_cm: 710
+affiliation: Beast Pirates
+other_affiliations:
+  - Rocks Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Kaidou
+power_level: 9100
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/kaidou.jpg
+  path: characters/kaidou.webp
+forms:
+  - slug: base
+    name: Kaidou
+    default: true

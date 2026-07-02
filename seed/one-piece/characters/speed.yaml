@@ -1,0 +1,37 @@
+slug: speed
+name: Speed
+epithet: Horselina
+nicknames:
+  - Horselina
+debut:
+  arc: wano-country
+  chapter: 917
+  episode: 904
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Zoan
+  name_en: Horse-Horse Fruit, Horse Model
+  name_ja: 'Uma Uma no Mi, Model: Horse'
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 24
+  height_cm: 298
+affiliation: Otama
+other_affiliations:
+  - Beast Pirates
+wiki_url: https://onepiece.fandom.com/wiki/Speed
+power_level: null
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/speed.jpg
+  path: characters/speed.webp
+forms:
+  - slug: base
+    name: Speed
+    default: true

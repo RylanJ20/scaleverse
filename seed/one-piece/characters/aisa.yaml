@@ -1,0 +1,35 @@
+slug: aisa
+name: Aisa
+epithet: null
+nicknames: []
+debut:
+  arc: skypiea
+  chapter: 238
+  episode: 153
+status: Alive
+bounty: 0
+haki:
+  conqueror: false
+  armament: false
+  observation: true
+devil_fruit:
+  type: None
+  name_en: None
+  name_ja: None
+demographics:
+  gender: Female
+  race: Shandia
+  origin: Sky Islands
+  age: 8
+  height_cm: null
+affiliation: Shandia
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Aisa
+power_level: 600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/aisa.jpg
+  path: characters/aisa.webp
+forms:
+  - slug: base
+    name: Aisa
+    default: true

@@ -1,0 +1,35 @@
+slug: diamante
+name: Diamante
+epithet: null
+nicknames: []
+debut:
+  arc: dressrosa
+  chapter: 700
+  episode: 629
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: true
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Ripple-Ripple Fruit
+  name_ja: Hira Hira no Mi
+demographics:
+  gender: Male
+  race: Human
+  origin: North Blue
+  age: 45
+  height_cm: 525
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Diamante
+power_level: 3780
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/diamante.jpg
+  path: characters/diamante.webp
+forms:
+  - slug: base
+    name: Diamante
+    default: true

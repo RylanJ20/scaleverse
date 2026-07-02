@@ -1,0 +1,35 @@
+slug: monet
+name: Monet
+epithet: null
+nicknames: []
+debut:
+  arc: punk-hazard
+  chapter: 655
+  episode: 580
+status: Dead
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Logia
+  name_en: Snow-Snow Fruit
+  name_ja: Yuki Yuki no Mi
+demographics:
+  gender: Female
+  race: Human
+  origin: Grand Line
+  age: 30
+  height_cm: 227
+affiliation: Donquixote Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Monet
+power_level: 2600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/monet.jpg
+  path: characters/monet.webp
+forms:
+  - slug: base
+    name: Monet
+    default: true

@@ -1,0 +1,35 @@
+slug: vander-decken-ix
+name: Vander Decken IX
+epithet: null
+nicknames: []
+debut:
+  arc: fish-man-island
+  chapter: 606
+  episode: 525
+status: Alive
+bounty: null
+haki:
+  conqueror: false
+  armament: false
+  observation: false
+devil_fruit:
+  type: Paramecia
+  name_en: Mark-Mark Fruit
+  name_ja: Mato Mato no Mi
+demographics:
+  gender: Male
+  race: Fish Man
+  origin: Grand Line
+  age: 35
+  height_cm: 352
+affiliation: Flying Pirates
+other_affiliations: []
+wiki_url: https://onepiece.fandom.com/wiki/Vander_Decken_IX
+power_level: 1600
+image:
+  source_url: https://qabhhswdxxlwhwwfxlyd.supabase.co/storage/v1/object/public/character-images/characters/vander-decken-ix.jpg
+  path: characters/vander-decken-ix.webp
+forms:
+  - slug: base
+    name: Vander Decken IX
+    default: true
