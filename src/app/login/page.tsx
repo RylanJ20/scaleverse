@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { signInWithUsername, signUpWithUsername } from "@/app/actions/auth";
 
 type Mode = "signin" | "signup";
 
 export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -22,22 +24,20 @@ export default function LoginPage() {
     if (error) setMessage(error.message);
   };
 
-  const submitEmail = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
     setMessage(null);
-    const supabase = createClient();
-    if (mode === "signin") {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setMessage(error.message);
-      else window.location.assign("/one-piece/arena");
+    const res =
+      mode === "signin"
+        ? await signInWithUsername(username, password)
+        : await signUpWithUsername(username, password, email || undefined);
+    if (res.ok) {
+      window.location.assign("/one-piece/arena");
     } else {
-      const { error, data } = await supabase.auth.signUp({ email, password });
-      if (error) setMessage(error.message);
-      else if (data.session) window.location.assign("/one-piece/arena");
-      else setMessage("Check your email to confirm your account.");
+      setMessage(res.error);
+      setBusy(false);
     }
-    setBusy(false);
   };
 
   return (
@@ -69,28 +69,45 @@ export default function LoginPage() {
 
         <div className="my-5 flex items-center gap-3 text-xs text-muted">
           <div className="h-px flex-1 bg-white/10" />
-          or with email
+          or with a username
           <div className="h-px flex-1 bg-white/10" />
         </div>
 
-        <form onSubmit={submitEmail} className="flex flex-col gap-3">
+        <form onSubmit={submit} className="flex flex-col gap-3">
           <input
-            type="email"
+            type="text"
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            autoComplete="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
             className="rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
           />
           <input
             type="password"
             required
             minLength={8}
+            autoComplete={mode === "signin" ? "current-password" : "new-password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password (8+ characters)"
+            placeholder={mode === "signin" ? "Password" : "Password (8+ characters)"}
             className="rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
           />
+          {mode === "signup" && (
+            <div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Recovery email (optional)"
+                className="w-full rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
+              />
+              <p className="mt-1 text-xs text-muted">
+                Only used to reset a forgotten password. Skip it if you want — but without it, a
+                lost password can&apos;t be recovered.
+              </p>
+            </div>
+          )}
           <button
             type="submit"
             disabled={busy}
@@ -104,7 +121,10 @@ export default function LoginPage() {
 
         <button
           type="button"
-          onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
+          onClick={() => {
+            setMode(mode === "signin" ? "signup" : "signin");
+            setMessage(null);
+          }}
           className="mt-4 text-sm text-muted underline-offset-4 hover:underline"
         >
           {mode === "signin" ? "New here? Create an account" : "Have an account? Sign in"}

@@ -37,6 +37,15 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  let username: string | null = null;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("id", user.id)
+      .maybeSingle();
+    username = profile?.username ?? null;
+  }
 
   return (
     <html
@@ -56,11 +65,18 @@ export default async function RootLayout({
               Tier list
             </Link>
             {user ? (
-              <form action={signOut}>
-                <button className="transition hover:text-foreground" type="submit">
-                  Sign out
-                </button>
-              </form>
+              <>
+                {username && (
+                  <Link href={`/u/${username}`} className="text-foreground transition hover:text-accent-2">
+                    @{username}
+                  </Link>
+                )}
+                <form action={signOut}>
+                  <button className="transition hover:text-foreground" type="submit">
+                    Sign out
+                  </button>
+                </form>
+              </>
             ) : (
               <Link
                 href="/login"
