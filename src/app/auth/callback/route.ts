@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { autoAssignDiscordUsername } from "@/lib/discord-username";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -10,7 +11,9 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      // OAuth users arrive with an email but no username — send them to pick one
+      // Discord users arrive with an email but no username. Try to adopt their
+      // Discord handle automatically; only fall back to the manual picker if it
+      // can't be claimed (unusable handle, or every variant already taken).
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: profile } = await supabase
@@ -19,9 +22,12 @@ export async function GET(request: Request) {
           .eq("id", user.id)
           .maybeSingle();
         if (!profile?.username) {
-          return NextResponse.redirect(
-            `${origin}/choose-username?next=${encodeURIComponent(next)}`,
-          );
+          const claimed = await autoAssignDiscordUsername(user.id, user.user_metadata);
+          if (!claimed) {
+            return NextResponse.redirect(
+              `${origin}/choose-username?next=${encodeURIComponent(next)}`,
+            );
+          }
         }
       }
       return NextResponse.redirect(`${origin}${next}`);

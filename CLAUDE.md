@@ -48,4 +48,4 @@ Next.js App Router (TypeScript, Tailwind) deployed on Vercel · Supabase (auth +
 
 - Server Components for pages, Server Actions for mutations; Route Handlers only for cron/OG/auth callbacks.
 - All schema/data is series-scoped from day one (verse #2 must be a content insert, not a rewrite).
-- Auth: Google, Discord, and email/password via Supabase.
+- Auth: username/password + Discord OAuth via Supabase (Google intentionally dropped, 2026-07-10).

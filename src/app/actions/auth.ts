@@ -72,7 +72,7 @@ export async function signInWithUsername(username: string, password: string): Pr
   return error ? invalid : { ok: true };
 }
 
-// Used by OAuth (Google/Discord) users, who arrive with an email but no username.
+// Used by OAuth (Discord) users, who arrive with an email but no username.
 export async function setUsername(username: string): Promise<Result> {
   const v = validateUsername(username);
   if (!v.ok) return { ok: false, error: v.reason };
