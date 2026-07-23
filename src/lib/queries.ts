@@ -133,6 +133,8 @@ export async function getCharacter(
   };
 }
 
+// The tally read itself lives in src/lib/cached.ts (getCachedMatchupTally) —
+// this is just the shared shape.
 export type MatchupTally = {
   matchup_id: string | null;
   vote_count: number;
@@ -140,37 +142,6 @@ export type MatchupTally = {
   a: FormCard;
   b: FormCard;
 };
-
-// Look up the public tally for a form pair (may not exist yet). Read-only.
-// Never resolves a per-user pick — that stays client-side so callers can cache.
-export async function getMatchupTally(
-  formA: { id: string },
-  formB: { id: string },
-  cardA: FormCard,
-  cardB: FormCard,
-  db?: DB,
-): Promise<MatchupTally> {
-  const supabase = db ?? (await createClient());
-  const [lo, hi] = [formA.id, formB.id].sort();
-  const aIsLo = cardA.form_id === lo;
-
-  const { data: m } = await supabase
-    .from("matchups")
-    .select("id, vote_count, a_wins")
-    .eq("form_a_id", lo)
-    .eq("form_b_id", hi)
-    .maybeSingle();
-
-  // a_wins tracks wins for the low form; re-orient to the caller's a/b
-  const aWinsForCaller = m ? (aIsLo ? m.a_wins : m.vote_count - m.a_wins) : 0;
-  return {
-    matchup_id: m?.id ?? null,
-    vote_count: m?.vote_count ?? 0,
-    a_wins: aWinsForCaller,
-    a: cardA,
-    b: cardB,
-  };
-}
 
 export function formToCard(
   f: CharacterFull["forms"][number],

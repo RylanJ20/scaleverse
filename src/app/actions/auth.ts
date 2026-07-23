@@ -1,5 +1,6 @@
 "use server";
 
+import { updateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { validateUsername, SYNTHETIC_EMAIL_DOMAIN } from "@/lib/username";
@@ -88,5 +89,7 @@ export async function setUsername(username: string): Promise<Result> {
   // RLS grants the owner update(username); the unique index catches a race
   const { error } = await supabase.from("profiles").update({ username }).eq("id", user.id);
   if (error) return { ok: false, error: "That username was just taken. Pick another." };
+  // a pre-claim visit may have cached /u/<name> as not-found — clear it
+  updateTag(`profile:${username}`);
   return { ok: true };
 }

@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getCachedProfile } from "@/lib/cached";
 import { characterImageUrl } from "@/lib/image";
 import type { FormCard } from "@/lib/types";
 import { canonicalMatchupSlug } from "@/lib/matchup-slug";
+import { SpoilerSettings, type SeriesSpoilerSetting } from "@/components/profile/spoiler-settings";
 
 type HottestTake = {
   matchup_id: string;
@@ -36,16 +39,55 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProfilePage({
+export default function ProfilePage({
   params,
 }: {
   params: Promise<{ username: string }>;
 }) {
+  return (
+    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-8">
+      <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-surface" aria-hidden />}>
+        <ProfileBody params={params} />
+      </Suspense>
+    </main>
+  );
+}
+
+async function ProfileBody({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
-  const supabase = await createClient();
-  const { data } = await supabase.rpc("get_profile", { p_username: username });
+  const data = await getCachedProfile(username);
   if (!data) notFound();
   const p = data as Profile;
+
+  // spoiler settings are owner-only: shown when viewing your own profile
+  const supabase = await createClient();
+  let spoilerSeries: SeriesSpoilerSetting[] | null = null;
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    const { data: me } = await supabase.from("profiles").select("username").eq("id", user.id).single();
+    if (me?.username === p.username) {
+      const [{ data: seriesRows }, { data: arcRows }, { data: progRows }] = await Promise.all([
+        supabase.from("series").select("id, slug, name").order("name"),
+        supabase.from("arcs").select("id, slug, name, position, series_id").order("position"),
+        supabase.from("user_series_progress").select("series_id, caught_up, last_arc_id").eq("user_id", user.id),
+      ]);
+      spoilerSeries = (seriesRows ?? []).map((s) => {
+        const arcs = (arcRows ?? []).filter((a) => a.series_id === s.id);
+        const prog = (progRows ?? []).find((r) => r.series_id === s.id);
+        const current = !prog
+          ? null
+          : prog.caught_up
+            ? "all"
+            : arcs.find((a) => a.id === prog.last_arc_id)?.slug ?? "all";
+        return {
+          slug: s.slug,
+          name: s.name,
+          arcs: arcs.map(({ slug, name, position }) => ({ slug, name, position })),
+          current,
+        };
+      });
+    }
+  }
 
   const since = new Date(p.member_since).toLocaleDateString(undefined, {
     month: "short",
@@ -53,7 +95,7 @@ export default async function ProfilePage({
   });
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-8">
+    <>
       <h1 className="font-display -skew-x-6 text-3xl uppercase sm:text-4xl">@{p.username}</h1>
       <p className="mt-1 text-sm text-muted">Scaling since {since}</p>
 
@@ -69,6 +111,8 @@ export default async function ProfilePage({
           value={p.agreement_pct != null ? `${100 - p.agreement_pct}%` : "—"}
         />
       </div>
+
+      {spoilerSeries && <SpoilerSettings series={spoilerSeries} />}
 
       <section className="mt-8">
         <h2 className="font-display -skew-x-6 mb-3 text-xl uppercase">
@@ -111,7 +155,7 @@ export default async function ProfilePage({
           Build your own record in the Arena
         </Link>
       </p>
-    </main>
+    </>
   );
 }
 

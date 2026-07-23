@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
-import { getDailyMatchup, getTakes, getMyTake } from "@/app/actions/social";
+import { getCachedDailyMatchup, getCachedTakes } from "@/lib/cached";
+import { getMyTake } from "@/app/actions/social";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
 import { TakesPanel } from "@/components/daily/takes-panel";
 import { IMAGE_BASE } from "@/lib/image";
@@ -8,17 +10,8 @@ import { IMAGE_BASE } from "@/lib/image";
 const SERIES = "one-piece";
 
 export default async function Home() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  const daily = await getDailyMatchup(SERIES);
-  let takes: Awaited<ReturnType<typeof getTakes>> = [];
-  let myTake: string | null = null;
-  if (daily) {
-    [takes, myTake] = await Promise.all([getTakes(daily.matchup_id), getMyTake(daily.matchup_id)]);
-  }
-
-  const imageBase = IMAGE_BASE;
+  // cached (shared) read — the hero + daily card prerender into the shell
+  const daily = await getCachedDailyMatchup(SERIES);
 
   return (
     <main className="flex flex-1 flex-col items-center px-6 py-12">
@@ -57,21 +50,31 @@ export default async function Home() {
           <MatchupVote
             a={daily.a}
             b={daily.b}
-            imageBase={imageBase}
+            imageBase={IMAGE_BASE}
             initialVoteCount={daily.vote_count}
             initialAWins={daily.a_wins}
             matchupId={daily.matchup_id}
           />
           <div className="mt-6 border-t border-white/10 pt-5">
-            <TakesPanel
-              matchupId={daily.matchup_id}
-              takes={takes}
-              myTake={myTake}
-              isAuthed={!!user}
-            />
+            <Suspense fallback={<div className="h-24 animate-pulse rounded-lg bg-surface" aria-hidden />}>
+              <TakesSection matchupId={daily.matchup_id} />
+            </Suspense>
           </div>
         </section>
       )}
     </main>
   );
+}
+
+// Dynamic hole: the takes list is cached/shared, but "my take" and auth state
+// are per-request (only signed-in users can post — ratified #24 gating is in
+// the post_take RPC).
+async function TakesSection({ matchupId }: { matchupId: string }) {
+  const supabase = await createClient();
+  const [takes, myTake, { data: { user } }] = await Promise.all([
+    getCachedTakes(matchupId),
+    getMyTake(matchupId),
+    supabase.auth.getUser(),
+  ]);
+  return <TakesPanel matchupId={matchupId} takes={takes} myTake={myTake} isAuthed={!!user} />;
 }

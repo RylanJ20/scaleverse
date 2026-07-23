@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getCharacter } from "@/lib/queries";
+import { getCachedCharacter } from "@/lib/cached";
 import { characterPngDataUri } from "@/lib/og-image";
 
 export const size = { width: 1200, height: 630 };
@@ -12,7 +12,8 @@ export default async function OgImage({
   params: Promise<{ series: string; slug: string }>;
 }) {
   const { series, slug } = await params;
-  const char = await getCharacter(series, slug);
+  // cached + cookie-free (the old default fell back to the cookie client)
+  const char = await getCachedCharacter(series, slug);
   const def = char?.forms.find((f) => f.is_default) ?? char?.forms[0];
 
   const bg = "#0a0a12";

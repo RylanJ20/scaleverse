@@ -1,26 +1,31 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
-import { getCharacter, getMatchupTally, formToCard } from "@/lib/queries";
-import { createPublicClient } from "@/lib/supabase/public";
+import { formToCard } from "@/lib/queries";
+import { getCachedCharacter, getCachedMatchupTally } from "@/lib/cached";
 import { parseMatchupSlug, canonicalMatchupSlug } from "@/lib/matchup-slug";
 import { IMAGE_BASE } from "@/lib/image";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
 
-// Rendered per-request. The page is fully public (no cookies/auth here — "your
-// pick" is resolved client-side in MatchupVote), so it's safe to cache later,
-// but ISR is deferred: supabase-js reads defeat Next's fetch cache, so forcing
-// static rendering throws DYNAMIC_SERVER_USAGE. Revisit with unstable_cache.
+// Fully public page (no cookies/auth — "your pick" is resolved client-side in
+// MatchupVote). All reads go through the "use cache" layer, so under Cache
+// Components this renders as a static shell revalidated on the caches' clock —
+// crawler hits stop reaching Supabase. (The old fetch-cache blocker doesn't
+// apply: "use cache" stores the helpers' return values.)
 
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
+
+export function generateStaticParams() {
+  // ≥1 sample is required under cacheComponents; other pairs render on demand
+  return [{ series: "one-piece", slug: canonicalMatchupSlug("monkey-d-luffy", "roronoa-zoro") }];
+}
 
 async function load(seriesSlug: string, slug: string) {
   const parsed = parseMatchupSlug(slug);
   if (!parsed) return null;
-  const db = createPublicClient();
   const [charA, charB] = await Promise.all([
-    getCharacter(seriesSlug, parsed.a, db),
-    getCharacter(seriesSlug, parsed.b, db),
+    getCachedCharacter(seriesSlug, parsed.a),
+    getCachedCharacter(seriesSlug, parsed.b),
   ]);
   if (!charA || !charB || charA.id === charB.id) return null;
   const defA = charA.forms.find((f) => f.is_default) ?? charA.forms[0];
@@ -66,7 +71,7 @@ export default async function MatchupPage({
 
   const cardA = formToCard(defA, charA);
   const cardB = formToCard(defB, charB);
-  const tally = await getMatchupTally(defA, defB, cardA, cardB, createPublicClient());
+  const tally = await getCachedMatchupTally(defA, defB, cardA, cardB);
 
   const imageBase = IMAGE_BASE;
   const aPct = tally.vote_count > 0 ? Math.round((tally.a_wins / tally.vote_count) * 100) : null;

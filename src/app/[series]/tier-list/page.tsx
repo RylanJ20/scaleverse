@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { getArcGate } from "@/app/actions/arena";
+import { Suspense } from "react";
+import { getCachedTierListRoster, type RosterRow } from "@/lib/cached";
+import { getViewerMaxArcPosition } from "@/lib/queries";
 import { characterImageUrl } from "@/lib/image";
-import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Tier List",
 };
+
+export function generateStaticParams() {
+  return [{ series: "one-piece" }];
+}
 
 const TIER_ORDER = ["S", "A", "B", "C", "D", "F"] as const;
 // percentile cutoffs when a form has no cron-assigned tier yet (5/10/20/30/25/10)
@@ -20,87 +25,12 @@ const CUTOFFS: Array<[string, number]> = [
   ["F", 1.0],
 ];
 
-type Row = {
-  form_id: string;
-  name: string;
-  image_path: string | null;
-  character_slug: string;
-  rating: number;
-  tier: string | null;
-  debut_pos: number | null;
-  reveal_pos: number | null;
-};
-
 export default async function TierListPage({
   params,
 }: {
   params: Promise<{ series: string }>;
 }) {
   const { series } = await params;
-  const supabase = await createClient();
-
-  const { data: { user } } = await supabase.auth.getUser();
-  let maxPos: number | null = null;
-  if (user) {
-    const { data: prog } = await supabase
-      .from("user_series_progress")
-      .select("caught_up, arcs(position), series!inner(slug)")
-      .eq("series.slug", series)
-      .eq("user_id", user.id)
-      .maybeSingle();
-    if (prog && !prog.caught_up) {
-      const arc = prog.arcs as unknown as { position: number } | { position: number }[] | null;
-      const arcRow = Array.isArray(arc) ? arc[0] : arc;
-      maxPos = arcRow?.position ?? null;
-    }
-  } else {
-    maxPos = await getArcGate();
-  }
-
-  const { data } = await supabase
-    .from("forms")
-    .select(
-      `id, name, image_path, is_active,
-       characters!inner(slug, series!inner(slug), debut:arcs!characters_debut_arc_id_series_id_fkey(position)),
-       reveal:arcs!forms_reveal_arc_id_fkey(position),
-       ratings(display_rating, tier)`,
-    )
-    .eq("is_active", true)
-    .eq("characters.series.slug", series)
-    .limit(1000);
-
-  const all: Row[] = (data ?? []).map((f) => {
-    const character = f.characters as unknown as { slug: string; debut: { position: number } | null };
-    const rating = f.ratings as unknown as { display_rating: number; tier: string | null } | null;
-    return {
-      form_id: f.id,
-      name: f.name,
-      image_path: f.image_path,
-      character_slug: character.slug,
-      rating: rating?.display_rating ?? 1000,
-      tier: rating?.tier ?? null,
-      debut_pos: character.debut?.position ?? null,
-      reveal_pos: (f.reveal as unknown as { position: number } | null)?.position ?? null,
-    };
-  });
-
-  // spoiler gate (ratified #9/#27): hidden characters are simply absent
-  const visible = all.filter(
-    (r) =>
-      maxPos === null ||
-      ((r.debut_pos === null || r.debut_pos <= maxPos) &&
-        (r.reveal_pos === null || r.reveal_pos <= maxPos)),
-  );
-  const hidden = all.length - visible.length;
-
-  const ranked = [...visible].sort((a, b) => b.rating - a.rating);
-  const byTier = new Map<string, Row[]>(TIER_ORDER.map((t) => [t, []]));
-  ranked.forEach((row, i) => {
-    const tier =
-      row.tier ?? CUTOFFS.find(([, cut]) => (i + 1) / ranked.length <= cut)![0];
-    byTier.get(tier)?.push(row);
-  });
-
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
       <h1 className="font-display -skew-x-6 text-3xl uppercase sm:text-4xl">
@@ -112,6 +42,40 @@ export default async function TierListPage({
           Disagree? Vote.
         </Link>
       </p>
+      <Suspense fallback={<div className="mt-6 h-96 animate-pulse rounded-lg bg-surface" aria-hidden />}>
+        <TierListBody series={series} />
+      </Suspense>
+    </main>
+  );
+}
+
+// Dynamic hole: reads the viewer's spoiler ceiling (cookies/auth — ≤1 tiny row)
+// and filters the shared cached roster per request (ratified #9/#27).
+async function TierListBody({ series }: { series: string }) {
+  const [maxPos, all] = await Promise.all([
+    getViewerMaxArcPosition(series),
+    getCachedTierListRoster(series),
+  ]);
+
+  // spoiler gate (ratified #9/#27): hidden characters are simply absent
+  const visible = all.filter(
+    (r) =>
+      maxPos === null ||
+      ((r.debut_pos === null || r.debut_pos <= maxPos) &&
+        (r.reveal_pos === null || r.reveal_pos <= maxPos)),
+  );
+  const hidden = all.length - visible.length;
+
+  const ranked = [...visible].sort((a, b) => b.rating - a.rating);
+  const byTier = new Map<string, RosterRow[]>(TIER_ORDER.map((t) => [t, []]));
+  ranked.forEach((row, i) => {
+    const tier =
+      row.tier ?? CUTOFFS.find(([, cut]) => (i + 1) / ranked.length <= cut)![0];
+    byTier.get(tier)?.push(row);
+  });
+
+  return (
+    <>
       {hidden > 0 && (
         <p className="mt-1 font-mono text-xs text-muted">
           {hidden} character{hidden === 1 ? "" : "s"} hidden by your spoiler settings
@@ -162,6 +126,6 @@ export default async function TierListPage({
           );
         })}
       </div>
-    </main>
+    </>
   );
 }

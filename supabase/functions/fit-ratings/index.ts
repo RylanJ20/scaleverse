@@ -156,6 +156,22 @@ Deno.serve(async (req) => {
     if (error) return Response.json({ error: `history write: ${error.message}` }, { status: 500 });
   }
 
+  // Nudge the site to refresh ratings-derived caches (SWR revalidateTag).
+  // Best-effort: a failed ping only means caches fall back to their TTL.
+  const siteUrl = Deno.env.get("SITE_URL");
+  if (siteUrl && secret) {
+    try {
+      const res = await fetch(`${siteUrl}/api/revalidate-ratings`, {
+        method: "POST",
+        headers: { "x-fit-secret": secret },
+        signal: AbortSignal.timeout(5000),
+      });
+      if (!res.ok) console.error(`revalidate ping rejected: ${res.status}`);
+    } catch (e) {
+      console.error("revalidate ping failed:", e);
+    }
+  }
+
   return Response.json({
     fitted: rows.length,
     pairs: pairs.size,

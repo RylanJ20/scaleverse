@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { getCharacter, getViewerMaxArcPosition } from "@/lib/queries";
+import { Suspense } from "react";
+import { getCachedCharacter } from "@/lib/cached";
+import { getViewerMaxArcPosition, type CharacterFull } from "@/lib/queries";
 import { characterImageUrl } from "@/lib/image";
 import { formatBounty, hakiList } from "@/lib/format";
 import { SpoilerGate } from "@/components/character/spoiler-gate";
 
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
+
+export function generateStaticParams() {
+  return [{ series: "one-piece", slug: "monkey-d-luffy" }];
+}
 
 export async function generateMetadata({
   params,
@@ -15,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ series: string; slug: string }>;
 }): Promise<Metadata> {
   const { series, slug } = await params;
-  const char = await getCharacter(series, slug);
+  const char = await getCachedCharacter(series, slug);
   if (!char) return { title: "Character" };
   const title = char.epithet ? `${char.name} "${char.epithet}"` : char.name;
   const description = `${char.name}'s power ranking, stats, and matchup record in the ${
@@ -40,9 +46,39 @@ export default async function CharacterPage({
   params: Promise<{ series: string; slug: string }>;
 }) {
   const { series, slug } = await params;
-  const char = await getCharacter(series, slug);
+  const char = await getCachedCharacter(series, slug);
   if (!char) notFound();
 
+  return (
+    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
+      <nav className="mb-4 font-mono text-xs text-muted">
+        <Link href={`/${series}/tier-list`} className="hover:text-foreground">
+          {SERIES_NAME[series] ?? series} tier list
+        </Link>{" "}
+        / {char.name}
+      </nav>
+
+      <h1 className="font-display -skew-x-6 text-3xl uppercase sm:text-4xl">{char.name}</h1>
+      {char.epithet && <p className="mb-6 text-muted">&ldquo;{char.epithet}&rdquo;</p>}
+
+      <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-surface" aria-hidden />}>
+        <GatedBody series={series} char={char} />
+      </Suspense>
+
+      <p className="mt-8 text-center text-sm text-muted">
+        Think {char.name} is ranked wrong?{" "}
+        <Link href={`/${series}/arena`} className="text-accent-2 underline-offset-4 hover:underline">
+          Vote in the Arena
+        </Link>
+      </p>
+    </main>
+  );
+}
+
+// Dynamic hole: only the viewer's gate (cookies/auth) is per-request — the
+// character payload comes from the shared cache. Spoiler interstitial per
+// ratified #33.
+async function GatedBody({ series, char }: { series: string; char: CharacterFull }) {
   const maxPos = await getViewerMaxArcPosition(series);
   const isSpoiler = maxPos != null && char.debut_position != null && char.debut_position > maxPos;
 
@@ -111,26 +147,5 @@ export default async function CharacterPage({
     </div>
   );
 
-  return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
-      <nav className="mb-4 font-mono text-xs text-muted">
-        <Link href={`/${series}/tier-list`} className="hover:text-foreground">
-          {SERIES_NAME[series] ?? series} tier list
-        </Link>{" "}
-        / {char.name}
-      </nav>
-
-      <h1 className="font-display -skew-x-6 text-3xl uppercase sm:text-4xl">{char.name}</h1>
-      {char.epithet && <p className="mb-6 text-muted">&ldquo;{char.epithet}&rdquo;</p>}
-
-      {isSpoiler ? <SpoilerGate characterName={char.name}>{body}</SpoilerGate> : body}
-
-      <p className="mt-8 text-center text-sm text-muted">
-        Think {char.name} is ranked wrong?{" "}
-        <Link href={`/${series}/arena`} className="text-accent-2 underline-offset-4 hover:underline">
-          Vote in the Arena
-        </Link>
-      </p>
-    </main>
-  );
+  return isSpoiler ? <SpoilerGate characterName={char.name}>{body}</SpoilerGate> : body;
 }

@@ -32,11 +32,32 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
       const { data: { user } } = await supabase.auth.getUser();
       if (cancelled) return;
       setAuthed(!!user);
-      if (user && matchupId) {
+      if (!user) return;
+      // The server tally can be minutes stale (cached page). If it predates the
+      // matchup row, resolve the live row by pair so a just-cast vote — and its
+      // pick highlight — never "vanishes" on reload. Signed-in viewers only, so
+      // anonymous traffic stays read-free.
+      let id = matchupId;
+      if (!id) {
+        const [lo, hi] = [a.form_id, b.form_id].sort();
+        const { data: m } = await supabase
+          .from("matchups")
+          .select("id, vote_count, a_wins")
+          .eq("form_a_id", lo)
+          .eq("form_b_id", hi)
+          .maybeSingle();
+        if (cancelled) return;
+        if (m) {
+          id = m.id;
+          setVoteCount(m.vote_count);
+          setAWins(a.form_id === lo ? m.a_wins : m.vote_count - m.a_wins);
+        }
+      }
+      if (id) {
         const { data } = await supabase
           .from("votes")
           .select("winner_form_id")
-          .eq("matchup_id", matchupId)
+          .eq("matchup_id", id)
           .eq("user_id", user.id)
           .maybeSingle();
         if (!cancelled) setPick(data?.winner_form_id ?? null);
@@ -45,7 +66,7 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
     return () => {
       cancelled = true;
     };
-  }, [matchupId]);
+  }, [matchupId, a.form_id, b.form_id]);
 
   const aPct = voteCount > 0 ? Math.round((aWins / voteCount) * 100) : null;
 

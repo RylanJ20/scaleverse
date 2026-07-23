@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { getCharacter, getMatchupTally, formToCard } from "@/lib/queries";
-import { createPublicClient } from "@/lib/supabase/public";
+import { formToCard } from "@/lib/queries";
+import { getCachedCharacter, getCachedMatchupTally } from "@/lib/cached";
 import { characterPngDataUri } from "@/lib/og-image";
 import { parseMatchupSlug } from "@/lib/matchup-slug";
 
@@ -15,9 +15,8 @@ export default async function OgImage({
 }) {
   const { series, slug } = await params;
   const parsed = parseMatchupSlug(slug);
-  const db = createPublicClient();
   const [charA, charB] = parsed
-    ? await Promise.all([getCharacter(series, parsed.a, db), getCharacter(series, parsed.b, db)])
+    ? await Promise.all([getCachedCharacter(series, parsed.a), getCachedCharacter(series, parsed.b)])
     : [null, null];
 
   const defA = charA?.forms.find((f) => f.is_default) ?? charA?.forms[0];
@@ -26,7 +25,7 @@ export default async function OgImage({
   let aPct: number | null = null;
   let voteCount = 0;
   if (charA && charB && defA && defB) {
-    const t = await getMatchupTally(defA, defB, formToCard(defA, charA), formToCard(defB, charB), db);
+    const t = await getCachedMatchupTally(defA, defB, formToCard(defA, charA), formToCard(defB, charB));
     voteCount = t.vote_count;
     aPct = voteCount > 0 ? Math.round((t.a_wins / voteCount) * 100) : null;
   }
