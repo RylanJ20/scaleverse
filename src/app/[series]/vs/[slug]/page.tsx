@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getCharacter, getMatchupTally, formToCard } from "@/lib/queries";
 import { createPublicClient } from "@/lib/supabase/public";
 import { parseMatchupSlug, canonicalMatchupSlug } from "@/lib/matchup-slug";
+import { IMAGE_BASE } from "@/lib/image";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
 
 // Rendered per-request. The page is fully public (no cookies/auth here — "your
@@ -67,7 +68,7 @@ export default async function MatchupPage({
   const cardB = formToCard(defB, charB);
   const tally = await getMatchupTally(defA, defB, cardA, cardB, createPublicClient());
 
-  const imageBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/character-images`;
+  const imageBase = IMAGE_BASE;
   const aPct = tally.vote_count > 0 ? Math.round((tally.a_wins / tally.vote_count) * 100) : null;
 
   const faq = {

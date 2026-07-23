@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getDailyMatchup, getTakes, getMyTake } from "@/app/actions/social";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
 import { TakesPanel } from "@/components/daily/takes-panel";
+import { IMAGE_BASE } from "@/lib/image";
 
 const SERIES = "one-piece";
 
@@ -17,7 +18,7 @@ export default async function Home() {
     [takes, myTake] = await Promise.all([getTakes(daily.matchup_id), getMyTake(daily.matchup_id)]);
   }
 
-  const imageBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/character-images`;
+  const imageBase = IMAGE_BASE;
 
   return (
     <main className="flex flex-1 flex-col items-center px-6 py-12">

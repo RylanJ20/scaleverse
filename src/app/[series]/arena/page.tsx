@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { fetchBatch, hasChosenProgress } from "@/app/actions/arena";
 import { createClient } from "@/lib/supabase/server";
 import { ArenaClient } from "@/components/arena/arena-client";
+import { IMAGE_BASE } from "@/lib/image";
 import type { ArcOption } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -34,7 +35,7 @@ export default async function ArenaPage({
         initialItems={batch.items}
         arcs={arcs}
         needsOnboarding={!chosen}
-        imageBase={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/character-images`}
+        imageBase={IMAGE_BASE}
       />
     </main>
   );
