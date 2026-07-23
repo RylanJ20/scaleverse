@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getCachedCharacter } from "@/lib/cached";
+import { getCachedCharacter, getCachedFormHistory, type FormHistoryPoint } from "@/lib/cached";
 import { getViewerMaxArcPosition, type CharacterFull } from "@/lib/queries";
 import { characterImageUrl } from "@/lib/image";
 import { formatBounty, hakiList } from "@/lib/format";
@@ -40,6 +40,53 @@ function StatRow({ label, value }: { label: string; value: string | number | nul
   );
 }
 
+// Single-series micro-chart: 2px recessive line + endpoint dot, no axes/legend
+// (the rating row it sits in names it); trend is described in the aria-label so
+// the information never rides on the mark alone. Hidden until a form has ≥3
+// snapshots — history is sparse until voting picks up.
+function Sparkline({ points }: { points: FormHistoryPoint[] }) {
+  if (points.length < 3) return null;
+  const w = 96;
+  const h = 24;
+  const pad = 3;
+  const vals = points.map((p) => p.display_rating);
+  const min = Math.min(...vals);
+  const max = Math.max(...vals);
+  // damp tiny wobbles (±1 must not fill the box) and center the used range;
+  // a perfectly flat series draws at mid-height, not pinned to an edge
+  const range = max - min;
+  const span = Math.max(4, range);
+  const step = (w - pad * 2) / (vals.length - 1);
+  const y = (v: number) =>
+    range === 0
+      ? h / 2
+      : pad + (h - pad * 2) * (1 - (v - min + (span - range) / 2) / span);
+  const d = vals
+    .map((v, i) => `${i === 0 ? "M" : "L"}${(pad + i * step).toFixed(1)},${y(v).toFixed(1)}`)
+    .join(" ");
+  const delta = vals[vals.length - 1] - vals[0];
+  return (
+    <svg
+      width={w}
+      height={h}
+      viewBox={`0 0 ${w} ${h}`}
+      role="img"
+      aria-label={`Rating trend: ${delta === 0 ? "flat" : `${delta > 0 ? "up" : "down"} ${Math.abs(delta)}`} across ${vals.length} refits`}
+      className="shrink-0"
+    >
+      <path
+        d={d}
+        fill="none"
+        stroke="var(--color-accent-2)"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+      <circle cx={pad + (vals.length - 1) * step} cy={y(vals[vals.length - 1])} r="2.5" fill="var(--color-accent-2)" />
+    </svg>
+  );
+}
+
 export default async function CharacterPage({
   params,
 }: {
@@ -48,6 +95,9 @@ export default async function CharacterPage({
   const { series, slug } = await params;
   const char = await getCachedCharacter(series, slug);
   if (!char) notFound();
+
+  const def = char.forms.find((f) => f.is_default) ?? char.forms[0];
+  const history = def ? await getCachedFormHistory(def.id) : [];
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">
@@ -62,7 +112,7 @@ export default async function CharacterPage({
       {char.epithet && <p className="mb-6 text-muted">&ldquo;{char.epithet}&rdquo;</p>}
 
       <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-surface" aria-hidden />}>
-        <GatedBody series={series} char={char} />
+        <GatedBody series={series} char={char} history={history} />
       </Suspense>
 
       <p className="mt-8 text-center text-sm text-muted">
@@ -78,7 +128,15 @@ export default async function CharacterPage({
 // Dynamic hole: only the viewer's gate (cookies/auth) is per-request — the
 // character payload comes from the shared cache. Spoiler interstitial per
 // ratified #33.
-async function GatedBody({ series, char }: { series: string; char: CharacterFull }) {
+async function GatedBody({
+  series,
+  char,
+  history,
+}: {
+  series: string;
+  char: CharacterFull;
+  history: FormHistoryPoint[];
+}) {
   const maxPos = await getViewerMaxArcPosition(series);
   const isSpoiler = maxPos != null && char.debut_position != null && char.debut_position > maxPos;
 
@@ -113,8 +171,9 @@ async function GatedBody({ series, char }: { series: string; char: CharacterFull
           </div>
         )}
         {def?.display_rating != null && (
-          <div className="mt-2 flex items-center justify-between rounded-md border border-white/10 px-3 py-2">
+          <div className="mt-2 flex items-center justify-between gap-3 rounded-md border border-white/10 px-3 py-2">
             <span className="font-mono text-xs uppercase text-muted">Rating</span>
+            <Sparkline points={history} />
             <span className="font-mono text-lg text-accent-2">{def.display_rating}</span>
           </div>
         )}

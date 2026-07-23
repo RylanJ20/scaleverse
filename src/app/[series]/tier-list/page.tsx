@@ -2,9 +2,23 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getCachedTierListRoster, type RosterRow } from "@/lib/cached";
+import { getCachedTierListRoster, getCachedMovementBaseline, type RosterRow } from "@/lib/cached";
 import { getViewerMaxArcPosition } from "@/lib/queries";
 import { characterImageUrl } from "@/lib/image";
+
+// movement is only shown when it clears per-fit jitter
+const CARET_MIN_DELTA = 3;
+const MOVERS_SHOWN = 3;
+
+function Delta({ delta }: { delta: number }) {
+  // direction rides on the glyph, not the color (never color-alone)
+  return (
+    <span className={delta > 0 ? "text-accent-2" : "text-accent"}>
+      {delta > 0 ? "▲" : "▼"}
+      {Math.abs(delta)}
+    </span>
+  );
+}
 
 export const metadata: Metadata = {
   title: "Tier List",
@@ -52,9 +66,11 @@ export default async function TierListPage({
 // Dynamic hole: reads the viewer's spoiler ceiling (cookies/auth — ≤1 tiny row)
 // and filters the shared cached roster per request (ratified #9/#27).
 async function TierListBody({ series }: { series: string }) {
-  const [maxPos, all] = await Promise.all([
+  const [maxPos, all, day, week] = await Promise.all([
     getViewerMaxArcPosition(series),
     getCachedTierListRoster(series),
+    getCachedMovementBaseline(series, 24),
+    getCachedMovementBaseline(series, 24 * 7),
   ]);
 
   // spoiler gate (ratified #9/#27): hidden characters are simply absent
@@ -74,12 +90,57 @@ async function TierListBody({ series }: { series: string }) {
     byTier.get(tier)?.push(row);
   });
 
+  // movement vs the nearest ≥24h-old snapshot; carets only past the jitter bar
+  const dayDelta = (r: RosterRow): number | null => {
+    const base = day.ratings[r.form_id];
+    return base == null ? null : r.rating - base;
+  };
+  // movers computed from the GATED set only — movement must not leak spoilers
+  const movers = week.fitAt
+    ? visible
+        .map((r) => ({ row: r, delta: week.ratings[r.form_id] != null ? r.rating - week.ratings[r.form_id] : null }))
+        .filter((m): m is { row: RosterRow; delta: number } => m.delta != null && Math.abs(m.delta) >= CARET_MIN_DELTA)
+        .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
+        .slice(0, MOVERS_SHOWN)
+    : [];
+
   return (
     <>
       {hidden > 0 && (
         <p className="mt-1 font-mono text-xs text-muted">
           {hidden} character{hidden === 1 ? "" : "s"} hidden by your spoiler settings
         </p>
+      )}
+
+      {movers.length > 0 && (
+        <section className="mt-6 rounded-lg border border-white/5 bg-surface p-3">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-2">
+            Biggest movers this week
+          </h2>
+          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+            {movers.map(({ row, delta }) => {
+              const url = characterImageUrl(row.image_path);
+              return (
+                <li key={row.form_id}>
+                  <Link
+                    href={`/${series}/characters/${row.character_slug}`}
+                    className="flex items-center gap-2 transition hover:opacity-80"
+                  >
+                    <span className="relative block h-8 w-8 shrink-0 overflow-hidden rounded bg-black/40">
+                      {url && (
+                        <Image src={url} alt="" fill sizes="32px" className="object-cover object-top" />
+                      )}
+                    </span>
+                    <span className="text-sm">{row.name}</span>
+                    <span className="font-mono text-xs">
+                      <Delta delta={delta} />
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       )}
 
       <div className="mt-6 space-y-3">
@@ -116,7 +177,18 @@ async function TierListBody({ series }: { series: string }) {
                           )}
                         </div>
                         <p className="mt-1 truncate text-[10px] leading-tight text-muted">{row.name}</p>
-                        <p className="font-mono text-[10px] text-foreground/80">{row.rating}</p>
+                        <p className="font-mono text-[10px] text-foreground/80">
+                          {row.rating}
+                          {(() => {
+                            const d = dayDelta(row);
+                            return d != null && Math.abs(d) >= CARET_MIN_DELTA ? (
+                              <>
+                                {" "}
+                                <Delta delta={d} />
+                              </>
+                            ) : null;
+                          })()}
+                        </p>
                       </Link>
                     </li>
                   );

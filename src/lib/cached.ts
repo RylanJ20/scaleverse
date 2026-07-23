@@ -239,6 +239,68 @@ export async function getCachedProfile(username: string): Promise<unknown> {
   return data ?? null;
 }
 
+// Movement baseline: the nearest FULL rating snapshot at least `hoursBack` old.
+// Every fit writes all forms atomically, so one fit_at is a consistent
+// baseline. null fitAt = no baseline yet (history is sparse until votes flow) —
+// callers show no movement rather than zeros. rating_history is global; the
+// series arg exists for cache keying/tags as more verses arrive.
+export type MovementBaseline = { fitAt: string | null; ratings: Record<string, number> };
+
+export async function getCachedMovementBaseline(
+  seriesSlug: string,
+  hoursBack: number,
+): Promise<MovementBaseline> {
+  "use cache";
+  cacheLife("ratings");
+  cacheTag("ratings", `movement:${seriesSlug}:${hoursBack}`);
+
+  const db = createPublicClient();
+  // bounded window: a baseline older than 2× the window would present stale
+  // movement as current (the fit skips idle periods, so gaps are normal) —
+  // better no carets than dishonest ones
+  const cutoff = new Date(Date.now() - hoursBack * 3600_000).toISOString();
+  const floor = new Date(Date.now() - 2 * hoursBack * 3600_000).toISOString();
+  const { data: fit } = await db
+    .from("rating_history")
+    .select("fit_at")
+    .lte("fit_at", cutoff)
+    .gte("fit_at", floor)
+    .order("fit_at", { ascending: false })
+    .limit(1);
+  const fitAt: string | null = fit?.[0]?.fit_at ?? null;
+  if (!fitAt) return { fitAt: null, ratings: {} };
+
+  const { data } = await db
+    .from("rating_history")
+    .select("form_id, display_rating")
+    .eq("fit_at", fitAt)
+    .limit(1000);
+  return {
+    fitAt,
+    ratings: Object.fromEntries((data ?? []).map((r) => [r.form_id as string, r.display_rating as number])),
+  };
+}
+
+// Per-form rating trajectory for sparklines (most recent points, oldest-first).
+export type FormHistoryPoint = { fit_at: string; display_rating: number };
+
+export async function getCachedFormHistory(formId: string): Promise<FormHistoryPoint[]> {
+  "use cache";
+  cacheLife("ratings");
+  cacheTag("ratings");
+
+  const db = createPublicClient();
+  const { data } = await db
+    .from("rating_history")
+    .select("fit_at, display_rating")
+    .eq("form_id", formId)
+    .order("fit_at", { ascending: false })
+    .limit(120);
+  return (data ?? [])
+    .map((r) => ({ fit_at: r.fit_at as string, display_rating: r.display_rating as number }))
+    .reverse();
+}
+
 // Sitemap payload — the single biggest crawler egress line (up to 10k matchup
 // rows) — refreshed hourly instead of per crawl.
 const MATCHUP_VOTE_THRESHOLD = 3;
