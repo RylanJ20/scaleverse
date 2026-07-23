@@ -9,15 +9,76 @@ import { VersusCard } from "./versus-card";
 
 const DEMO_GATE_AT = 5;
 const REVEAL_MS = 1600;
+// Dispatch pacing: floor between sends (above the ratified 1.5s server guard)
+// plus a rolling client budget that stays under the ratified 20/min ceiling —
+// the queue absorbs bursts (reveal-skipping) and drains within the rules.
+const SEND_SPACING_MS = 1600;
+const BUDGET_WINDOW_MS = 61_000;
+const BUDGET_MAX_SENDS = 19; // one under the server's 20/min, leaving retry headroom
+const RATE_LIMIT_PAUSE_MS = 65_000;
+const MAX_QUEUED_VOTES = 8; // picking pauses (not fails) beyond this backlog
 
-type Phase = "onboarding" | "pick" | "waiting" | "reveal" | "gate" | "empty" | "errored";
+type Phase = "onboarding" | "pick" | "reveal" | "gate" | "empty" | "errored";
 
 type Reveal = {
+  matchupId: string;
   pick: "a" | "b";
   aPct: number | null; // null = too few votes to show a %
   voteCount: number;
   delta: number | null;
 };
+
+// A vote in the background send queue (optimistic loop: the reveal renders
+// instantly from dealt tallies; the RPC happens here and reconciles after).
+type VoteJob = {
+  matchupId: string;
+  dealId: string | null; // null = demo vote
+  sessionId: string | null; // demo session (demo jobs only)
+  winnerFormId: string;
+  label: string; // "Luffy vs Kaido" for the failure banner
+  attempts: number;
+  tooFastRetries: number; // separate budget: P0005 is always wait-and-resend
+};
+
+type VoteFailure = {
+  id: number;
+  job: VoteJob;
+  retryable: boolean;
+  message: string;
+};
+
+// ---------------------------------------------------------------------------
+// Module-scoped vote pipeline. Shared across remounts on purpose: SPA
+// navigation must never double-send, reset pacing, or strand queued votes in a
+// dead closure. Components subscribe for re-renders; the pipeline owns state.
+// ---------------------------------------------------------------------------
+const voteQueue: VoteJob[] = [];
+const failureLog: VoteFailure[] = [];
+// matchups voted/skipped this tab — deal_matchups re-serves still-pending
+// deals, so top-ups must not re-show a fight whose vote is merely in flight
+const handledMatchups = new Set<string>();
+const sentAtLog: number[] = [];
+let lastSentAt = 0;
+let pausedUntil = 0; // rate-limit backoff (auto-resumes)
+let rateLimitStreak = 0; // consecutive P0006s → escalate the pause (hr/day ceilings)
+let draining = false;
+let failureSeq = 0;
+// The mounted instance's reconcile — module-held so a drain loop or resume
+// timer that outlives its original mount still reconciles the CURRENT reveal.
+let activeReconcile: (matchupId: string, voteCount: number, aWins: number, delta: number | null) => void = () => {};
+const pipelineListeners = new Set<() => void>();
+function notifyPipeline() {
+  pipelineListeners.forEach((l) => l());
+}
+function pipelinePaused() {
+  return Date.now() < pausedUntil;
+}
+async function waitForVoteQueue(maxMs: number) {
+  const deadline = Date.now() + maxMs;
+  while (voteQueue.length > 0 && Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, 200));
+  }
+}
 
 export function ArenaClient({
   seriesSlug,
@@ -38,19 +99,172 @@ export function ArenaClient({
   gateArc: ArcOption | null; // null = caught up, no gate
   imageBase: string;
 }) {
-  const [queue, setQueue] = useState<MatchupItem[]>(initialItems);
-  const [phase, setPhase] = useState<Phase>(
-    needsOnboarding ? "onboarding" : initialError ? "errored" : initialItems.length ? "pick" : "empty",
+  // initialItems can include re-served deals whose votes are still in this
+  // tab's pipeline (SPA nav remount) — filter them exactly like topUp does
+  const [queue, setQueue] = useState<MatchupItem[]>(() =>
+    initialItems.filter((i) => !handledMatchups.has(i.matchup_id)),
   );
+  const [phase, setPhase] = useState<Phase>(() => {
+    const visible = initialItems.filter((i) => !handledMatchups.has(i.matchup_id));
+    return needsOnboarding ? "onboarding" : initialError ? "errored" : visible.length ? "pick" : "empty";
+  });
   const [showPicker, setShowPicker] = useState(false);
   const [reveal, setReveal] = useState<Reveal | null>(null);
   const [setCount, setSetCount] = useState(0);
   const [demoVotes, setDemoVotes] = useState(0);
-  const [error, setError] = useState<string | null>(null);
+  // re-render trigger for module pipeline changes (queue depth, failures, pause)
+  const [, setPipelineVersion] = useState(0);
   const fetching = useRef(false);
   const sessionId = useRef<string | null>(null);
 
   const current = queue[0] ?? null;
+
+  useEffect(() => {
+    const bump = () => setPipelineVersion((v) => v + 1);
+    pipelineListeners.add(bump);
+    return () => {
+      pipelineListeners.delete(bump);
+    };
+  }, []);
+
+  // Reconcile a server tally into the reveal ONLY if that matchup is still on
+  // screen — once the user advanced, the optimistic numbers just stand.
+  const reconcile = useCallback((matchupId: string, voteCount: number, aWins: number, delta: number | null) => {
+    setReveal((r) =>
+      r && r.matchupId === matchupId
+        ? {
+            ...r,
+            voteCount,
+            aPct: voteCount >= 5 ? aWins / voteCount : null,
+            delta,
+          }
+        : r,
+    );
+  }, []);
+
+  useEffect(() => {
+    // point the module pipeline at THIS mount's reveal
+    activeReconcile = reconcile;
+  }, [reconcile]);
+
+  // Drain the module queue sequentially. Pacing: SEND_SPACING_MS floor plus a
+  // rolling ≤19-sends/61s budget, so neither the ratified 1.5s guard nor the
+  // 20/min ceiling fires in normal play. Failures are classified by TYPED
+  // OUTCOME CODES (production redacts thrown server-action messages — string
+  // matching never works deployed).
+  const drainQueue = useCallback(async () => {
+    if (draining) return;
+    draining = true;
+    try {
+      while (voteQueue.length > 0) {
+        if (pipelinePaused()) break; // resume timer re-enters drain
+        // rolling 20/min client budget
+        const cutoff = Date.now() - BUDGET_WINDOW_MS;
+        while (sentAtLog.length && sentAtLog[0] < cutoff) sentAtLog.shift();
+        const budgetWait = sentAtLog.length >= BUDGET_MAX_SENDS ? sentAtLog[0] + BUDGET_WINDOW_MS - Date.now() : 0;
+        const spacingWait = lastSentAt + SEND_SPACING_MS - Date.now();
+        const wait = Math.max(budgetWait, spacingWait);
+        if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+
+        const job = voteQueue[0];
+        lastSentAt = Date.now();
+        sentAtLog.push(lastSentAt);
+
+        const fail = (retryable: boolean, message: string) => {
+          voteQueue.shift();
+          // release the fight: its deal is still pending server-side, so the
+          // re-serve can legitimately show it again (retry re-claims it)
+          handledMatchups.delete(job.matchupId);
+          failureLog.push({ id: ++failureSeq, job, retryable, message });
+        };
+
+        if (job.dealId) {
+          const out = await castVote(job.dealId, job.winnerFormId).catch(
+            () => ({ ok: false, code: "unknown" }) as const,
+          );
+          if (out.ok) {
+            rateLimitStreak = 0;
+            activeReconcile(job.matchupId, out.result.vote_count, out.result.a_wins, out.result.cosmetic_delta);
+            voteQueue.shift();
+          } else if (out.code === "resolved") {
+            // the deal is VOTED (e.g. our response got lost) — success
+            rateLimitStreak = 0;
+            voteQueue.shift();
+          } else if (out.code === "too_fast" && job.tooFastRetries < 4) {
+            job.tooFastRetries += 1; // guard skew / second tab — wait, resend
+            lastSentAt = Date.now() + 400 * job.tooFastRetries;
+          } else if (out.code === "rate_limit") {
+            // Ceiling hit: pause and auto-resume. A repeat means an hour/day
+            // ceiling (the client budget already respects 20/min) — back off
+            // long instead of probing every minute.
+            rateLimitStreak += 1;
+            const pause = rateLimitStreak >= 2 ? 10 * 60_000 : RATE_LIMIT_PAUSE_MS;
+            pausedUntil = Date.now() + pause;
+            setTimeout(() => {
+              pausedUntil = 0;
+              notifyPipeline();
+              void drainQueue();
+            }, pause);
+            break;
+          } else if (out.code === "expired") {
+            fail(false, `Your vote on ${job.label} didn't land — that fight expired.`);
+          } else if (out.code === "skipped") {
+            fail(false, `Your vote on ${job.label} didn't land — it was skipped in another tab.`);
+          } else if (out.code === "not_found") {
+            fail(false, `Your vote on ${job.label} didn't land — that fight is no longer on your card.`);
+          } else if (out.code === "revote_limit") {
+            fail(false, `Your pick on ${job.label} didn't change — one change per fight per week.`);
+          } else if (job.attempts < 1) {
+            job.attempts += 1; // one automatic retry for transient failures
+          } else {
+            fail(true, `Your vote on ${job.label} didn't land.`);
+          }
+        } else {
+          const res = await recordDemoVote(job.matchupId, job.winnerFormId, job.sessionId ?? "anon").catch(
+            () => ({ ok: false, tally: null }),
+          );
+          if (res.ok) {
+            if (res.tally) activeReconcile(job.matchupId, res.tally.vote_count, res.tally.a_wins, null);
+            voteQueue.shift();
+          } else if (job.attempts < 1) {
+            job.attempts += 1;
+          } else {
+            fail(true, `Your vote on ${job.label} didn't land.`);
+          }
+        }
+        notifyPipeline();
+      }
+    } finally {
+      draining = false;
+      notifyPipeline();
+    }
+  }, []);
+
+  const enqueueVote = useCallback(
+    (job: VoteJob) => {
+      voteQueue.push(job);
+      notifyPipeline();
+      void drainQueue();
+    },
+    [drainQueue],
+  );
+
+  const retryFailure = useCallback(
+    (id: number) => {
+      const idx = failureLog.findIndex((f) => f.id === id);
+      if (idx === -1) return;
+      const [entry] = failureLog.splice(idx, 1);
+      handledMatchups.add(entry.job.matchupId); // re-claim the fight while retrying
+      enqueueVote({ ...entry.job, attempts: 0, tooFastRetries: 0 });
+    },
+    [enqueueVote],
+  );
+
+  const dismissFailure = useCallback((id: number) => {
+    const idx = failureLog.findIndex((f) => f.id === id);
+    if (idx !== -1) failureLog.splice(idx, 1);
+    notifyPipeline();
+  }, []);
 
   useEffect(() => {
     if (mode !== "demo") return;
@@ -70,8 +284,11 @@ export function ArenaClient({
     try {
       const batch = await fetchBatch(seriesSlug);
       setQueue((q) => {
+        // exclude fights already on the card AND fights voted/skipped this tab
+        // whose deals are still server-pending (their votes are in flight — the
+        // re-serve migration would hand them straight back otherwise)
         const seen = new Set(q.map((i) => i.matchup_id));
-        return [...q, ...batch.items.filter((i) => !seen.has(i.matchup_id))];
+        return [...q, ...batch.items.filter((i) => !seen.has(i.matchup_id) && !handledMatchups.has(i.matchup_id))];
       });
       // a top-up can refill an "empty" arena (e.g. after an arc change)
       if (batch.items.length) setPhase((p) => (p === "empty" ? "pick" : p));
@@ -103,14 +320,17 @@ export function ArenaClient({
   const changeArc = useCallback(
     async (choice: { caughtUp: true } | { arcSlug: string }) => {
       await saveProgress(seriesSlug, choice);
+      // let in-flight votes land before the reload wipes the pipeline (kick the
+      // drain in case it's idle; rate-limit-paused votes are re-served instead)
+      void drainQueue();
+      await waitForVoteQueue(10_000);
       window.location.reload();
     },
-    [seriesSlug],
+    [seriesSlug, drainQueue],
   );
 
   const advance = useCallback(() => {
     setReveal(null);
-    setError(null);
     setQueue((q) => q.slice(1));
     if (mode === "demo" && demoVotes >= DEMO_GATE_AT && demoVotes % DEMO_GATE_AT === 0) {
       setPhase("gate");
@@ -125,60 +345,68 @@ export function ArenaClient({
     return () => clearTimeout(t);
   }, [phase, advance]);
 
+  // Optimistic: the reveal renders instantly from the tallies dealt with the
+  // card; the vote itself dispatches from the background queue and reconciles
+  // the numbers when the RPC returns. Only signed-in (deal) votes count toward
+  // rankings — demo tallies are shown as-is, never +1'd (demo votes are
+  // isolated by design and don't move the community numbers).
   const pick = useCallback(
-    async (side: "a" | "b") => {
+    (side: "a" | "b") => {
       if (!current || phase !== "pick") return;
+      // pause (don't fail) new picks while rate-limited or badly backlogged
+      if (pipelinePaused() || voteQueue.length >= MAX_QUEUED_VOTES) return;
       const winner = side === "a" ? current.a : current.b;
-      setPhase("waiting");
-      setError(null);
-      try {
-        if (mode === "deal" && current.deal_id) {
-          const res = await castVote(current.deal_id, winner.form_id);
-          const aPct = res.vote_count > 0 ? res.a_wins / res.vote_count : null;
-          setReveal({
-            pick: side,
-            aPct: res.vote_count >= 5 ? aPct : null,
-            voteCount: res.vote_count,
-            delta: res.cosmetic_delta,
-          });
-        } else {
-          const res = await recordDemoVote(current.matchup_id, winner.form_id, sessionId.current ?? "anon");
-          const next = demoVotes + 1;
-          setDemoVotes(next);
-          localStorage.setItem("sv-demo-votes", String(next));
-          setReveal({
-            pick: side,
-            aPct: res.vote_count >= 5 ? res.a_wins / res.vote_count : null,
-            voteCount: res.vote_count,
-            delta: null,
-          });
-        }
-        setSetCount((n) => n + 1);
-        setPhase("reveal");
-      } catch (e) {
-        const msg = e instanceof Error ? e.message : "something went wrong";
-        setError(
-          msg.includes("too fast")
-            ? "Easy — one fight at a time."
-            : msg.includes("rate limit")
-              ? "You've hit the hourly vote limit. Take a break, captain."
-              : "That vote didn't land. Try again.",
-        );
-        setPhase("pick");
+
+      const isDeal = mode === "deal" && !!current.deal_id;
+      const voteCount = current.vote_count + (isDeal ? 1 : 0);
+      const aWins = current.a_wins + (isDeal && side === "a" ? 1 : 0);
+      setReveal({
+        matchupId: current.matchup_id,
+        pick: side,
+        aPct: voteCount >= 5 ? aWins / voteCount : null,
+        voteCount,
+        delta: null,
+      });
+      if (!isDeal) {
+        const next = demoVotes + 1;
+        setDemoVotes(next);
+        localStorage.setItem("sv-demo-votes", String(next));
       }
+      setSetCount((n) => n + 1);
+      setPhase("reveal");
+      // only deal-mode fights go in the re-serve guard set: demo pairs are
+      // legitimately re-dealable by the server (no deals exist for them), and
+      // hiding them forever would starve small gated rosters
+      if (isDeal) handledMatchups.add(current.matchup_id);
+
+      enqueueVote({
+        matchupId: current.matchup_id,
+        dealId: isDeal ? current.deal_id! : null,
+        sessionId: isDeal ? null : sessionId.current,
+        winnerFormId: winner.form_id,
+        label: `${current.a.character_name} vs ${current.b.character_name}`,
+        attempts: 0,
+        tooFastRetries: 0,
+      });
     },
-    [current, phase, mode, demoVotes],
+    [current, phase, mode, demoVotes, enqueueVote],
   );
 
   const skip = useCallback(async () => {
     if (!current || phase !== "pick") return;
-    if (mode === "deal" && current.deal_id) void skipDeal(current.deal_id);
+    if (mode === "deal" && current.deal_id) {
+      const id = current.matchup_id;
+      handledMatchups.add(id);
+      // if the skip never lands the deal stays pending — release the fight so
+      // a later re-serve can show it again instead of hiding it forever
+      skipDeal(current.deal_id).catch(() => handledMatchups.delete(id));
+    }
     advance();
   }, [current, phase, mode, advance]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (showPicker) return;
+      if (showPicker || e.repeat) return; // key-repeat must not auto-vote
       if (phase === "reveal") {
         advance();
         return;
@@ -198,6 +426,45 @@ export function ArenaClient({
   const changePicker = showPicker ? (
     <ArcPicker arcs={arcs} onChoose={changeArc} onClose={() => setShowPicker(false)} />
   ) : null;
+
+  // Pipeline status — rendered on every screen the user can be on when a
+  // background vote resolves (pick/reveal, gate, empty), never only on "pick".
+  const visibleFailures = failureLog.slice(-3);
+  const backlogged = voteQueue.length >= MAX_QUEUED_VOTES;
+  const pipelineBanners =
+    pipelinePaused() || backlogged || visibleFailures.length > 0 ? (
+      <div className="flex flex-col items-center gap-1.5" aria-live="polite">
+        {pipelinePaused() && (
+          <p className="text-sm text-accent">
+            Vote limit hit — your queued votes will retry automatically.
+          </p>
+        )}
+        {backlogged && !pipelinePaused() && (
+          <p className="font-mono text-xs text-muted">Catching up on your votes…</p>
+        )}
+        {visibleFailures.map((f) => (
+          <p key={f.id} className="text-sm text-accent">
+            {f.message}{" "}
+            {f.retryable && (
+              <button
+                type="button"
+                onClick={() => retryFailure(f.id)}
+                className="underline underline-offset-4 transition hover:text-foreground"
+              >
+                Retry
+              </button>
+            )}{" "}
+            <button
+              type="button"
+              onClick={() => dismissFailure(f.id)}
+              className="text-muted underline underline-offset-4 transition hover:text-foreground"
+            >
+              Dismiss
+            </button>
+          </p>
+        ))}
+      </div>
+    ) : null;
 
   if (phase === "errored") {
     return (
@@ -240,6 +507,7 @@ export function ArenaClient({
         <button type="button" onClick={advance} className="text-sm text-muted underline-offset-4 hover:underline">
           Keep playing as guest
         </button>
+        {pipelineBanners}
       </div>
     );
   }
@@ -259,6 +527,7 @@ export function ArenaClient({
         >
           Change my arc
         </button>
+        {pipelineBanners}
         {changePicker}
       </div>
     );
@@ -296,7 +565,7 @@ export function ArenaClient({
           side="a"
           imageUrl={current.a.image_path ? `${imageBase}/${current.a.image_path}` : null}
           onPick={() => void pick("a")}
-          disabled={phase !== "pick"}
+          disabled={phase !== "pick" || pipelinePaused() || backlogged}
           picked={reveal?.pick === "a"}
         />
         <VersusCard
@@ -304,7 +573,7 @@ export function ArenaClient({
           side="b"
           imageUrl={current.b.image_path ? `${imageBase}/${current.b.image_path}` : null}
           onPick={() => void pick("b")}
-          disabled={phase !== "pick"}
+          disabled={phase !== "pick" || pipelinePaused() || backlogged}
           picked={reveal?.pick === "b"}
         />
         <div
@@ -358,7 +627,7 @@ export function ArenaClient({
         )}
         {phase === "pick" && (
           <div className="flex flex-col items-center gap-2">
-            {error && <p className="text-sm text-accent">{error}</p>}
+            {pipelineBanners}
             <button
               type="button"
               onClick={() => void skip()}
@@ -368,7 +637,7 @@ export function ArenaClient({
             </button>
           </div>
         )}
-        {phase === "waiting" && <p className="text-center font-mono text-xs text-muted">…</p>}
+        {phase === "reveal" && pipelineBanners}
       </div>
 
       {changePicker}

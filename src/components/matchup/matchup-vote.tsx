@@ -75,22 +75,27 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
     setBusy(true);
     setError(null);
     try {
-      const res = await voteOnMatchup(a.form_id, b.form_id, winner.form_id);
-      setVoteCount(res.vote_count);
-      const aIsLow = a.form_id < b.form_id;
-      setAWins(aIsLow ? res.a_wins : res.vote_count - res.a_wins);
-      setPick(winner.form_id);
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : "vote failed";
-      setError(
-        msg.includes("too fast")
-          ? "Slow down a moment."
-          : msg.includes("revote limit")
-            ? "You can only change this pick once a week."
-            : msg.includes("rate limit")
-              ? "You've hit the vote limit for now."
-              : "That vote didn't land. Try again.",
-      );
+      // typed outcome codes — production redacts thrown server-action messages,
+      // so error classification must never rely on message strings
+      const out = await voteOnMatchup(a.form_id, b.form_id, winner.form_id);
+      if (out.ok) {
+        setVoteCount(out.result.vote_count);
+        const aIsLow = a.form_id < b.form_id;
+        setAWins(aIsLow ? out.result.a_wins : out.result.vote_count - out.result.a_wins);
+        setPick(winner.form_id);
+      } else {
+        setError(
+          out.code === "too_fast"
+            ? "Slow down a moment."
+            : out.code === "revote_limit"
+              ? "You can only change this pick once a week."
+              : out.code === "rate_limit"
+                ? "You've hit the vote limit for now."
+                : "That vote didn't land. Try again.",
+        );
+      }
+    } catch {
+      setError("That vote didn't land. Try again.");
     } finally {
       setBusy(false);
     }

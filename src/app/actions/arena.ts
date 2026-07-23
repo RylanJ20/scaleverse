@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { Batch, MatchupItem, ProgressGate, VoteResult } from "@/lib/types";
+import type { Batch, MatchupItem, ProgressGate, VoteFailCode, VoteOutcome, VoteResult } from "@/lib/types";
 
 const ARC_COOKIE = "sv-arc-pos"; // "all" (caught up) or an arc position integer
 
@@ -130,54 +130,71 @@ export async function fetchBatch(seriesSlug: string): Promise<Batch> {
   return { mode: "demo", items: (data ?? []) as MatchupItem[] };
 }
 
-export async function castVote(dealId: string, winnerFormId: string): Promise<VoteResult> {
+const VOTE_FAIL_CODES: Record<string, VoteFailCode> = {
+  P0002: "not_found",
+  P0003: "resolved",
+  P0004: "expired",
+  P0005: "too_fast",
+  P0006: "rate_limit",
+  P0008: "revote_limit",
+  P0012: "skipped",
+};
+
+// Returns a typed outcome instead of throwing: production builds redact thrown
+// server-action messages, so the client must classify by code, not message.
+export async function castVote(dealId: string, winnerFormId: string): Promise<VoteOutcome> {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("cast_vote", {
     p_deal_id: dealId,
     p_winner_form_id: winnerFormId,
   });
-  if (error) throw new Error(error.message);
-  return data as VoteResult;
+  if (error) return { ok: false, code: VOTE_FAIL_CODES[error.code ?? ""] ?? "unknown" };
+  return { ok: true, result: data as VoteResult };
 }
 
 export async function skipDeal(dealId: string): Promise<void> {
   const supabase = await createClient();
-  await supabase.rpc("skip_deal", { p_deal_id: dealId });
+  const { error } = await supabase.rpc("skip_deal", { p_deal_id: dealId });
+  // surface failure so the client can release the fight for re-serving
+  if (error) throw new Error("skip failed");
 }
 
 export async function recordDemoVote(
   matchupId: string,
   winnerFormId: string,
   sessionId: string,
-): Promise<{ vote_count: number; a_wins: number }> {
+): Promise<{ ok: boolean; tally: { vote_count: number; a_wins: number } | null }> {
   const admin = createAdminClient();
   // demo votes are isolated by design (ratified #23) — never touch rankings
-  await admin.from("demo_votes").insert({
+  const { error } = await admin.from("demo_votes").insert({
     session_id: sessionId,
     matchup_id: matchupId,
     winner_form_id: winnerFormId,
   });
+  if (error) return { ok: false, tally: null };
   const { data } = await admin
     .from("matchups")
     .select("vote_count, a_wins")
     .eq("id", matchupId)
     .single();
-  return data ?? { vote_count: 0, a_wins: 0 };
+  // tally:null (select failed) means "recorded, nothing to reconcile" — never
+  // feed a zeroed fallback into a live reveal
+  return { ok: true, tally: data ?? null };
 }
 
 export async function voteOnMatchup(
   formAId: string,
   formBId: string,
   winnerFormId: string,
-): Promise<VoteResult> {
+): Promise<VoteOutcome> {
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("vote_on_matchup", {
     p_form_a_id: formAId,
     p_form_b_id: formBId,
     p_winner_form_id: winnerFormId,
   });
-  if (error) throw new Error(error.message);
-  return data as VoteResult;
+  if (error) return { ok: false, code: VOTE_FAIL_CODES[error.code ?? ""] ?? "unknown" };
+  return { ok: true, result: data as VoteResult };
 }
 
 export async function signOut(): Promise<void> {
