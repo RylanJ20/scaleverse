@@ -10,7 +10,7 @@ import { VersusCard } from "./versus-card";
 const DEMO_GATE_AT = 5;
 const REVEAL_MS = 1600;
 
-type Phase = "onboarding" | "pick" | "waiting" | "reveal" | "gate" | "empty";
+type Phase = "onboarding" | "pick" | "waiting" | "reveal" | "gate" | "empty" | "errored";
 
 type Reveal = {
   pick: "a" | "b";
@@ -25,6 +25,8 @@ export function ArenaClient({
   initialItems,
   arcs,
   needsOnboarding,
+  initialError,
+  gateArc,
   imageBase,
 }: {
   seriesSlug: string;
@@ -32,10 +34,15 @@ export function ArenaClient({
   initialItems: MatchupItem[];
   arcs: ArcOption[];
   needsOnboarding: boolean;
+  initialError?: boolean;
+  gateArc: ArcOption | null; // null = caught up, no gate
   imageBase: string;
 }) {
   const [queue, setQueue] = useState<MatchupItem[]>(initialItems);
-  const [phase, setPhase] = useState<Phase>(needsOnboarding ? "onboarding" : initialItems.length ? "pick" : "empty");
+  const [phase, setPhase] = useState<Phase>(
+    needsOnboarding ? "onboarding" : initialError ? "errored" : initialItems.length ? "pick" : "empty",
+  );
+  const [showPicker, setShowPicker] = useState(false);
   const [reveal, setReveal] = useState<Reveal | null>(null);
   const [setCount, setSetCount] = useState(0);
   const [demoVotes, setDemoVotes] = useState(0);
@@ -66,6 +73,8 @@ export function ArenaClient({
         const seen = new Set(q.map((i) => i.matchup_id));
         return [...q, ...batch.items.filter((i) => !seen.has(i.matchup_id))];
       });
+      // a top-up can refill an "empty" arena (e.g. after an arc change)
+      if (batch.items.length) setPhase((p) => (p === "empty" ? "pick" : p));
     } catch {
       // transient; next advance retries
     } finally {
@@ -74,8 +83,30 @@ export function ArenaClient({
   }, [seriesSlug]);
 
   useEffect(() => {
-    if (phase !== "onboarding" && queue.length < 4) void topUp();
+    if (phase !== "onboarding" && phase !== "errored" && queue.length < 4) void topUp();
   }, [queue.length, phase, topUp]);
+
+  const [retrying, setRetrying] = useState(false);
+  const retry = useCallback(async () => {
+    setRetrying(true);
+    try {
+      const batch = await fetchBatch(seriesSlug);
+      setQueue(batch.items);
+      setPhase(batch.items.length ? "pick" : "empty");
+    } catch {
+      // stay on the errored screen
+    } finally {
+      setRetrying(false);
+    }
+  }, [seriesSlug]);
+
+  const changeArc = useCallback(
+    async (choice: { caughtUp: true } | { arcSlug: string }) => {
+      await saveProgress(seriesSlug, choice);
+      window.location.reload();
+    },
+    [seriesSlug],
+  );
 
   const advance = useCallback(() => {
     setReveal(null);
@@ -147,6 +178,7 @@ export function ArenaClient({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (showPicker) return;
       if (phase === "reveal") {
         advance();
         return;
@@ -157,17 +189,32 @@ export function ArenaClient({
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [pick, skip, advance, phase]);
+  }, [pick, skip, advance, phase, showPicker]);
 
   if (phase === "onboarding") {
+    return <ArcPicker arcs={arcs} onChoose={changeArc} />;
+  }
+
+  const changePicker = showPicker ? (
+    <ArcPicker arcs={arcs} onChoose={changeArc} onClose={() => setShowPicker(false)} />
+  ) : null;
+
+  if (phase === "errored") {
     return (
-      <ArcPicker
-        arcs={arcs}
-        onChoose={async (choice) => {
-          await saveProgress(seriesSlug, choice);
-          window.location.reload();
-        }}
-      />
+      <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
+        <h2 className="font-display -skew-x-6 text-2xl uppercase">
+          The arena didn&apos;t <span className="text-accent">load</span>
+        </h2>
+        <p className="text-sm text-muted">Couldn&apos;t deal your matchups. Try again in a moment.</p>
+        <button
+          type="button"
+          disabled={retrying}
+          onClick={() => void retry()}
+          className="rounded-md bg-accent px-6 py-3 font-bold uppercase tracking-wide text-white transition hover:brightness-110 disabled:opacity-50"
+        >
+          {retrying ? "Trying…" : "Try again"}
+        </button>
+      </div>
     );
   }
 
@@ -205,6 +252,14 @@ export function ArenaClient({
           You may have voted everything your spoiler setting allows. Advance your arc progress, or
           come back after the next roster wave.
         </p>
+        <button
+          type="button"
+          onClick={() => setShowPicker(true)}
+          className="rounded-md border border-white/15 px-4 py-3 text-sm text-foreground transition hover:border-white/30"
+        >
+          Change my arc
+        </button>
+        {changePicker}
       </div>
     );
   }
@@ -219,7 +274,16 @@ export function ArenaClient({
         <span>
           Set {Math.floor(setCount / 10) + 1} · fight {(setCount % 10) + 1}/10
         </span>
-        <span className="hidden sm:block">← left wins · right wins → · ↓ can&apos;t call it</span>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setShowPicker(true)}
+            className="uppercase underline decoration-dotted underline-offset-4 transition hover:text-foreground"
+          >
+            Spoilers: {gateArc ? `through ${gateArc.name}` : "caught up"}
+          </button>
+          <span className="hidden sm:block">← left wins · right wins → · ↓ can&apos;t call it</span>
+        </div>
       </div>
 
       <h1 className="font-display -skew-x-6 mb-5 text-center text-3xl uppercase sm:text-4xl">
@@ -306,6 +370,8 @@ export function ArenaClient({
         )}
         {phase === "waiting" && <p className="text-center font-mono text-xs text-muted">…</p>}
       </div>
+
+      {changePicker}
     </div>
   );
 }

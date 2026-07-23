@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { Batch, MatchupItem, VoteResult } from "@/lib/types";
+import type { Batch, MatchupItem, ProgressGate, VoteResult } from "@/lib/types";
 
 const ARC_COOKIE = "sv-arc-pos"; // "all" (caught up) or an arc position integer
 
@@ -15,20 +15,48 @@ export async function getArcGate(): Promise<number | null> {
   return Number.isFinite(n) ? n : null;
 }
 
-export async function hasChosenProgress(seriesSlug: string): Promise<boolean> {
+// Where this visitor's spoiler gate sits: chosen=false means onboarding is
+// still needed; maxArcPosition=null means caught up (no gate).
+export async function getProgress(seriesSlug: string): Promise<ProgressGate> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
     const { data } = await supabase
       .from("user_series_progress")
-      .select("user_id, series!inner(slug)")
+      .select("caught_up, last_arc_id, series!inner(slug)")
       .eq("series.slug", seriesSlug)
       .eq("user_id", user.id)
       .maybeSingle();
-    if (data) return true;
+    if (data) {
+      if (data.caught_up || !data.last_arc_id) return { chosen: true, maxArcPosition: null };
+      const { data: arc, error } = await supabase
+        .from("arcs")
+        .select("position")
+        .eq("id", data.last_arc_id)
+        .single();
+      if (!error && arc) return { chosen: true, maxArcPosition: arc.position };
+      // lookup failed — fall back to the cookie rather than claiming "caught up"
+      return { chosen: true, maxArcPosition: await cookieArcPosition() };
+    }
+    // Signed in but no progress row: deal_matchups gates ONLY on the DB row, so
+    // an anon-era cookie can't be honored — re-onboard to create the row rather
+    // than showing a gate label the dealer doesn't enforce.
+    return { chosen: false, maxArcPosition: null };
   }
   const cookieStore = await cookies();
-  return cookieStore.get(ARC_COOKIE) !== undefined;
+  const v = cookieStore.get(ARC_COOKIE)?.value;
+  if (v === undefined) return { chosen: false, maxArcPosition: null };
+  if (v === "all") return { chosen: true, maxArcPosition: null };
+  const n = Number(v);
+  return { chosen: true, maxArcPosition: Number.isFinite(n) ? n : null };
+}
+
+async function cookieArcPosition(): Promise<number | null> {
+  const cookieStore = await cookies();
+  const v = cookieStore.get(ARC_COOKIE)?.value;
+  if (!v || v === "all") return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 }
 
 export async function saveProgress(
@@ -60,18 +88,20 @@ export async function saveProgress(
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
     const { data: series } = await supabase.from("series").select("id").eq("slug", seriesSlug).single();
-    if (series) {
-      await supabase.from("user_series_progress").upsert(
-        {
-          user_id: user.id,
-          series_id: series.id,
-          last_arc_id: arcId,
-          caught_up: arcPosition === null,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "user_id,series_id" },
-      );
-    }
+    if (!series) throw new Error(`unknown series ${seriesSlug}`);
+    // the DB row is what deal_matchups gates on — a silent failure here would
+    // break spoiler gating for signed-in users
+    const { error } = await supabase.from("user_series_progress").upsert(
+      {
+        user_id: user.id,
+        series_id: series.id,
+        last_arc_id: arcId,
+        caught_up: arcPosition === null,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,series_id" },
+    );
+    if (error) throw new Error(`saveProgress: ${error.message}`);
   }
 }
 

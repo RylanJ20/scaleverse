@@ -32,3 +32,6 @@ export type VoteResult = {
 export type ArcOption = { slug: string; name: string; position: number };
 
 export type Batch = { mode: "deal" | "demo"; items: MatchupItem[] };
+
+// chosen=false → onboarding needed; maxArcPosition=null → caught up (no gate)
+export type ProgressGate = { chosen: boolean; maxArcPosition: number | null };

@@ -6,16 +6,25 @@ import type { ArcOption } from "@/lib/types";
 export function ArcPicker({
   arcs,
   onChoose,
+  onClose,
 }: {
   arcs: ArcOption[];
   onChoose: (choice: { caughtUp: true } | { arcSlug: string }) => Promise<void>;
+  // present when opened as a change (not forced onboarding)
+  onClose?: () => void;
 }) {
   const [showArcs, setShowArcs] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [pending, startTransition] = useTransition();
 
   const choose = (choice: { caughtUp: true } | { arcSlug: string }) =>
     startTransition(async () => {
-      await onChoose(choice);
+      setFailed(false);
+      try {
+        await onChoose(choice);
+      } catch {
+        setFailed(true);
+      }
     });
 
   return (
@@ -64,6 +73,21 @@ export function ArcPicker({
               </li>
             ))}
           </ul>
+        )}
+
+        {failed && (
+          <p className="mt-3 text-sm text-accent">Couldn&apos;t save that. Try again.</p>
+        )}
+
+        {onClose && (
+          <button
+            type="button"
+            disabled={pending}
+            onClick={onClose}
+            className="mt-4 text-sm text-muted underline-offset-4 hover:underline disabled:opacity-50"
+          >
+            Keep my current setting
+          </button>
         )}
       </div>
     </div>
