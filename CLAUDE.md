@@ -15,7 +15,7 @@ The founder signs off on **every** product/design/technical decision before impl
 
 ## Stack
 
-Next.js App Router (TypeScript, Tailwind) deployed on Vercel · Supabase (auth + Postgres, RLS) · ratings computed by a Vercel Cron job, never in the request path.
+Next.js App Router (TypeScript, Tailwind) deployed on Vercel · Supabase (auth + Postgres, RLS) · ratings computed by the fit-ratings Edge Function on a pg_cron→pg_net schedule (committed in migrations; secrets in Vault), never in the request path. Freshness: /api/fit-health.
 
 ## Commands
 
