@@ -42,7 +42,7 @@
 | 33 | Character-page spoilers | **Show all current-canon stats, gated by a one-tap page-level spoiler interstitial** if the character is beyond the viewer's arc | Not per-stat gating |
 | 34 | Share/OG images | **Dynamic OG images now** via `next/og` + on-the-fly webp→PNG (Satori can't decode webp) | Matchup VS card + character card |
 | 36 | Arena flow | ⚠️ **Infinite feed — no sets** (2026-07-23): the every-10-fights summary screen is removed; the reveal is the only beat (demo sign-in gate unchanged). Session stats may resurface on profiles later | Supersedes §5's "Sets of 10" arena loop |
-| 37 | Arena VFX & chrome | **Layered impact + feed motion** (2026-07-23): fighting-game impact frame on the pick (flash, punch-scale, screen shake, WINNER stamp, loser desaturates), next pair deals in feed-style; header strip replaced by clean corners (spoiler eye top-right, fight ticker bottom-left, one-time keyboard hint) | prefers-reduced-motion zeroes all of it |
+| 37 | Arena VFX & chrome | **Layered impact + feed motion** (2026-07-23): fighting-game impact frame on the pick (flash, punch-scale, screen shake, WINNER stamp, loser desaturates), next pair deals in feed-style; header strip replaced by clean corners (spoiler eye top-right, one-time keyboard hint; fight ticker cut 2026-07-23) | prefers-reduced-motion zeroes all of it |
 | 38 | Vote ceilings | ⚠️ **1000/hr, 4000/day** (2026-07-23) — infinite play hits 500/hr in ~30-40 min; the 1.5s min spacing and 20/min burst cap stay unchanged | Supersedes §7's 500/hr, 1500/day |
 
 **Process note:** every decision from here on requires founder sign-off before implementation — no unilateral calls.

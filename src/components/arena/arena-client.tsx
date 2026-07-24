@@ -150,7 +150,6 @@ export function ArenaClient({
   });
   const [showPicker, setShowPicker] = useState(false);
   const [reveal, setReveal] = useState<Reveal | null>(null);
-  const [fightCount, setFightCount] = useState(0); // fights called this session (corner ticker)
   const [lastGateAt, setLastGateAt] = useState(0);
   const demoVotes = useSyncExternalStore(subscribeDemoVotes, readDemoVotes, () => 0);
   const [showHint, setShowHint] = useState(false);
@@ -448,7 +447,6 @@ export function ArenaClient({
         delta: null,
       });
       if (!isDeal) bumpDemoVotes();
-      setFightCount((n) => n + 1);
       setPhase("reveal");
       // only deal-mode fights go in the re-serve guard set: demo pairs are
       // legitimately re-dealable by the server (no deals exist for them), and
@@ -750,10 +748,6 @@ export function ArenaClient({
           ← left wins · right wins → · ↓ skip
         </p>
       )}
-
-      <span className="pointer-events-none absolute bottom-6 left-4 font-mono text-[11px] text-muted">
-        fight {phase === "reveal" ? fightCount : fightCount + 1}
-      </span>
 
       {changePicker}
     </div>
