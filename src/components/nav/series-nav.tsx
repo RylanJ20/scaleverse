@@ -16,17 +16,32 @@ export function SeriesNav() {
   const seg = pathname.split("/")[1] ?? "";
   if (!seg || RESERVED.has(seg) || seg.length > 64 || !SLUG_RE.test(seg)) return null;
 
+  const items = [
+    { href: `/${seg}/arena`, label: "Arena" },
+    { href: `/${seg}/tier-list`, label: "Tier list" },
+    { href: `/${seg}/characters`, label: "Characters", desktopOnly: true },
+  ];
+
   return (
     <>
-      <Link href={`/${seg}/arena`} className="transition hover:text-foreground">
-        Arena
-      </Link>
-      <Link href={`/${seg}/tier-list`} className="transition hover:text-foreground">
-        Tier list
-      </Link>
-      <Link href={`/${seg}/characters`} className="hidden transition hover:text-foreground sm:block">
-        Characters
-      </Link>
+      {items.map(({ href, label, desktopOnly }) => {
+        // subpages count: /one-piece/characters/luffy still highlights Characters
+        const active = pathname === href || pathname.startsWith(`${href}/`);
+        return (
+          <Link
+            key={href}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            className={`${desktopOnly ? "hidden sm:block " : ""}transition ${
+              active
+                ? "text-foreground underline decoration-accent decoration-2 underline-offset-8"
+                : "hover:text-foreground"
+            }`}
+          >
+            {label}
+          </Link>
+        );
+      })}
     </>
   );
 }
