@@ -14,7 +14,7 @@ const MOVERS_SHOWN = 3;
 function Delta({ delta }: { delta: number }) {
   // direction rides on the glyph, not the color (never color-alone)
   return (
-    <span className={delta > 0 ? "text-accent-2" : "text-accent"}>
+    <span className={delta > 0 ? "text-accent-2" : "text-accent-text"}>
       {delta > 0 ? "▲" : "▼"}
       {Math.abs(delta)}
     </span>

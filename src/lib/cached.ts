@@ -259,6 +259,43 @@ export async function getCachedArcs(seriesSlug: string): Promise<ArcOption[]> {
   return (data ?? []).map(({ slug, name, position }) => ({ slug, name, position }));
 }
 
+// Live verses for the homepage select screen; created_at order = launch order.
+// Verse #2 appears here (and gets a hub page) by inserting a series row — no
+// code change (series-scoped invariant).
+export type SeriesInfo = { slug: string; name: string };
+
+export async function getCachedSeriesList(): Promise<SeriesInfo[]> {
+  "use cache";
+  cacheLife("hourly");
+  cacheTag("series");
+
+  const db = createPublicClient();
+  const { data, error } = await db.from("series").select("slug, name").order("created_at");
+  // Throw on failure so it is never cached: SWR keeps serving the last good
+  // list, whereas a cached [] would blank the front door for a full hour.
+  if (error) throw new Error(`series list read failed: ${error.message}`);
+  return data ?? [];
+}
+
+// Slug lookup for the verse hub — null means notFound(), the only place the
+// [series] segment itself is validated.
+export async function getCachedSeries(seriesSlug: string): Promise<SeriesInfo | null> {
+  "use cache";
+  cacheLife("hourly");
+  cacheTag("series");
+
+  const db = createPublicClient();
+  const { data, error } = await db
+    .from("series")
+    .select("slug, name")
+    .eq("slug", seriesSlug)
+    .maybeSingle();
+  // null strictly means "unknown slug" (callers 404 on it) — a DB failure must
+  // throw so it is never cached as an hour-long 404 of the hub.
+  if (error) throw new Error(`series read failed: ${error.message}`);
+  return data ?? null;
+}
+
 // Movement baseline: the nearest FULL rating snapshot at least `hoursBack` old.
 // Every fit writes all forms atomically, so one fit_at is a consistent
 // baseline. null fitAt = no baseline yet (history is sparse until votes flow) —

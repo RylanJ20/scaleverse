@@ -76,7 +76,7 @@ export function ArcPicker({
         )}
 
         {failed && (
-          <p className="mt-3 text-sm text-accent">Couldn&apos;t save that. Try again.</p>
+          <p className="mt-3 text-sm text-accent-text">Couldn&apos;t save that. Try again.</p>
         )}
 
         {onClose && (

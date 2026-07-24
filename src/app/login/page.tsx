@@ -167,7 +167,7 @@ export default function LoginPage() {
             className="rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
           />
           {mode === "signup" && usernameTaken && (
-            <p className="-mt-1 text-xs text-accent">{usernameTaken}</p>
+            <p className="-mt-1 text-xs text-accent-text">{usernameTaken}</p>
           )}
           <input
             type="password"
@@ -204,7 +204,7 @@ export default function LoginPage() {
             />
           )}
           {mode === "signup" && turnstileError && (
-            <p className="-mt-1 text-xs text-accent">
+            <p className="-mt-1 text-xs text-accent-text">
               Couldn&apos;t load the verification check — disable your ad blocker for this page and
               reload.
             </p>

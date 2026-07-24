@@ -166,7 +166,7 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
               <div className="h-full bg-accent-2 transition-all duration-500" style={{ width: `${100 - aPct}%` }} />
             </div>
             <div className="mt-1.5 flex items-center justify-between font-mono text-xs">
-              <span className="text-accent">{aPct}%</span>
+              <span className="text-accent-text">{aPct}%</span>
               <span className="text-muted">
                 {voteCount.toLocaleString()} vote{voteCount === 1 ? "" : "s"}
               </span>
@@ -197,7 +197,7 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
         ) : authed === true ? (
           <p className="text-sm text-muted">Tap a fighter to cast your vote.</p>
         ) : null}
-        {error && <p className="mt-2 text-sm text-accent">{error}</p>}
+        {error && <p className="mt-2 text-sm text-accent-text">{error}</p>}
       </div>
     </div>
   );

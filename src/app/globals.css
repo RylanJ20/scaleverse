@@ -9,6 +9,7 @@
   --foreground: #f2f2f7;
   --muted: #8b8b9e;
   --accent: #e11d48; /* versus-screen red */
+  --accent-text: #f43f5e; /* same red, small-text tier — #e11d48 is <4.5:1 at ≤14px */
   --accent-2: #22d3ee; /* electric cyan */
 }
 
@@ -18,6 +19,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
   --color-accent-2: var(--accent-2);
   --color-tier-s: #facc15;
   --color-tier-a: #fb7185;

@@ -84,7 +84,7 @@ function SeriesRow({ series }: { series: SeriesSpoilerSetting }) {
         </button>
       </div>
       {saved && !dirty && <p className="mt-1.5 font-mono text-xs text-accent-2">Saved</p>}
-      {failed && <p className="mt-1.5 text-sm text-accent">Couldn&apos;t save that. Try again.</p>}
+      {failed && <p className="mt-1.5 text-sm text-accent-text">Couldn&apos;t save that. Try again.</p>}
     </li>
   );
 }

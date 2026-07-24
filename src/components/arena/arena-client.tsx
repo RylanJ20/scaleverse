@@ -539,7 +539,7 @@ export function ArenaClient({
     pipelinePaused() || backlogged || visibleFailures.length > 0 ? (
       <div className="flex flex-col items-center gap-1.5" aria-live="polite">
         {pipelinePaused() && (
-          <p className="text-sm text-accent">
+          <p className="text-sm text-accent-text">
             Vote limit hit — your queued votes will retry automatically.
           </p>
         )}
@@ -547,7 +547,7 @@ export function ArenaClient({
           <p className="font-mono text-xs text-muted">Catching up on your votes…</p>
         )}
         {visibleFailures.map((f) => (
-          <p key={f.id} className="text-sm text-accent">
+          <p key={f.id} className="text-sm text-accent-text">
             {f.message}{" "}
             {f.retryable && (
               <button
@@ -650,7 +650,7 @@ export function ArenaClient({
 
         {hottest ? (
           <div className="w-full rounded-lg border border-white/10 bg-surface p-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-text">
               Hottest take
             </p>
             <div className="mt-3 flex items-center justify-center gap-3">
@@ -804,7 +804,7 @@ export function ArenaClient({
                   />
                 </div>
                 <div className="mt-2 flex items-baseline justify-between">
-                  <span className="font-mono text-sm text-accent">{aPctDisplay}%</span>
+                  <span className="font-mono text-sm text-accent-text">{aPctDisplay}%</span>
                   <p className="text-center text-sm">
                     {rawMyPct != null && rawMyPct >= 0.5 ? (
                       <span className="text-muted">With the crowd</span>

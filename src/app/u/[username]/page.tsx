@@ -117,7 +117,7 @@ async function ProfileBody({ params }: { params: Promise<{ username: string }> }
 
       {spoilerSeries && noRecoveryEmail && (
         <p className="mt-6 rounded-lg border border-accent/30 bg-surface p-3 text-sm text-muted">
-          <span className="font-bold text-accent">No recovery email on this account.</span> If you
+          <span className="font-bold text-accent-text">No recovery email on this account.</span> If you
           lose your password, your take record is gone — there is no way back without one.
         </p>
       )}
