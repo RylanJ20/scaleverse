@@ -34,6 +34,31 @@ export async function getViewerMaxArcPosition(seriesSlug: string): Promise<numbe
   return Number.isFinite(n) ? n : null;
 }
 
+// Browse-surface gate state: the viewer's ceiling PLUS whether this is a
+// first-touch anonymous visitor (no account, no arc cookie) who must be asked
+// before the full roster reveals (invariant #4 — first-touch is not the
+// "deliberate access" ratified #27 exempts).
+export async function getBrowseGate(
+  seriesSlug: string,
+): Promise<{ maxPos: number | null; needsFirstTouch: boolean }> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const maxPos = await getViewerMaxArcPosition(seriesSlug);
+  if (user) {
+    // mirror the arena: a signed-in user with no progress row hasn't chosen an
+    // arc yet — gate the browse surfaces too, don't leak the full roster
+    const { data: prog } = await supabase
+      .from("user_series_progress")
+      .select("user_id, series!inner(slug)")
+      .eq("series.slug", seriesSlug)
+      .eq("user_id", user.id)
+      .maybeSingle();
+    return { maxPos, needsFirstTouch: !prog };
+  }
+  const cookieStore = await cookies();
+  return { maxPos, needsFirstTouch: cookieStore.get("sv-arc-pos") === undefined };
+}
+
 export type CharacterStats = {
   nicknames?: string[];
   status?: string | null;

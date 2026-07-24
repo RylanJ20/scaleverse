@@ -9,6 +9,7 @@ import { characterImageUrl } from "@/lib/image";
 import type { FormCard } from "@/lib/types";
 import { canonicalMatchupSlug } from "@/lib/matchup-slug";
 import { SpoilerSettings, type SeriesSpoilerSetting } from "@/components/profile/spoiler-settings";
+import { isSyntheticEmail } from "@/lib/username";
 
 type HottestTake = {
   matchup_id: string;
@@ -62,8 +63,10 @@ async function ProfileBody({ params }: { params: Promise<{ username: string }> }
   // spoiler settings are owner-only: shown when viewing your own profile
   const supabase = await createClient();
   let spoilerSeries: SeriesSpoilerSetting[] | null = null;
+  let noRecoveryEmail = false;
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
+    noRecoveryEmail = isSyntheticEmail(user.email);
     const { data: me } = await supabase.from("profiles").select("username").eq("id", user.id).single();
     if (me?.username === p.username) {
       const [{ data: seriesRows }, { data: arcRows }, { data: progRows }] = await Promise.all([
@@ -111,6 +114,13 @@ async function ProfileBody({ params }: { params: Promise<{ username: string }> }
           value={p.agreement_pct != null ? `${100 - p.agreement_pct}%` : "—"}
         />
       </div>
+
+      {spoilerSeries && noRecoveryEmail && (
+        <p className="mt-6 rounded-lg border border-accent/30 bg-surface p-3 text-sm text-muted">
+          <span className="font-bold text-accent">No recovery email on this account.</span> If you
+          lose your password, your take record is gone — there is no way back without one.
+        </p>
+      )}
 
       {spoilerSeries && <SpoilerSettings series={spoilerSeries} />}
 

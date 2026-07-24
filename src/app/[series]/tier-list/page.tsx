@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getCachedTierListRoster, getCachedMovementBaseline, type RosterRow } from "@/lib/cached";
-import { getViewerMaxArcPosition } from "@/lib/queries";
+import { getCachedTierListRoster, getCachedMovementBaseline, getCachedArcs, type RosterRow } from "@/lib/cached";
+import { getBrowseGate } from "@/lib/queries";
 import { characterImageUrl } from "@/lib/image";
+import { FirstTouchGate } from "@/components/browse/first-touch-gate";
 
 // movement is only shown when it clears per-fit jitter
 const CARET_MIN_DELTA = 3;
@@ -66,11 +67,12 @@ export default async function TierListPage({
 // Dynamic hole: reads the viewer's spoiler ceiling (cookies/auth — ≤1 tiny row)
 // and filters the shared cached roster per request (ratified #9/#27).
 async function TierListBody({ series }: { series: string }) {
-  const [maxPos, all, day, week] = await Promise.all([
-    getViewerMaxArcPosition(series),
+  const [{ maxPos, needsFirstTouch }, all, day, week, arcs] = await Promise.all([
+    getBrowseGate(series),
     getCachedTierListRoster(series),
     getCachedMovementBaseline(series, 24),
     getCachedMovementBaseline(series, 24 * 7),
+    getCachedArcs(series),
   ]);
 
   // spoiler gate (ratified #9/#27): hidden characters are simply absent
@@ -106,6 +108,11 @@ async function TierListBody({ series }: { series: string }) {
 
   return (
     <>
+      {needsFirstTouch && <FirstTouchGate arcs={arcs} seriesSlug={series} />}
+      {/* while the gate is up, the ungated roster underneath is inert +
+          aria-hidden so it's unreachable by keyboard, find-in-page, and AT
+          (server-decided, so no flash) — crawler HTML is unaffected */}
+      <div inert={needsFirstTouch || undefined} aria-hidden={needsFirstTouch || undefined}>
       {hidden > 0 && (
         <p className="mt-1 font-mono text-xs text-muted">
           {hidden} character{hidden === 1 ? "" : "s"} hidden by your spoiler settings
@@ -197,6 +204,7 @@ async function TierListBody({ series }: { series: string }) {
             </section>
           );
         })}
+      </div>
       </div>
     </>
   );

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getCachedCharacterIndex } from "@/lib/cached";
-import { getViewerMaxArcPosition } from "@/lib/queries";
+import { getCachedCharacterIndex, getCachedArcs } from "@/lib/cached";
+import { getBrowseGate } from "@/lib/queries";
 import { RosterGrid, type RosterEntry } from "@/components/browse/roster-grid";
+import { FirstTouchGate } from "@/components/browse/first-touch-gate";
 
 const SERIES_NAME: Record<string, string> = { "one-piece": "One Piece" };
 
@@ -50,9 +51,10 @@ export default async function CharactersIndexPage({
 
 // Dynamic hole: viewer gate (cookies/auth) filters the shared cached index.
 async function RosterBody({ series }: { series: string }) {
-  const [maxPos, all] = await Promise.all([
-    getViewerMaxArcPosition(series),
+  const [{ maxPos, needsFirstTouch }, all, arcs] = await Promise.all([
+    getBrowseGate(series),
     getCachedCharacterIndex(series),
+    getCachedArcs(series),
   ]);
 
   const visible: RosterEntry[] = all
@@ -67,13 +69,18 @@ async function RosterBody({ series }: { series: string }) {
 
   return (
     <>
-      {hidden > 0 && (
-        <p className="mt-1 font-mono text-xs text-muted">
-          {hidden} hidden by your spoiler settings
-        </p>
-      )}
-      <div className="mt-6">
-        <RosterGrid series={series} entries={visible} />
+      {needsFirstTouch && <FirstTouchGate arcs={arcs} seriesSlug={series} />}
+      {/* ungated roster is inert + aria-hidden behind the gate (no flash;
+          crawler HTML unaffected) */}
+      <div inert={needsFirstTouch || undefined} aria-hidden={needsFirstTouch || undefined}>
+        {hidden > 0 && (
+          <p className="mt-1 font-mono text-xs text-muted">
+            {hidden} hidden by your spoiler settings
+          </p>
+        )}
+        <div className="mt-6">
+          <RosterGrid series={series} entries={visible} />
+        </div>
       </div>
     </>
   );

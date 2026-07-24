@@ -1,18 +1,96 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { signInWithUsername, signUpWithUsername } from "@/app/actions/auth";
+import { checkUsername, signInWithUsername, signUpWithUsername } from "@/app/actions/auth";
 
 type Mode = "signin" | "signup";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: { sitekey: string; theme?: string; callback: (token: string) => void; "expired-callback"?: () => void; "error-callback"?: () => void }) => string;
+      reset: (id: string) => void;
+    };
+  }
+}
+
+// Signup-only bot check (integrity floor — never inside the voting loop).
+// Renders nothing until NEXT_PUBLIC_TURNSTILE_SITE_KEY exists.
+function TurnstileWidget({
+  onToken,
+  onError,
+  resetSignal,
+}: {
+  onToken: (token: string | null) => void;
+  onError: () => void;
+  resetSignal: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY || !ref.current) return;
+    const el = ref.current;
+    const render = () => {
+      if (window.turnstile && el.childElementCount === 0) {
+        widgetId.current = window.turnstile.render(el, {
+          sitekey: TURNSTILE_SITE_KEY,
+          theme: "dark",
+          callback: onToken,
+          "expired-callback": () => onToken(null),
+          "error-callback": onError,
+        });
+      }
+    };
+    if (window.turnstile) {
+      render();
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    s.async = true;
+    s.onload = render;
+    s.onerror = onError; // adblocked / offline — surface a message, don't hang
+    document.head.appendChild(s);
+  }, [onToken, onError]);
+  // a consumed token can't be reused — reset the widget after a failed submit
+  useEffect(() => {
+    if (resetSignal > 0 && widgetId.current && window.turnstile) {
+      window.turnstile.reset(widgetId.current);
+      onToken(null);
+    }
+  }, [resetSignal, onToken]);
+  if (!TURNSTILE_SITE_KEY) return null;
+  return <div ref={ref} className="min-h-16" />;
+}
 
 export default function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileError, setTurnstileError] = useState(false);
+  const [turnstileReset, setTurnstileReset] = useState(0);
+  const [usernameTaken, setUsernameTaken] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  const onTurnstileError = useCallback(() => setTurnstileError(true), []);
+
+  // live availability so a taken name is caught before it burns a signup slot
+  const onUsernameBlur = async () => {
+    if (mode !== "signup" || username.trim().length < 3) {
+      setUsernameTaken(null);
+      return;
+    }
+    const res = await checkUsername(username.trim());
+    setUsernameTaken(res.ok ? null : res.error);
+  };
+
+  const needsToken = mode === "signup" && !!TURNSTILE_SITE_KEY;
 
   const discordSignIn = async () => {
     setMessage(null);
@@ -31,12 +109,17 @@ export default function LoginPage() {
     const res =
       mode === "signin"
         ? await signInWithUsername(username, password)
-        : await signUpWithUsername(username, password, email || undefined);
+        : await signUpWithUsername(username, password, email || undefined, turnstileToken ?? undefined);
     if (res.ok) {
       window.location.assign("/one-piece/arena");
     } else {
       setMessage(res.error);
       setBusy(false);
+      // the submitted Turnstile token is now spent — force a fresh challenge
+      if (needsToken) {
+        setTurnstileToken(null);
+        setTurnstileReset((n) => n + 1);
+      }
     }
   };
 
@@ -75,10 +158,17 @@ export default function LoginPage() {
             required
             autoComplete="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              setUsernameTaken(null);
+            }}
+            onBlur={() => void onUsernameBlur()}
             placeholder="Username"
             className="rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
           />
+          {mode === "signup" && usernameTaken && (
+            <p className="-mt-1 text-xs text-accent">{usernameTaken}</p>
+          )}
           <input
             type="password"
             required
@@ -95,18 +185,33 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Recovery email (optional)"
+                placeholder="Recovery email"
                 className="w-full rounded-md border border-white/15 bg-surface px-3 py-2.5 outline-none transition focus:border-accent-2"
               />
-              <p className="mt-1 text-xs text-muted">
-                Only used to reset a forgotten password. Skip it if you want — but without it, a
-                lost password can&apos;t be recovered.
+              <p className="mt-1 text-xs">
+                <span className="text-accent-2">Strongly recommended.</span>{" "}
+                <span className="text-muted">
+                  Without it, your record dies with a lost password — no email, no recovery, ever.
+                </span>
               </p>
             </div>
           )}
+          {mode === "signup" && (
+            <TurnstileWidget
+              onToken={setTurnstileToken}
+              onError={onTurnstileError}
+              resetSignal={turnstileReset}
+            />
+          )}
+          {mode === "signup" && turnstileError && (
+            <p className="-mt-1 text-xs text-accent">
+              Couldn&apos;t load the verification check — disable your ad blocker for this page and
+              reload.
+            </p>
+          )}
           <button
             type="submit"
-            disabled={busy}
+            disabled={busy || (needsToken && !turnstileToken) || (mode === "signup" && !!usernameTaken)}
             className="rounded-md bg-accent px-4 py-2.5 font-bold uppercase tracking-wide text-white transition hover:brightness-110 disabled:opacity-50"
           >
             {mode === "signin" ? "Sign in" : "Create account"}

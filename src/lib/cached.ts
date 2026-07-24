@@ -7,7 +7,7 @@ import { getCharacter, type CharacterFull, type MatchupTally } from "@/lib/queri
 import { canonicalMatchupSlug } from "@/lib/matchup-slug";
 import { characterImageUrl } from "@/lib/image";
 import { SITE_URL } from "@/lib/site";
-import type { FormCard, MatchupItem } from "@/lib/types";
+import type { ArcOption, FormCard, MatchupItem } from "@/lib/types";
 import type { Take } from "@/app/actions/social";
 
 // Shared "use cache" read layer (Cache Components). Everything here is
@@ -182,7 +182,11 @@ export async function getCachedDailyMatchup(seriesSlug: string): Promise<Matchup
     new Date().getUTCMonth(),
     new Date().getUTCDate() + 1,
   ) - Date.now()) / 1000);
-  const expire = Math.max(120, secsToUtcMidnight);
+  // floor of 360s: an expire under 5 minutes is EXCLUDED from prerenders
+  // (becomes a dynamic hole), which fails the home build when it runs within
+  // ~5 min of UTC midnight. Worst case the old daily lives ~6 min into the new
+  // day — bounded, and post_take's "takes closed" path already covers it.
+  const expire = Math.max(360, secsToUtcMidnight);
   const revalidate = Math.min(300, Math.max(60, expire - 60));
   cacheLife({ stale: Math.min(300, revalidate), revalidate, expire });
   cacheTag(`daily:${seriesSlug}`);
@@ -237,6 +241,22 @@ export async function getCachedProfile(username: string): Promise<unknown> {
   const db = createPublicClient();
   const { data } = await db.rpc("get_profile", { p_username: username });
   return data ?? null;
+}
+
+// Arc list for a series (static content — powers the first-touch spoiler gate
+// on browse surfaces without a per-request read).
+export async function getCachedArcs(seriesSlug: string): Promise<ArcOption[]> {
+  "use cache";
+  cacheLife("hourly");
+  cacheTag(`arcs:${seriesSlug}`);
+
+  const db = createPublicClient();
+  const { data } = await db
+    .from("arcs")
+    .select("slug, name, position, series!inner(slug)")
+    .eq("series.slug", seriesSlug)
+    .order("position");
+  return (data ?? []).map(({ slug, name, position }) => ({ slug, name, position }));
 }
 
 // Movement baseline: the nearest FULL rating snapshot at least `hoursBack` old.
