@@ -46,3 +46,67 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
+
+/* Arena impact frame + feed motion (decisions #36–37). The reduced-motion
+   rule above zeroes every duration here, so no per-animation guards. */
+@keyframes sv-deal-in {
+  from { opacity: 0; transform: translateY(44px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.sv-deal-in { animation: sv-deal-in 380ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.sv-deal-in-b { animation-delay: 60ms; }
+
+@keyframes sv-punch {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); }
+  100% { transform: scale(1.02); }
+}
+.sv-punch { animation: sv-punch 240ms cubic-bezier(0.2, 1.4, 0.4, 1) forwards; }
+
+@keyframes sv-shake {
+  0%, 100% { transform: none; }
+  15% { transform: translate(-6px, 2px); }
+  30% { transform: translate(5px, -3px); }
+  45% { transform: translate(-4px, 2px); }
+  60% { transform: translate(3px, -2px); }
+  80% { transform: translate(-2px, 1px); }
+}
+.sv-shake { animation: sv-shake 300ms ease-out; }
+
+@keyframes sv-impact-flash {
+  0% { opacity: 0; }
+  15% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+.sv-impact-flash {
+  background: radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.35) 55%, transparent 75%);
+  opacity: 0;
+  animation: sv-impact-flash 260ms ease-out;
+}
+
+@keyframes sv-stamp {
+  0% { opacity: 0; transform: skewX(-12deg) scale(1.8); }
+  60% { opacity: 1; transform: skewX(-12deg) scale(0.95); }
+  100% { opacity: 1; transform: skewX(-12deg) scale(1); }
+}
+.sv-stamp { opacity: 0; animation: sv-stamp 220ms 70ms cubic-bezier(0.2, 1, 0.4, 1) forwards; }
+
+@keyframes sv-bar-slam {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.sv-bar-slam { animation: sv-bar-slam 320ms cubic-bezier(0.2, 0.9, 0.25, 1); }
+
+@keyframes sv-pop {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+.sv-pop { animation: sv-pop 240ms 140ms ease-out backwards; }
+
+@keyframes sv-hint-fade {
+  0% { opacity: 0; transform: translateY(6px); }
+  8% { opacity: 1; transform: none; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.sv-hint { animation: sv-hint-fade 6s ease-in-out forwards; }

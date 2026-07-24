@@ -41,6 +41,9 @@
 | 32 | Matchup page empty state | **Raw community % from vote 1** (no seeded-rating prediction fallback) | Strictly honors #19 |
 | 33 | Character-page spoilers | **Show all current-canon stats, gated by a one-tap page-level spoiler interstitial** if the character is beyond the viewer's arc | Not per-stat gating |
 | 34 | Share/OG images | **Dynamic OG images now** via `next/og` + on-the-fly webp→PNG (Satori can't decode webp) | Matchup VS card + character card |
+| 36 | Arena flow | ⚠️ **Infinite feed — no sets** (2026-07-23): the every-10-fights summary screen is removed; the reveal is the only beat (demo sign-in gate unchanged). Session stats may resurface on profiles later | Supersedes §5's "Sets of 10" arena loop |
+| 37 | Arena VFX & chrome | **Layered impact + feed motion** (2026-07-23): fighting-game impact frame on the pick (flash, punch-scale, screen shake, WINNER stamp, loser desaturates), next pair deals in feed-style; header strip replaced by clean corners (spoiler eye top-right, fight ticker bottom-left, one-time keyboard hint) | prefers-reduced-motion zeroes all of it |
+| 38 | Vote ceilings | ⚠️ **1000/hr, 4000/day** (2026-07-23) — infinite play hits 500/hr in ~30-40 min; the 1.5s min spacing and 20/min burst cap stay unchanged | Supersedes §7's 500/hr, 1500/day |
 
 **Process note:** every decision from here on requires founder sign-off before implementation — no unilateral calls.
 
@@ -92,7 +95,7 @@ One screen — **The Arena** (`/one-piece/arena`, also the default landing route
 | Feature | Description | Why MVP |
 |---|---|---|
 | OAuth login (Google/Discord) + anon demo mode | Authed-only counted votes; anon plays display-only, soft gate at 5 votes | Conversion + integrity floor |
-| Arena loop | Sub-2s vote → reveal → next, Sets of 10, skip button, prefetch | This IS the product |
+| Arena loop | Sub-2s vote → reveal → next, ⚠️ Sets of 10 (superseded by #36 — infinite feed), skip button, prefetch | This IS the product |
 | Batch BT engine + 10-min cron | Weighted fit, anchored scale, per-fit snapshots | The credibility engine |
 | Tier list page | S–F rows, movement carets, Placement section, "Disagree? Vote." deep links | The shared artifact |
 | 64-character roster, arc-versioned seed data (YAML in git) | Curated to a conservative arc cutoff (through Wano; no Egghead/Elbaph/Imu) | Convergence math + spoiler safety by curation |
@@ -144,7 +147,7 @@ One screen — **The Arena** (`/one-piece/arena`, also the default landing route
 
 **Architecture keystone (unanimous across lenses — protected):** append-only vote events + rankings as a re-runnable weighted batch job. Every future trust decision — downweight a user, void a brigade window, change the algorithm — is retroactive and reversible. Poisoned votes never bake in.
 
-**Launch defenses:** authed-only counted votes (anon = demo, hard red line — never a tuning knob; Supabase anonymous-auth sessions checked via the `is_anonymous` claim and routed to the demo path); DB-enforced UNIQUE(matchup_id, user_id) with revote-overwrite into an event log; server-dealt matchups with short-lived signed tokens recording a `deals` row (dealt_at, outcome voted/skipped/expired — also the skip-signal home); randomized left/right presentation; **minimum inter-vote spacing (~1.5s) enforced server-side** (not served→voted latency, which prefetching breaks); burst-tolerant rate limits (20/min burst, 500/hr, 1500/day) in the RPC plus Vercel WAF rules; per-IP signup caps + disposable-email denylist; Turnstile on signup only — never inside the loop; ip_hash (salted, 90-day retention), user_agent, and latency logged on every event from day one.
+**Launch defenses:** authed-only counted votes (anon = demo, hard red line — never a tuning knob; Supabase anonymous-auth sessions checked via the `is_anonymous` claim and routed to the demo path); DB-enforced UNIQUE(matchup_id, user_id) with revote-overwrite into an event log; server-dealt matchups with short-lived signed tokens recording a `deals` row (dealt_at, outcome voted/skipped/expired — also the skip-signal home); randomized left/right presentation; **minimum inter-vote spacing (~1.5s) enforced server-side** (not served→voted latency, which prefetching breaks); burst-tolerant rate limits (20/min burst, 1000/hr, 4000/day — hourly/daily raised by #38, 2026-07-23) in the RPC plus Vercel WAF rules; per-IP signup caps + disposable-email denylist; Turnstile on signup only — never inside the loop; ip_hash (salted, 90-day retention), user_agent, and latency logged on every event from day one.
 
 **Deferred (v1/later):** reliability weights (age ramp, calibration-matchup consistency bounded at 0.5× for aged normal accounts, behavioral penalties); velocity-based brigade dampening with public "contested" badges; escalation-only Turnstile on risk signals; forensics dashboard with three kill switches (zero-weight user, void window, recompute); fingerprinting and trust tiers.
 

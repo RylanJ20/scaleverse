@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { castVote, fetchBatch, recordDemoVote, saveProgress, skipDeal } from "@/app/actions/arena";
 import type { ArcOption, FormCard, MatchupItem } from "@/lib/types";
@@ -19,25 +18,7 @@ const BUDGET_MAX_SENDS = 19; // one under the server's 20/min, leaving retry hea
 const RATE_LIMIT_PAUSE_MS = 65_000;
 const MAX_QUEUED_VOTES = 8; // picking pauses (not fails) beyond this backlog
 
-type Phase = "onboarding" | "pick" | "reveal" | "gate" | "summary" | "empty" | "errored";
-
-// One vote's contribution to the set summary (deal mode only — demo votes have
-// no deltas and guests keep the sign-in gate as their beat).
-type SetEntry = {
-  matchupId: string;
-  pickIsA: boolean;
-  pickFormId: string; // ratings are per-FORM (invariant #3) — momentum keys on this
-  pickLabel: string;
-  otherLabel: string;
-  pickImagePath: string | null;
-  myPct: number | null; // share agreeing with my pick; null under the 5-vote gate
-  delta: number | null; // reconciled cosmetic delta
-};
-
-function entryPct(pickIsA: boolean, voteCount: number, aWins: number): number | null {
-  if (voteCount < 5) return null;
-  return (pickIsA ? aWins : voteCount - aWins) / voteCount;
-}
+type Phase = "onboarding" | "pick" | "reveal" | "gate" | "empty" | "errored";
 
 // Forms are the votable/ranked entities (Base Luffy ≠ Gear 5 Luffy) — qualify
 // the character name whenever the pick is a non-base form.
@@ -93,9 +74,6 @@ let failureSeq = 0;
 // The mounted instance's reconcile — module-held so a drain loop or resume
 // timer that outlives its original mount still reconciles the CURRENT reveal.
 let activeReconcile: (matchupId: string, voteCount: number, aWins: number, delta: number | null) => void = () => {};
-// Same pattern for terminal vote failures: the set score must drop picks that
-// never landed.
-let activeVoteFailed: (matchupId: string) => void = () => {};
 const pipelineListeners = new Set<() => void>();
 function notifyPipeline() {
   pipelineListeners.forEach((l) => l());
@@ -115,6 +93,7 @@ async function waitForVoteQueue(maxMs: number) {
 // pass). Same-tab writes notify through the listener set; the storage event
 // keeps a second guest tab's gate honest too.
 const DEMO_VOTES_KEY = "sv-demo-votes";
+const HINT_KEY = "sv-kbd-hint-seen";
 const demoVoteListeners = new Set<() => void>();
 function subscribeDemoVotes(listener: () => void) {
   demoVoteListeners.add(listener);
@@ -171,13 +150,11 @@ export function ArenaClient({
   });
   const [showPicker, setShowPicker] = useState(false);
   const [reveal, setReveal] = useState<Reveal | null>(null);
-  const [setCount, setSetCount] = useState(0);
-  const [setEntries, setSetEntries] = useState<SetEntry[]>([]);
-  const [lastSummaryAt, setLastSummaryAt] = useState(0);
+  const [fightCount, setFightCount] = useState(0); // fights called this session (corner ticker)
   const [lastGateAt, setLastGateAt] = useState(0);
   const demoVotes = useSyncExternalStore(subscribeDemoVotes, readDemoVotes, () => 0);
-  const summaryShownAt = useRef(0);
-  const nextSetRef = useRef<HTMLButtonElement>(null);
+  const [showHint, setShowHint] = useState(false);
+  const hintArmed = useRef(false);
   // re-render trigger for module pipeline changes (queue depth, failures, pause)
   const [, setPipelineVersion] = useState(0);
   const fetching = useRef(false);
@@ -194,8 +171,7 @@ export function ArenaClient({
   }, []);
 
   // Reconcile a server tally into the reveal (only if that matchup is still on
-  // screen — once the user advanced, the optimistic numbers just stand) and
-  // into the running set summary.
+  // screen — once the user advanced, the optimistic numbers just stand).
   const reconcile = useCallback((matchupId: string, voteCount: number, aWins: number, delta: number | null) => {
     setReveal((r) =>
       r && r.matchupId === matchupId
@@ -207,20 +183,11 @@ export function ArenaClient({
           }
         : r,
     );
-    setSetEntries((es) =>
-      es.map((e) =>
-        e.matchupId === matchupId
-          ? { ...e, myPct: entryPct(e.pickIsA, voteCount, aWins), delta }
-          : e,
-      ),
-    );
   }, []);
 
   useEffect(() => {
-    // point the module pipeline at THIS mount's reveal + set accumulator
+    // point the module pipeline at THIS mount's reveal
     activeReconcile = reconcile;
-    activeVoteFailed = (matchupId: string) =>
-      setSetEntries((es) => es.filter((e) => e.matchupId !== matchupId));
   }, [reconcile]);
 
   // Drain the module queue sequentially. Pacing: SEND_SPACING_MS floor plus a
@@ -251,8 +218,6 @@ export function ArenaClient({
           // release the fight: its deal is still pending server-side, so the
           // re-serve can legitimately show it again (retry re-claims it)
           handledMatchups.delete(job.matchupId);
-          // a pick that never landed must not count in the set score
-          activeVoteFailed(job.matchupId);
           failureLog.push({ id: ++failureSeq, job, retryable, message });
         };
 
@@ -412,16 +377,12 @@ export function ArenaClient({
     [seriesSlug, drainQueue],
   );
 
+  // Infinite feed (decision #36): no set boundaries — after the reveal it's
+  // straight back to the next fight. The demo sign-in gate is the only interrupt.
   const advance = useCallback(() => {
     setReveal(null);
     setQueue((q) => q.slice(1));
-    if (mode === "deal" && setCount > 0 && setCount % 10 === 0 && setCount !== lastSummaryAt) {
-      // set boundary: the round-results beat (signed-in only — demo votes have
-      // no rating deltas and guests keep the sign-in gate as their beat)
-      setLastSummaryAt(setCount);
-      summaryShownAt.current = Date.now();
-      setPhase("summary");
-    } else if (
+    if (
       mode === "demo" &&
       demoVotes >= DEMO_GATE_AT &&
       demoVotes % DEMO_GATE_AT === 0 &&
@@ -433,12 +394,7 @@ export function ArenaClient({
     } else {
       setPhase("pick");
     }
-  }, [mode, demoVotes, setCount, lastSummaryAt, lastGateAt]);
-
-  const nextSet = useCallback(() => {
-    setSetEntries([]);
-    setPhase("pick");
-  }, []);
+  }, [mode, demoVotes, lastGateAt]);
 
   // dedicated gate continue: advance() already consumed the fight that led
   // here — continuing must not slice another one off the queue
@@ -452,10 +408,21 @@ export function ArenaClient({
     return () => clearTimeout(t);
   }, [phase, advance]);
 
-  // announce + keyboard-anchor the payoff beat (a live region mounting with
-  // its content isn't announced; focusing the primary CTA is)
+  // One-time keyboard hint (desktop): arms on the first fight ever shown, CSS
+  // fades it out for good, localStorage keeps it from ever coming back. Armed
+  // on first "pick" (not mount) so the onboarding arc picker doesn't burn it.
   useEffect(() => {
-    if (phase === "summary") nextSetRef.current?.focus();
+    if (phase !== "pick" || hintArmed.current) return;
+    hintArmed.current = true;
+    try {
+      if (localStorage.getItem(HINT_KEY)) return;
+      localStorage.setItem(HINT_KEY, "1");
+    } catch {
+      return; // storage unavailable (private mode) — skip rather than re-show forever
+    }
+    // deferred a tick: the commit itself stays free of state updates
+    const t = setTimeout(() => setShowHint(true), 0);
+    return () => clearTimeout(t);
   }, [phase]);
 
   // Optimistic: the reveal renders instantly from the tallies dealt with the
@@ -481,29 +448,12 @@ export function ArenaClient({
         delta: null,
       });
       if (!isDeal) bumpDemoVotes();
-      setSetCount((n) => n + 1);
+      setFightCount((n) => n + 1);
       setPhase("reveal");
       // only deal-mode fights go in the re-serve guard set: demo pairs are
       // legitimately re-dealable by the server (no deals exist for them), and
       // hiding them forever would starve small gated rosters
-      if (isDeal) {
-        handledMatchups.add(current.matchup_id);
-        const other = side === "a" ? current.b : current.a;
-        setSetEntries((es) => [
-          // a failed-then-revoted fight must not appear twice in the score
-          ...es.filter((e) => e.matchupId !== current.matchup_id),
-          {
-            matchupId: current.matchup_id,
-            pickIsA: side === "a",
-            pickFormId: winner.form_id,
-            pickLabel: formLabel(winner),
-            otherLabel: formLabel(other),
-            pickImagePath: winner.image_path,
-            myPct: entryPct(side === "a", voteCount, aWins),
-            delta: null,
-          },
-        ]);
-      }
+      if (isDeal) handledMatchups.add(current.matchup_id);
 
       enqueueVote({
         matchupId: current.matchup_id,
@@ -537,23 +487,13 @@ export function ArenaClient({
         advance();
         return;
       }
-      if (phase === "summary") {
-        // never hijack focus navigation or focused controls; only Enter/Space
-        // continue (arrows are the mashed voting keys — a 500ms arming delay
-        // keeps spam from blowing through the payoff beat)
-        if (e.target instanceof HTMLElement && e.target.closest("a,button")) return;
-        if ((e.key === "Enter" || e.key === " ") && Date.now() - summaryShownAt.current > 500) {
-          nextSet();
-        }
-        return;
-      }
       if (e.key === "ArrowLeft") void pick("a");
       if (e.key === "ArrowRight") void pick("b");
       if (e.key === "ArrowDown") void skip();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [pick, skip, advance, nextSet, phase, showPicker]);
+  }, [pick, skip, advance, phase, showPicker]);
 
   if (phase === "onboarding") {
     return <ArcPicker arcs={arcs} onChoose={changeArc} />;
@@ -648,103 +588,6 @@ export function ArenaClient({
     );
   }
 
-  if (phase === "summary") {
-    const scored = setEntries.filter((e) => e.myPct != null);
-    const withCrowd = scored.filter((e) => e.myPct! >= 0.5).length;
-    const hottest =
-      scored.filter((e) => e.myPct! < 0.5).sort((x, y) => x.myPct! - y.myPct!)[0] ?? null;
-    // ratings are per-form (invariant #3): momentum keys on the picked form
-    const momentumTotals = new Map<string, { label: string; total: number }>();
-    for (const e of setEntries) {
-      if (e.delta != null && e.delta > 0) {
-        const cur = momentumTotals.get(e.pickFormId) ?? { label: e.pickLabel, total: 0 };
-        cur.total += e.delta;
-        momentumTotals.set(e.pickFormId, cur);
-      }
-    }
-    const momentum =
-      [...momentumTotals.values()].sort((x, y) => y.total - x.total)[0] ?? null;
-
-    return (
-      <div className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center gap-5 px-6 py-10 text-center">
-        <h2 className="font-mono text-xs uppercase tracking-[0.3em] text-accent-2">
-          Set {Math.floor(setCount / 10)} complete
-        </h2>
-
-        <div>
-          <p className="font-display -skew-x-6 text-6xl uppercase leading-none">
-            {scored.length > 0 ? `${withCrowd}/${scored.length}` : setEntries.length}
-          </p>
-          <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            {scored.length > 0 ? "with the crowd" : "fights called"}
-          </p>
-        </div>
-
-        {hottest ? (
-          <div className="w-full rounded-lg border border-white/10 bg-surface p-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent-text">
-              Hottest take
-            </p>
-            <div className="mt-3 flex items-center justify-center gap-3">
-              {hottest.pickImagePath && (
-                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded bg-black/40">
-                  <Image
-                    src={`${imageBase}/${hottest.pickImagePath}`}
-                    alt={hottest.pickLabel}
-                    fill
-                    sizes="44px"
-                    className="object-cover object-top"
-                  />
-                </div>
-              )}
-              <p className="text-left text-sm">
-                <span className="font-bold">{hottest.pickLabel}</span> over {hottest.otherLabel}
-                <br />
-                <span className="font-mono text-xs text-accent-2">
-                  only {Math.floor(hottest.myPct! * 100)}% agree
-                </span>
-              </p>
-            </div>
-          </div>
-        ) : scored.length > 0 ? (
-          <p className="text-sm text-muted">No hot takes this set — you rode with the crowd.</p>
-        ) : (
-          <p className="text-sm text-muted">
-            Early fights — the crowd hasn&apos;t formed on these yet. Your votes shape it.
-          </p>
-        )}
-
-        {/* reserved height: late reconciles must not shift the CTA */}
-        <div className="min-h-6">
-          {momentum && (
-            <p className="text-sm">
-              <span className="font-mono text-accent-2">+{momentum.total}</span>{" "}
-              <span className="text-muted">· you pushed</span>{" "}
-              <span className="font-bold">{momentum.label}</span> <span aria-hidden>↑</span>
-            </p>
-          )}
-        </div>
-
-        <button
-          ref={nextSetRef}
-          type="button"
-          onClick={nextSet}
-          className="rounded-md bg-accent px-8 py-3 text-lg font-bold uppercase tracking-wider text-white transition hover:brightness-110"
-        >
-          Next set
-        </button>
-        <Link
-          href={`/${seriesSlug}/tier-list`}
-          className="text-sm text-accent-2 underline-offset-4 hover:underline"
-        >
-          See the tier list you&apos;re shaping
-        </Link>
-        {pipelineBanners}
-        {changePicker}
-      </div>
-    );
-  }
-
   if (!current) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
@@ -767,50 +610,68 @@ export function ArenaClient({
   }
 
   const aPctDisplay = reveal?.aPct != null ? Math.round(reveal.aPct * 100) : null;
-  // classify from the RAW fraction (same threshold the set summary uses) so the
-  // two beats can never disagree about the same fight at the 50% boundary
+  // classify from the RAW fraction (not the rounded display %) so the hot-take
+  // call can never flip at the 50% boundary
   const rawMyPct =
     reveal?.aPct != null ? (reveal.pick === "a" ? reveal.aPct : 1 - reveal.aPct) : null;
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-6">
-      <div className="mb-4 flex items-center justify-between font-mono text-xs text-muted">
-        <span>
-          Set {Math.floor(setCount / 10) + 1} · fight {(setCount % 10) + 1}/10
-        </span>
-        <div className="flex items-center gap-4">
-          <button
-            type="button"
-            onClick={() => setShowPicker(true)}
-            className="uppercase underline decoration-dotted underline-offset-4 transition hover:text-foreground"
-          >
-            Spoilers: {gateArc ? `through ${gateArc.name}` : "caught up"}
-          </button>
-          <span className="hidden sm:block">← left wins · right wins → · ↓ can&apos;t call it</span>
-        </div>
-      </div>
+    <div className="relative mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-6">
+      {/* clean-corner chrome (decision #37): spoiler control top-right,
+          session ticker bottom-left — the arena itself is title + cards */}
+      <button
+        type="button"
+        onClick={() => setShowPicker(true)}
+        aria-label={`Spoiler setting: ${gateArc ? `through ${gateArc.name}` : "caught up"} — change`}
+        title={gateArc ? `Spoilers: through ${gateArc.name}` : "Spoilers: caught up"}
+        className="absolute right-4 top-6 z-10 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition hover:text-foreground"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+        <span className="hidden sm:inline">spoilers</span>
+      </button>
 
       <h1 className="font-display -skew-x-6 mb-5 text-center text-3xl uppercase sm:text-4xl">
         Who <span className="text-accent">wins</span>?
       </h1>
 
-      <div className="relative grid grid-cols-2 gap-3 sm:gap-6">
-        <VersusCard
-          card={current.a}
-          side="a"
-          imageUrl={current.a.image_path ? `${imageBase}/${current.a.image_path}` : null}
-          onPick={() => void pick("a")}
-          disabled={phase !== "pick" || pipelinePaused() || backlogged}
-          picked={reveal?.pick === "a"}
-        />
-        <VersusCard
-          card={current.b}
-          side="b"
-          imageUrl={current.b.image_path ? `${imageBase}/${current.b.image_path}` : null}
-          onPick={() => void pick("b")}
-          disabled={phase !== "pick" || pipelinePaused() || backlogged}
-          picked={reveal?.pick === "b"}
-        />
+      {/* keyed by matchup so each new pair replays the deal-in; the shake class
+          lands exactly once per fight, on the pick */}
+      <div
+        key={current.matchup_id}
+        className={`relative grid grid-cols-2 gap-3 sm:gap-6 ${phase === "reveal" ? "sv-shake" : ""}`}
+      >
+        <div className="sv-deal-in">
+          <VersusCard
+            card={current.a}
+            side="a"
+            imageUrl={current.a.image_path ? `${imageBase}/${current.a.image_path}` : null}
+            onPick={() => void pick("a")}
+            disabled={phase !== "pick" || pipelinePaused() || backlogged}
+            result={reveal ? (reveal.pick === "a" ? "winner" : "loser") : null}
+          />
+        </div>
+        <div className="sv-deal-in sv-deal-in-b">
+          <VersusCard
+            card={current.b}
+            side="b"
+            imageUrl={current.b.image_path ? `${imageBase}/${current.b.image_path}` : null}
+            onPick={() => void pick("b")}
+            disabled={phase !== "pick" || pipelinePaused() || backlogged}
+            result={reveal ? (reveal.pick === "b" ? "winner" : "loser") : null}
+          />
+        </div>
         <div
           aria-hidden
           className="font-display pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 -skew-x-12 rounded bg-background px-3 py-1.5 text-2xl uppercase"
@@ -825,17 +686,19 @@ export function ArenaClient({
           <button type="button" onClick={advance} className="block w-full text-left">
             {aPctDisplay != null ? (
               <>
-                <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/5">
-                  <div
-                    className="h-full bg-accent transition-all duration-500"
-                    style={{ width: `${aPctDisplay}%` }}
-                  />
-                  <div
-                    className="h-full bg-accent-2 transition-all duration-500"
-                    style={{ width: `${100 - aPctDisplay}%` }}
-                  />
+                <div className="h-3 w-full overflow-hidden rounded-full bg-white/5">
+                  <div className="sv-bar-slam flex h-full origin-left">
+                    <div
+                      className="h-full bg-accent transition-all duration-500"
+                      style={{ width: `${aPctDisplay}%` }}
+                    />
+                    <div
+                      className="h-full bg-accent-2 transition-all duration-500"
+                      style={{ width: `${100 - aPctDisplay}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="mt-2 flex items-baseline justify-between">
+                <div className="sv-pop mt-2 flex items-baseline justify-between">
                   <span className="font-mono text-sm text-accent-text">{aPctDisplay}%</span>
                   <p className="text-center text-sm">
                     {rawMyPct != null && rawMyPct >= 0.5 ? (
@@ -850,13 +713,13 @@ export function ArenaClient({
                 </div>
               </>
             ) : (
-              <p className="text-center text-sm text-muted">
+              <p className="sv-pop text-center text-sm text-muted">
                 Early votes — results still forming ({reveal.voteCount} vote
                 {reveal.voteCount === 1 ? "" : "s"})
               </p>
             )}
             {reveal.delta != null && reveal.delta > 0 && (
-              <p className="mt-1.5 text-center font-mono text-xs text-accent-2">
+              <p className="sv-pop mt-1.5 text-center font-mono text-xs text-accent-2">
                 +{reveal.delta} · you pushed{" "}
                 {reveal.pick === "a" ? current.a.character_name : current.b.character_name}{" "}
                 <span aria-hidden>↑</span>
@@ -878,6 +741,19 @@ export function ArenaClient({
         )}
         {phase === "reveal" && pipelineBanners}
       </div>
+
+      {showHint && (
+        <p
+          aria-hidden
+          className="sv-hint pointer-events-none mx-auto mt-2 hidden font-mono text-[11px] uppercase tracking-[0.2em] text-muted sm:block"
+        >
+          ← left wins · right wins → · ↓ skip
+        </p>
+      )}
+
+      <span className="pointer-events-none absolute bottom-6 left-4 font-mono text-[11px] text-muted">
+        fight {phase === "reveal" ? fightCount : fightCount + 1}
+      </span>
 
       {changePicker}
     </div>

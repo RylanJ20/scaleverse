@@ -9,28 +9,32 @@ export function VersusCard({
   imageUrl,
   onPick,
   disabled,
-  picked,
+  result,
 }: {
   card: FormCard;
   side: "a" | "b";
   imageUrl: string | null;
   onPick: () => void;
   disabled: boolean;
-  picked: boolean;
+  result: "winner" | "loser" | null; // the impact frame: winner flashes + stamps, loser drops out
 }) {
   const sideColor = side === "a" ? "var(--accent)" : "var(--accent-2)";
+  const isWinner = result === "winner";
+  const isLoser = result === "loser";
   return (
     <button
       type="button"
       onClick={onPick}
       disabled={disabled}
       aria-label={`${card.form_name} wins`}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-lg border bg-surface text-left transition
-        ${picked ? "scale-[1.02]" : "hover:scale-[1.01]"}
-        ${disabled && !picked ? "opacity-60" : ""}`}
+      className={`group relative flex w-full flex-col overflow-hidden rounded-lg border bg-surface text-left transition duration-300
+        ${isWinner ? "sv-punch" : ""}
+        ${isLoser ? "scale-[0.97] opacity-60 brightness-75 grayscale" : ""}
+        ${!result && !disabled ? "hover:scale-[1.01]" : ""}
+        ${!result && disabled ? "opacity-60" : ""}`}
       style={{
-        borderColor: picked ? sideColor : "rgba(255,255,255,0.08)",
-        boxShadow: picked ? `0 0 32px -8px ${sideColor}` : undefined,
+        borderColor: isWinner ? sideColor : "rgba(255,255,255,0.08)",
+        boxShadow: isWinner ? `0 0 32px -8px ${sideColor}` : undefined,
       }}
     >
       <div className="relative aspect-[3/4] w-full bg-black/40">
@@ -50,6 +54,18 @@ export function VersusCard({
           className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
           style={{ background: "linear-gradient(to top, rgba(10,10,18,0.95), transparent)" }}
         />
+        {isWinner && (
+          <>
+            <span aria-hidden className="sv-impact-flash pointer-events-none absolute inset-0 z-10" />
+            <span
+              aria-hidden
+              className="sv-stamp font-display pointer-events-none absolute inset-x-0 top-[40%] z-20 text-center text-3xl uppercase tracking-wide text-white sm:text-4xl"
+              style={{ textShadow: `0 0 18px ${sideColor}, 0 2px 0 rgba(0,0,0,0.6)` }}
+            >
+              Winner
+            </span>
+          </>
+        )}
       </div>
       <div className="flex flex-col gap-0.5 p-3">
         {card.epithet && (
