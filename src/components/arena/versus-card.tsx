@@ -27,7 +27,7 @@ export function VersusCard({
       onClick={onPick}
       disabled={disabled}
       aria-label={`${card.form_name} wins`}
-      className={`group relative flex w-full flex-col overflow-hidden rounded-lg border bg-surface text-left transition duration-300
+      className={`group relative flex h-full w-full flex-col overflow-hidden rounded-lg border bg-surface text-left transition duration-300
         ${isWinner ? "sv-punch" : ""}
         ${isLoser ? "scale-[0.97] opacity-60 brightness-75 grayscale" : ""}
         ${!result && !disabled ? "hover:scale-[1.01]" : ""}
@@ -43,7 +43,7 @@ export function VersusCard({
             src={imageUrl}
             alt={card.form_name}
             fill
-            sizes="(max-width: 640px) 45vw, 320px"
+            sizes="(max-width: 640px) 45vw, 480px"
             className="object-cover object-top transition group-hover:scale-[1.03]"
             priority
           />
@@ -67,20 +67,18 @@ export function VersusCard({
           </>
         )}
       </div>
+      {/* every row always renders (nbsp keeps empty line boxes) so cards with
+          no epithet or rating stay pixel-identical to their opponent */}
       <div className="flex flex-col gap-0.5 p-3">
-        {card.epithet && (
-          <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-            {card.epithet}
-          </p>
-        )}
+        <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          {card.epithet || "\u00A0"}
+        </p>
         <p className="font-display -skew-x-6 truncate text-lg uppercase leading-tight">
           {card.form_name}
         </p>
-        {card.display_rating != null && (
-          <p className="font-mono text-xs" style={{ color: sideColor }}>
-            {card.display_rating}
-          </p>
-        )}
+        <p className="font-mono text-xs" style={{ color: sideColor }}>
+          {card.display_rating ?? "\u00A0"}
+        </p>
       </div>
     </button>
   );

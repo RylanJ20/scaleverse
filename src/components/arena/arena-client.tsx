@@ -614,15 +614,21 @@ export function ArenaClient({
     reveal?.aPct != null ? (reveal.pick === "a" ? reveal.aPct : 1 - reveal.aPct) : null;
 
   return (
-    <div className="relative mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-6">
-      {/* clean-corner chrome (decision #37): spoiler control top-right,
-          session ticker bottom-left — the arena itself is title + cards */}
+    <div
+      className="relative mx-auto flex w-full flex-1 flex-col px-4 py-5"
+      // cards fill the screen: width backs out of the viewport height minus
+      // the fixed chrome so the vote loop stays above the fold, floored at the
+      // old max-w-3xl so cards never get SMALLER on short windows
+      style={{ maxWidth: "max(48rem, min(64rem, calc((100dvh - 21rem) * 1.5)))" }}
+    >
+      {/* clean-corner chrome (decision #37): spoiler control top-right —
+          the arena itself is title + cards */}
       <button
         type="button"
         onClick={() => setShowPicker(true)}
         aria-label={`Spoiler setting: ${gateArc ? `through ${gateArc.name}` : "caught up"} — change`}
         title={gateArc ? `Spoilers: through ${gateArc.name}` : "Spoilers: caught up"}
-        className="absolute right-4 top-6 z-10 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition hover:text-foreground"
+        className="absolute right-4 top-5 z-10 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition hover:text-foreground"
       >
         <svg
           viewBox="0 0 24 24"
@@ -640,7 +646,7 @@ export function ArenaClient({
         <span className="hidden sm:inline">spoilers</span>
       </button>
 
-      <h1 className="font-display -skew-x-6 mb-5 text-center text-3xl uppercase sm:text-4xl">
+      <h1 className="font-display -skew-x-6 mb-4 text-center text-3xl uppercase sm:text-4xl">
         Who <span className="text-accent">wins</span>?
       </h1>
 
@@ -679,7 +685,7 @@ export function ArenaClient({
         </div>
       </div>
 
-      <div className="mt-5 min-h-24" aria-live="polite">
+      <div className="mt-4 min-h-24" aria-live="polite">
         {phase === "reveal" && reveal && (
           <button type="button" onClick={advance} className="block w-full text-left">
             {aPctDisplay != null ? (
