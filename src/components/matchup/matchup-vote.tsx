@@ -16,6 +16,71 @@ type Props = {
   matchupId: string | null;
 };
 
+// Module-scoped (not defined inside MatchupVote): an inline component would be
+// a new type every render, forcing React to remount both card subtrees on each
+// state change — dropping button focus mid-vote and snapping the pick highlight.
+function Card({
+  card,
+  side,
+  picked,
+  busy,
+  authed,
+  imageBase,
+  onVote,
+}: {
+  card: FormCard;
+  side: "a" | "b";
+  picked: boolean;
+  busy: boolean;
+  authed: boolean | null;
+  imageBase: string;
+  onVote: (card: FormCard) => Promise<void>;
+}) {
+  const color = side === "a" ? "var(--accent)" : "var(--accent-2)";
+  const url = card.image_path ? `${imageBase}/${card.image_path}` : null;
+  return (
+    <button
+      type="button"
+      onClick={() => void onVote(card)}
+      disabled={busy || authed !== true}
+      aria-label={`${card.character_name} wins`}
+      className={`group relative flex flex-col self-start overflow-hidden rounded-lg border bg-surface text-left transition ${
+        picked ? "scale-[1.02]" : authed === true ? "hover:scale-[1.01]" : ""
+      } ${authed !== true ? "cursor-default" : ""}`}
+      style={{
+        borderColor: picked ? color : "rgba(255,255,255,0.08)",
+        boxShadow: picked ? `0 0 32px -8px ${color}` : undefined,
+      }}
+    >
+      <div className="relative aspect-[3/4] w-full bg-black/40">
+        {url && (
+          <Image
+            src={url}
+            alt={card.character_name}
+            fill
+            sizes="(max-width: 640px) 40vw, 300px"
+            className="object-cover object-top"
+          />
+        )}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+          style={{ background: "linear-gradient(to top, rgba(10,10,18,0.95), transparent)" }}
+        />
+      </div>
+      <div className="p-3">
+        {card.epithet && (
+          <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+            {card.epithet}
+          </p>
+        )}
+        <p className="font-display -skew-x-6 truncate text-lg uppercase leading-tight">
+          {card.character_name}
+        </p>
+      </div>
+    </button>
+  );
+}
+
 export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, matchupId }: Props) {
   const [voteCount, setVoteCount] = useState(initialVoteCount);
   const [aWins, setAWins] = useState(initialAWins);
@@ -101,61 +166,14 @@ export function MatchupVote({ a, b, imageBase, initialVoteCount, initialAWins, m
     }
   };
 
-  const Card = ({ card, side }: { card: FormCard; side: "a" | "b" }) => {
-    const color = side === "a" ? "var(--accent)" : "var(--accent-2)";
-    const picked = pick === card.form_id;
-    const url = card.image_path ? `${imageBase}/${card.image_path}` : null;
-    return (
-      <button
-        type="button"
-        onClick={() => void vote(card)}
-        disabled={busy || authed !== true}
-        aria-label={`${card.character_name} wins`}
-        className={`group relative flex flex-col self-start overflow-hidden rounded-lg border bg-surface text-left transition ${
-          picked ? "scale-[1.02]" : authed === true ? "hover:scale-[1.01]" : ""
-        } ${authed !== true ? "cursor-default" : ""}`}
-        style={{
-          borderColor: picked ? color : "rgba(255,255,255,0.08)",
-          boxShadow: picked ? `0 0 32px -8px ${color}` : undefined,
-        }}
-      >
-        <div className="relative aspect-[3/4] w-full bg-black/40">
-          {url && (
-            <Image
-              src={url}
-              alt={card.character_name}
-              fill
-              sizes="(max-width: 640px) 40vw, 300px"
-              className="object-cover object-top"
-            />
-          )}
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
-            style={{ background: "linear-gradient(to top, rgba(10,10,18,0.95), transparent)" }}
-          />
-        </div>
-        <div className="p-3">
-          {card.epithet && (
-            <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-              {card.epithet}
-            </p>
-          )}
-          <p className="font-display -skew-x-6 truncate text-lg uppercase leading-tight">
-            {card.character_name}
-          </p>
-        </div>
-      </button>
-    );
-  };
-
   return (
     <div>
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
-        <Card card={a} side="a" />
+        <Card card={a} side="a" picked={pick === a.form_id} busy={busy} authed={authed} imageBase={imageBase} onVote={vote} />
         <div aria-hidden className="font-display -skew-x-12 text-xl uppercase text-muted sm:text-2xl">
           vs
         </div>
-        <Card card={b} side="b" />
+        <Card card={b} side="b" picked={pick === b.form_id} busy={busy} authed={authed} imageBase={imageBase} onVote={vote} />
       </div>
 
       <div className="mt-4">

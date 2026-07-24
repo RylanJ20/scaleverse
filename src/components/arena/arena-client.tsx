@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { castVote, fetchBatch, recordDemoVote, saveProgress, skipDeal } from "@/app/actions/arena";
@@ -110,6 +110,37 @@ async function waitForVoteQueue(maxMs: number) {
   }
 }
 
+// localStorage-backed demo-vote count, read via useSyncExternalStore (SSR
+// snapshots 0; the client value arrives with hydration — no post-mount setState
+// pass). Same-tab writes notify through the listener set; the storage event
+// keeps a second guest tab's gate honest too.
+const DEMO_VOTES_KEY = "sv-demo-votes";
+const demoVoteListeners = new Set<() => void>();
+function subscribeDemoVotes(listener: () => void) {
+  demoVoteListeners.add(listener);
+  window.addEventListener("storage", listener);
+  return () => {
+    demoVoteListeners.delete(listener);
+    window.removeEventListener("storage", listener);
+  };
+}
+function readDemoVotes(): number {
+  try {
+    const n = Number(localStorage.getItem(DEMO_VOTES_KEY) ?? 0);
+    return Number.isFinite(n) ? n : 0;
+  } catch {
+    return 0; // storage unavailable (private mode) — gate simply never arms
+  }
+}
+function bumpDemoVotes() {
+  try {
+    localStorage.setItem(DEMO_VOTES_KEY, String(readDemoVotes() + 1));
+  } catch {
+    return;
+  }
+  demoVoteListeners.forEach((l) => l());
+}
+
 export function ArenaClient({
   seriesSlug,
   mode,
@@ -144,7 +175,7 @@ export function ArenaClient({
   const [setEntries, setSetEntries] = useState<SetEntry[]>([]);
   const [lastSummaryAt, setLastSummaryAt] = useState(0);
   const [lastGateAt, setLastGateAt] = useState(0);
-  const [demoVotes, setDemoVotes] = useState(0);
+  const demoVotes = useSyncExternalStore(subscribeDemoVotes, readDemoVotes, () => 0);
   const summaryShownAt = useRef(0);
   const nextSetRef = useRef<HTMLButtonElement>(null);
   // re-render trigger for module pipeline changes (queue depth, failures, pause)
@@ -322,7 +353,6 @@ export function ArenaClient({
       localStorage.setItem(KEY, sid);
     }
     sessionId.current = sid;
-    setDemoVotes(Number(localStorage.getItem("sv-demo-votes") ?? 0));
   }, [mode]);
 
   const topUp = useCallback(async () => {
@@ -346,8 +376,14 @@ export function ArenaClient({
     }
   }, [seriesSlug]);
 
+  // Refill is reactive (queue depth is state, the source is the server), so an
+  // effect is its home — but the kick is deferred a tick so the commit itself
+  // stays free of state updates, and an unmount cancels a pending kick. topUp's
+  // fetching ref already collapses overlapping kicks into one request.
   useEffect(() => {
-    if (phase !== "onboarding" && phase !== "errored" && queue.length < 4) void topUp();
+    if (phase === "onboarding" || phase === "errored" || queue.length >= 4) return;
+    const t = setTimeout(() => void topUp(), 0);
+    return () => clearTimeout(t);
   }, [queue.length, phase, topUp]);
 
   const [retrying, setRetrying] = useState(false);
@@ -444,11 +480,7 @@ export function ArenaClient({
         voteCount,
         delta: null,
       });
-      if (!isDeal) {
-        const next = demoVotes + 1;
-        setDemoVotes(next);
-        localStorage.setItem("sv-demo-votes", String(next));
-      }
+      if (!isDeal) bumpDemoVotes();
       setSetCount((n) => n + 1);
       setPhase("reveal");
       // only deal-mode fights go in the re-serve guard set: demo pairs are
@@ -483,7 +515,7 @@ export function ArenaClient({
         tooFastRetries: 0,
       });
     },
-    [current, phase, mode, demoVotes, enqueueVote],
+    [current, phase, mode, enqueueVote],
   );
 
   const skip = useCallback(async () => {
