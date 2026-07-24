@@ -1,37 +1,58 @@
 import "server-only";
+import { cache } from "react";
 import { cookies } from "next/headers";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/viewer";
 import type { FormCard } from "@/lib/types";
 
 // Pages that render for anyone (matchup pages) pass a cookie-free public client
 // so they can be cached; per-user pages fall back to the cookie-based client.
 type DB = SupabaseClient;
 
-// The current viewer's spoiler ceiling (max arc position they've seen), or null
-// for "caught up / no gate". Works for both authed users and cookie-only guests.
-export async function getViewerMaxArcPosition(seriesSlug: string): Promise<number | null> {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) {
-    const { data: prog } = await supabase
+export type ProgressRow = {
+  caught_up: boolean;
+  last_arc_id: string | null;
+  arcs: { position: number } | { position: number }[] | null;
+};
+
+// The viewer's progress row for a series, memoized per request — the header
+// gates, browse surfaces, and arena all derive from this one query.
+export const getProgressRow = cache(
+  async (seriesSlug: string, userId: string): Promise<ProgressRow | null> => {
+    const supabase = await createClient();
+    const { data } = await supabase
       .from("user_series_progress")
-      .select("caught_up, arcs(position), series!inner(slug)")
+      .select("caught_up, last_arc_id, arcs(position), series!inner(slug)")
       .eq("series.slug", seriesSlug)
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .maybeSingle();
-    if (prog && !prog.caught_up) {
-      const arc = prog.arcs as unknown as { position: number } | { position: number }[] | null;
-      const row = Array.isArray(arc) ? arc[0] : arc;
-      return row?.position ?? null;
-    }
-    return null;
-  }
-  const cookieStore = await cookies();
-  const v = cookieStore.get("sv-arc-pos")?.value;
+    return (data as unknown as ProgressRow | null) ?? null;
+  },
+);
+
+export function progressArcPosition(row: ProgressRow): number | null {
+  const arc = Array.isArray(row.arcs) ? row.arcs[0] : row.arcs;
+  return arc?.position ?? null;
+}
+
+function cookieArcPos(v: string | undefined): number | null {
   if (!v || v === "all") return null;
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
+}
+
+// The current viewer's spoiler ceiling (max arc position they've seen), or null
+// for "caught up / no gate". Works for both authed users and cookie-only guests.
+export async function getViewerMaxArcPosition(seriesSlug: string): Promise<number | null> {
+  const user = await getViewer();
+  if (user) {
+    const prog = await getProgressRow(seriesSlug, user.id);
+    if (prog && !prog.caught_up) return progressArcPosition(prog);
+    return null;
+  }
+  const cookieStore = await cookies();
+  return cookieArcPos(cookieStore.get("sv-arc-pos")?.value);
 }
 
 // Browse-surface gate state: the viewer's ceiling PLUS whether this is a
@@ -41,22 +62,17 @@ export async function getViewerMaxArcPosition(seriesSlug: string): Promise<numbe
 export async function getBrowseGate(
   seriesSlug: string,
 ): Promise<{ maxPos: number | null; needsFirstTouch: boolean }> {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  const maxPos = await getViewerMaxArcPosition(seriesSlug);
+  const user = await getViewer();
   if (user) {
     // mirror the arena: a signed-in user with no progress row hasn't chosen an
     // arc yet — gate the browse surfaces too, don't leak the full roster
-    const { data: prog } = await supabase
-      .from("user_series_progress")
-      .select("user_id, series!inner(slug)")
-      .eq("series.slug", seriesSlug)
-      .eq("user_id", user.id)
-      .maybeSingle();
+    const prog = await getProgressRow(seriesSlug, user.id);
+    const maxPos = prog && !prog.caught_up ? progressArcPosition(prog) : null;
     return { maxPos, needsFirstTouch: !prog };
   }
   const cookieStore = await cookies();
-  return { maxPos, needsFirstTouch: cookieStore.get("sv-arc-pos") === undefined };
+  const arcCookie = cookieStore.get("sv-arc-pos");
+  return { maxPos: cookieArcPos(arcCookie?.value), needsFirstTouch: arcCookie === undefined };
 }
 
 export type CharacterStats = {

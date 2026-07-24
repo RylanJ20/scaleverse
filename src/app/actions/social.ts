@@ -2,6 +2,7 @@
 
 import { updateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/viewer";
 
 // Reads that are shared/public (daily matchup, takes list) live in
 // src/lib/cached.ts behind "use cache" — this file keeps only the mutation and
@@ -15,9 +16,9 @@ export type Take = {
 };
 
 export async function getMyTake(matchupId: string): Promise<string | null> {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
   if (!user) return null;
+  const supabase = await createClient();
   const { data } = await supabase
     .from("takes")
     .select("body")

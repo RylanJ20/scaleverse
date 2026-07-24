@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/viewer";
 import { getCachedProfile } from "@/lib/cached";
 import { characterImageUrl } from "@/lib/image";
 import type { FormCard } from "@/lib/types";
@@ -64,7 +65,7 @@ async function ProfileBody({ params }: { params: Promise<{ username: string }> }
   const supabase = await createClient();
   let spoilerSeries: SeriesSpoilerSetting[] | null = null;
   let noRecoveryEmail = false;
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
   if (user) {
     noRecoveryEmail = isSyntheticEmail(user.email);
     const { data: me } = await supabase.from("profiles").select("username").eq("id", user.id).single();

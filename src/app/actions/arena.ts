@@ -3,6 +3,8 @@
 import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getViewer } from "@/lib/viewer";
+import { getProgressRow, progressArcPosition } from "@/lib/queries";
 import type { Batch, MatchupItem, ProgressGate, VoteFailCode, VoteOutcome, VoteResult } from "@/lib/types";
 
 const ARC_COOKIE = "sv-arc-pos"; // "all" (caught up) or an arc position integer
@@ -18,24 +20,14 @@ export async function getArcGate(): Promise<number | null> {
 // Where this visitor's spoiler gate sits: chosen=false means onboarding is
 // still needed; maxArcPosition=null means caught up (no gate).
 export async function getProgress(seriesSlug: string): Promise<ProgressGate> {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
   if (user) {
-    const { data } = await supabase
-      .from("user_series_progress")
-      .select("caught_up, last_arc_id, series!inner(slug)")
-      .eq("series.slug", seriesSlug)
-      .eq("user_id", user.id)
-      .maybeSingle();
+    const data = await getProgressRow(seriesSlug, user.id);
     if (data) {
       if (data.caught_up || !data.last_arc_id) return { chosen: true, maxArcPosition: null };
-      const { data: arc, error } = await supabase
-        .from("arcs")
-        .select("position")
-        .eq("id", data.last_arc_id)
-        .single();
-      if (!error && arc) return { chosen: true, maxArcPosition: arc.position };
-      // lookup failed — fall back to the cookie rather than claiming "caught up"
+      const pos = progressArcPosition(data);
+      if (pos !== null) return { chosen: true, maxArcPosition: pos };
+      // arc join came back empty — fall back to the cookie rather than claiming "caught up"
       return { chosen: true, maxArcPosition: await cookieArcPosition() };
     }
     // Signed in but no progress row: deal_matchups gates ONLY on the DB row, so
@@ -85,7 +77,7 @@ export async function saveProgress(
     sameSite: "lax",
   });
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
   if (user) {
     const { data: series } = await supabase.from("series").select("id").eq("slug", seriesSlug).single();
     if (!series) throw new Error(`unknown series ${seriesSlug}`);
@@ -106,10 +98,10 @@ export async function saveProgress(
 }
 
 export async function fetchBatch(seriesSlug: string): Promise<Batch> {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
 
   if (user) {
+    const supabase = await createClient();
     const { data, error } = await supabase.rpc("deal_matchups", {
       p_series_slug: seriesSlug,
       p_count: 10,

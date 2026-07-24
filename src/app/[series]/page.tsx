@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/viewer";
 import { getCachedDailyMatchup, getCachedSeries, getCachedTakes } from "@/lib/cached";
 import { getMyTake } from "@/app/actions/social";
 import { MatchupVote } from "@/components/matchup/matchup-vote";
@@ -105,11 +105,10 @@ export default async function SeriesHubPage({
 // are per-request (only signed-in users can post — ratified #24 gating is in
 // the post_take RPC).
 async function TakesSection({ matchupId }: { matchupId: string }) {
-  const supabase = await createClient();
-  const [takes, myTake, { data: { user } }] = await Promise.all([
+  const [takes, myTake, user] = await Promise.all([
     getCachedTakes(matchupId),
     getMyTake(matchupId),
-    supabase.auth.getUser(),
+    getViewer(),
   ]);
   return <TakesPanel matchupId={matchupId} takes={takes} myTake={myTake} isAuthed={!!user} />;
 }

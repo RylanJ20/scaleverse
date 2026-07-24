@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { fetchBatch, getProgress } from "@/app/actions/arena";
-import { createClient } from "@/lib/supabase/server";
+import { getCachedArcs } from "@/lib/cached";
 import { ArenaClient } from "@/components/arena/arena-client";
 import { IMAGE_BASE } from "@/lib/image";
-import type { ArcOption, Batch } from "@/lib/types";
+import type { Batch } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Arena",
@@ -28,15 +28,9 @@ export default function ArenaPage({
 
 async function ArenaBody({ params }: { params: Promise<{ series: string }> }) {
   const { series } = await params;
-  const supabase = await createClient();
 
-  const progress = await getProgress(series);
-  const { data: arcData } = await supabase
-    .from("arcs")
-    .select("slug, name, position, series!inner(slug)")
-    .eq("series.slug", series)
-    .order("position");
-  const arcs: ArcOption[] = (arcData ?? []).map(({ slug, name, position }) => ({ slug, name, position }));
+  // arcs are static content — the shared cached read, in parallel with the gate
+  const [progress, arcs] = await Promise.all([getProgress(series), getCachedArcs(series)]);
 
   // a dealing failure must degrade to a retry state, never crash the page
   let batch: Batch = { mode: "demo", items: [] };

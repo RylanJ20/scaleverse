@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Anton } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { getViewer } from "@/lib/viewer";
 import { signOut } from "@/app/actions/arena";
 import { SeriesNav } from "@/components/nav/series-nav";
 import "./globals.css";
@@ -35,8 +36,7 @@ export const metadata: Metadata = {
 // The only per-request work in the layout: who is signed in. Streams into the
 // static header shell so the rest of every page can prerender (PPR).
 async function HeaderAuth() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getViewer();
   if (!user) {
     return (
       <Link
@@ -47,6 +47,7 @@ async function HeaderAuth() {
       </Link>
     );
   }
+  const supabase = await createClient();
   const { data: profile } = await supabase
     .from("profiles")
     .select("username")
