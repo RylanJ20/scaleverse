@@ -1,6 +1,6 @@
 slug: alber
-name: Alber
-epithet: King
+name: King
+epithet: Alber
 nicknames:
   - King
   - The Wildfire
@@ -33,5 +33,5 @@ image:
   path: characters/alber.webp
 forms:
   - slug: base
-    name: Alber
+    name: King
     default: true

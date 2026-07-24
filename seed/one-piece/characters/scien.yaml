@@ -1,5 +1,5 @@
 slug: scien
-name: Scien
+name: Queen
 epithet: The Plague
 nicknames:
   - The Plague
@@ -33,5 +33,5 @@ image:
   path: characters/scien.webp
 forms:
   - slug: base
-    name: Scien
+    name: Queen
     default: true

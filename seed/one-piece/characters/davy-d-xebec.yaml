@@ -1,6 +1,6 @@
 slug: davy-d-xebec
-name: Davy D. Xebec
-epithet: Rocks
+name: Rocks D. Xebec
+epithet: null
 nicknames:
   - Rocks
 debut:
@@ -32,5 +32,5 @@ image:
   path: characters/davy-d-xebec.webp
 forms:
   - slug: base
-    name: Davy D. Xebec
+    name: Rocks D. Xebec
     default: true

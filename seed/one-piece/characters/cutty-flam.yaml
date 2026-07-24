@@ -1,6 +1,6 @@
 slug: cutty-flam
-name: Cutty Flam
-epithet: Franky
+name: Franky
+epithet: Cutty Flam
 nicknames:
   - Franky
   - Cyborg Franky
@@ -36,5 +36,5 @@ image:
   path: characters/cutty-flam.webp
 forms:
   - slug: base
-    name: Cutty Flam
+    name: Franky
     default: true
