@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/app/actions/arena";
+import { SeriesNav } from "@/components/nav/series-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -84,15 +85,10 @@ export default function RootLayout({
             Scale<span className="text-accent">verse</span>
           </Link>
           <nav className="flex items-center gap-5 text-sm text-muted">
-            <Link href="/one-piece/arena" className="transition hover:text-foreground">
-              Arena
-            </Link>
-            <Link href="/one-piece/tier-list" className="transition hover:text-foreground">
-              Tier list
-            </Link>
-            <Link href="/one-piece/characters" className="hidden transition hover:text-foreground sm:block">
-              Characters
-            </Link>
+            {/* pathname is runtime data on fallback-shell routes — needs a boundary */}
+            <Suspense fallback={null}>
+              <SeriesNav />
+            </Suspense>
             <Suspense fallback={<span className="inline-block h-8 w-16" aria-hidden />}>
               <HeaderAuth />
             </Suspense>
